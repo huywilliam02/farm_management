@@ -18,6 +18,7 @@ class MainTabView extends BaseView<MainTabviewController> {
       onPopInvoked: (didPop) => false,
       // onWillPop: () async => false,
       child: Scaffold(
+          backgroundColor: ColorConstant.background_color,
           resizeToAvoidBottomInset: false,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
@@ -33,6 +34,7 @@ class MainTabView extends BaseView<MainTabviewController> {
                   width: UtilsReponsive.width(context, 120),
                   height: UtilsReponsive.height(context, 120),
                   decoration: const BoxDecoration(
+                    color: ColorConstant.background_color,
                     border: Border(
                       right: BorderSide(
                           width: 1, color: ColorConstant.background_color),
@@ -83,7 +85,7 @@ class MainTabView extends BaseView<MainTabviewController> {
           ),
           bottomNavigationBar: Obx(
             () => BottomAppBar(
-              color: Colors.white,
+              color: ColorConstant.background_color,
               shape: const CircularNotchedRectangle(),
               notchMargin: 0,
               child: SizedBox(

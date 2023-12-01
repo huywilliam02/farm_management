@@ -84,8 +84,7 @@ class ChooseLanguageView extends BaseView<ChooseLanguageController> {
                               alignment: Alignment.centerLeft,
                               height: UtilsReponsive.height(context, 26),
                               width: UtilsReponsive.width(context, 30),
-                              child: Image.asset(
-                                  "assets/icons/us.png")),
+                              child: Image.asset("assets/icons/uk.png")),
                         ),
                         const Expanded(
                           flex: 2,

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:itfsd/app/core/common/common_form_field_widget.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/area/view_more_area/view_more_land_controller.dart';
 import 'package:itfsd/app/core/common/form_field_widget.dart';
@@ -196,7 +197,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                       height: UtilsReponsive.height(context, 10),
                     ),
                     Obx(
-                      () => FormFieldWidget(
+                      () => CommonFormFieldWidget(
                         controllerEditting: controller.namecontroller,
                         textInputType: TextInputType.text,
                         errorText: controller.validateErrname.value,
@@ -339,7 +340,10 @@ class MoreLandView extends BaseView<MoreLandController> {
                                       controller.latInput.value,
                                       controller.lngInput.value);
                                 },
-                                icon: Image.asset("assets/icons/add.png"),
+                                icon: Image.asset(
+                                  "assets/icons/add.png",
+                                  height: 30,
+                                ),
                               ),
                             ],
                           ),

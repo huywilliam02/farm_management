@@ -9,24 +9,27 @@ class CommonConstrainBoxButton extends StatelessWidget {
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints.tightFor(width: context.width),
-      child: ElevatedButton(
-        style: ButtonStyle(
-          minimumSize: const MaterialStatePropertyAll(Size(20, 60)),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: ConstrainedBox(
+        constraints: BoxConstraints.tightFor(width: context.width),
+        child: ElevatedButton(
+          style: ButtonStyle(
+            minimumSize: const MaterialStatePropertyAll(Size(20, 60)),
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
+            backgroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(255, 40, 127, 60)),
+            // padding: MaterialStateProperty.all(EdgeInsets.all(14)),
           ),
-          backgroundColor: MaterialStateProperty.all(
-              const Color.fromARGB(255, 40, 127, 60)),
-          // padding: MaterialStateProperty.all(EdgeInsets.all(14)),
-        ),
-        onPressed: () {},
-        child: Text(
-          text,
-          style: TextStyleConstant.white16Roboto,
+          onPressed: () {},
+          child: Text(
+            text,
+            style: TextStyleConstant.white16Roboto,
+          ),
         ),
       ),
     );

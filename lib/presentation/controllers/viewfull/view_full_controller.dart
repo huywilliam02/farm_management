@@ -133,6 +133,10 @@ class ViewFullController extends BaseController {
     }
   }
 
+
+
+// google.navigation:q=${widget.to?.latitude},${widget.to?.longitude}
+//  comgooglemapsurl: maps.google.com/?q=@${widget.to?.latitude},${widget.to?.longitude}&zoom=18
   renderFarm() {
     for (var element in listFarm) {
         log("hello");

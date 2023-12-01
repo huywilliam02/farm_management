@@ -1,4 +1,3 @@
-
 import 'package:itfsd/app/core/common/common_app_bar.dart';
 import 'package:itfsd/app/core/common/common_scaffold.dart';
 import 'package:itfsd/app/util/number_format_utils.dart';
@@ -201,13 +200,12 @@ class MoreMaterialView extends BaseView<MaterialController> {
                                         Center(
                                             child: CachedNetworkImage(
                                           imageUrl:
-                                              "http://116.118.49.43:8878${controller
-                                                      .listImage.value[index]}",
+                                              "http://116.118.49.43:8878${controller.listImage.value[index]}",
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.info),
-                                          progressIndicatorBuilder:
-                                              (context, url, progress) =>
-                                                  const CircularProgressIndicator(),
+                                          progressIndicatorBuilder: (context,
+                                                  url, progress) =>
+                                              const CircularProgressIndicator(),
                                           fit: BoxFit.contain,
                                         )),
                                         Align(

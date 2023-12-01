@@ -45,6 +45,7 @@ dependencies:
   intl: any
   intl_utils: ^2.8.5
   intl_translation: ^0.18.2
+  ionicons: ^0.2.2
 
 
 

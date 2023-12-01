@@ -103,7 +103,6 @@ class CustomerController extends BaseController {
     descriptionController.text = model.description;
     dropdownValue.value =
         model.status == 1 ? listStatusDropdown.first : listStatusDropdown.last;
-
     Get.to(
       () => MoreCustomerView(
         idCustomer: model.id,

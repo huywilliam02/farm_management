@@ -36,7 +36,6 @@ class WorkindayView extends BaseView<WorkindayController> {
           titleType: AppBarTitle.text,
           leadingIcon: const Icon(Icons.arrow_back_ios_new),
           onLeadingPressed: () {
-            
             Get.offAll(() => const ListIconTreeView());
           },
           actions: [

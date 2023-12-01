@@ -52,11 +52,10 @@ class FarmController extends BaseController {
     super.onInit();
   }
 
-
-
   getAllBusinessModel() async {
     listBusinessModel.value =
         await FarmApi.getAllDataByTypeCategory("BUSINESS_MODEL");
+
   }
 
   getAllBusinessType() async {

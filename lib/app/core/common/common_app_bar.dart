@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:itfsd/app/core/constants/app_constants.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -52,8 +52,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.bottom,
     this.shadowColor,
     this.shape,
-    this.backgroundColor,
-    this.foregroundColor,
+    this.backgroundColor = ColorConstant.background_color,
+    this.foregroundColor = ColorConstant.grey70747E,
     this.iconTheme,
     this.actionsIconTheme,
     this.primary = true,

@@ -57,6 +57,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -82,6 +83,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -108,6 +110,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -134,6 +137,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -160,6 +164,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -186,6 +191,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(

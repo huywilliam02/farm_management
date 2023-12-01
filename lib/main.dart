@@ -20,7 +20,6 @@ Future<void> main() async {
   tz.setLocalLocation(detroit);
   runApp(
     GetMaterialApp(
-
       title: "ITFSD",
       locale: language,
       fallbackLocale: const Locale('en'), // Ngôn ngữ dự phòng là tiếng Anh
@@ -30,3 +29,4 @@ Future<void> main() async {
     ),
   );
 }
+

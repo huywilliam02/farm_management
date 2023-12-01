@@ -57,6 +57,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -82,6 +83,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -105,6 +107,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -128,6 +131,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(

@@ -56,7 +56,7 @@ class _TabCropViewState extends State<TabCropView>
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(10),
                 children: [
-                  Card(
+                  Card(elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -81,7 +81,7 @@ class _TabCropViewState extends State<TabCropView>
                       ],
                     ),
                   ),
-                  Card(
+                  Card(elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(

@@ -1,4 +1,5 @@
 import 'package:itfsd/base/base_bindings.dart';
+import 'package:itfsd/presentation/controllers/account/controllers/account_controller.dart';
 import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
 import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
 import 'package:itfsd/presentation/controllers/home/home_controller.dart';
@@ -23,6 +24,9 @@ class MainTabviewBinding extends BaseBindings {
     );
     Get.lazyPut<LoginController>(
       () => LoginController(),
+    );
+    Get.lazyPut<AccountController>(
+      () => AccountController(),
     );
   }
 }

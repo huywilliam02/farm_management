@@ -57,6 +57,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -83,6 +84,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -109,6 +111,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -135,6 +138,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -161,6 +165,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -187,6 +192,7 @@ class _ListIconTreeViewState extends State<ListIconTreeView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(

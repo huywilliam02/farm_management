@@ -20,7 +20,7 @@ class CommonCardButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Card(
-        elevation: 0.5,
+        elevation: 0.3,
         color: Colors.white,
         child: Column(
           children: [

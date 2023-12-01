@@ -15,6 +15,7 @@ import 'package:itfsd/presentation/page/bill_farm/bill_farm_view.dart';
 import 'package:itfsd/presentation/page/farm/more_farm.dart';
 import 'package:itfsd/presentation/page/fundnumber/fundnumber_view.dart';
 import 'package:itfsd/presentation/page/planttracking/planttracking_view.dart';
+import 'package:itfsd/presentation/page/sign_up/sign_up_view.dart';
 
 class ButtonTabView extends StatefulWidget {
   const ButtonTabView({super.key});
@@ -60,7 +61,7 @@ class _ButtonTabViewState extends State<ButtonTabView>
           height: 20,
         ),
         Container(
-          color: Colors.white,
+          color: ColorConstant.background_color,
           child: GridView.count(
             physics: const NeverScrollableScrollPhysics(),
             crossAxisCount: 4,
@@ -174,7 +175,8 @@ class _ButtonTabViewState extends State<ButtonTabView>
                 title: "Đầu tư",
                 iconButton: "assets/icons/requestform.png",
                 onPressed: () {
-                  Get.to(() => MoreFarm());
+                  // Get.to(() => MoreFarm());
+                  Get.toNamed(Routes.SIGN_UP);
                 },
               ),
               CommonCardButton(

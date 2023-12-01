@@ -171,6 +171,7 @@ class FarmingCalendarController extends BaseController {
 
   chooseProduct(Product product) {
     idproductnameChoose(product.id);
+
     productController.text = product.name!;
   }
 
@@ -289,7 +290,7 @@ class FarmingCalendarController extends BaseController {
           colorText: Colors.white);
     }
   }
-                       
+
   chooseDate(bool isStart) async {
     DateTime dateTime = isStart
         ? dateStartChoose.value

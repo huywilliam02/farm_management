@@ -23,7 +23,7 @@ class ColorConstant {
   static const pinkFFF1F3 = Color(0xffFFF1F3);
   static const blue265AE8 = Color(0xff265AE8);
   static const yellowFFF2AF = Color(0xffFFF2AF);
-  static const grey = Color.fromARGB(12, 118, 118, 128);
+  static const grey = Color.fromARGB(12, 86, 86, 91);
   static const redpink = Color(0xfffe546e);
   static const redStop = Color(0xffF70D1A);
   static const cyanResume = Color(0xffCCFFFF);
