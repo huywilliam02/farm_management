@@ -57,6 +57,7 @@ class _ListIconPetViewState extends State<ListIconPetView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -84,6 +85,7 @@ class _ListIconPetViewState extends State<ListIconPetView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -109,6 +111,7 @@ class _ListIconPetViewState extends State<ListIconPetView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -136,6 +139,7 @@ class _ListIconPetViewState extends State<ListIconPetView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [

@@ -23,6 +23,7 @@ class EditProfileView extends BaseView<EditProfileController> {
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
+      backgroundColor: ColorConstant.background_color,
       appBar: CommonAppBar(
         title: "Tài khoản",
         titleType: AppBarTitle.text,
@@ -89,82 +90,87 @@ class EditProfileView extends BaseView<EditProfileController> {
                 ),
               ),
             ),
-            CommonCreateEditItem(
-              title: "Họ và tên",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Số điện thoại",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Email",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Loại thành viên",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Số điện thoại",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Chức danh",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Nhóm quyền",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Quê quán",
-              widget: FormFieldWidget(setValueFunc: () {}),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CommonCreateEditItem(
-              title: "Thông tin chung",
-              widget: SizedBox(
-                height: 100,
-                child: FormFieldWidget(
-                  contentPadding: EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  setValueFunc: () {},
+            Padding(
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 15,vertical: 5),
+              child: Column(children: [
+                CommonCreateEditItem(
+                  title: "Họ và tên",
+                  widget: FormFieldWidget(setValueFunc: () {}),
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              child: CommonConstrainBoxButton(
-                text: "Cập nhật",
-                onPressed: () {},
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Số điện thoại",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Email",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Loại thành viên",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Số điện thoại",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Chức danh",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Nhóm quyền",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Quê quán",
+                  widget: FormFieldWidget(setValueFunc: () {}),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                CommonCreateEditItem(
+                  title: "Thông tin chung",
+                  widget: SizedBox(
+                    height: 100,
+                    child: FormFieldWidget(
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                      ),
+                      setValueFunc: () {},
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  child: CommonConstrainBoxButton(
+                    text: "Cập nhật",
+                    onPressed: () {},
+                  ),
+                ),
+              ]),
             ),
           ],
         ),

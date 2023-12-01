@@ -55,6 +55,7 @@ class _ListIconPhoneNumberState extends State<ListIconPhoneNumber>
               padding: const EdgeInsets.all(10),
               children: [
                 Card(
+                  color: ColorConstant.background_color,
                   elevation: 0.3,
                   child: Column(
                     children: [
@@ -82,6 +83,7 @@ class _ListIconPhoneNumberState extends State<ListIconPhoneNumber>
                   ),
                 ),
                 Card(
+                  color: ColorConstant.background_color,
                   elevation: 0.3,
                   child: Column(
                     children: [
@@ -109,6 +111,7 @@ class _ListIconPhoneNumberState extends State<ListIconPhoneNumber>
                   ),
                 ),
                 Card(
+                  color: ColorConstant.background_color,
                   elevation: 0.3,
                   child: Column(
                     children: [
@@ -136,6 +139,7 @@ class _ListIconPhoneNumberState extends State<ListIconPhoneNumber>
                   ),
                 ),
                 Card(
+                  color: ColorConstant.background_color,
                   elevation: 0.3,
                   child: Column(
                     children: [

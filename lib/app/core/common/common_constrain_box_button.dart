@@ -10,7 +10,7 @@ class CommonConstrainBoxButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(5.0),
       child: ConstrainedBox(
         constraints: BoxConstraints.tightFor(width: context.width),
         child: ElevatedButton(

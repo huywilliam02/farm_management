@@ -59,6 +59,7 @@ class _ListIconwageViewState extends State<ListIconwageView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -87,6 +88,7 @@ class _ListIconwageViewState extends State<ListIconwageView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -114,6 +116,7 @@ class _ListIconwageViewState extends State<ListIconwageView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [

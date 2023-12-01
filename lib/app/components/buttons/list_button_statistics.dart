@@ -47,7 +47,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.white,
+              color: ColorConstant.background_color,
               child: GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,

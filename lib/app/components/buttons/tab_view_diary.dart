@@ -57,6 +57,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -83,6 +84,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -107,6 +109,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -131,6 +134,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [

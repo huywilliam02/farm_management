@@ -57,6 +57,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -83,6 +84,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -110,6 +112,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -137,6 +140,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -164,6 +168,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [
@@ -191,6 +196,7 @@ class _ListIconwarehouseViewState extends State<ListIconwarehouseView>
                     ),
                   ),
                   Card(
+                    color: ColorConstant.background_color,
                     elevation: 0.3,
                     child: Column(
                       children: [

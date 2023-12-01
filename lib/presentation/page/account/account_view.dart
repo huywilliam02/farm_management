@@ -18,6 +18,7 @@ class AccountView extends BaseView<AccountController> {
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(30),
