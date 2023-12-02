@@ -5,10 +5,6 @@ import 'package:get/get.dart';
 import 'package:itfsd/presentation/page/login/login_choose_page.dart';
 
 class ChooseLanguageController extends BaseController {
-
-
-
-
   updateLanguage(int index)async{
     switch (index) {
       case 1:

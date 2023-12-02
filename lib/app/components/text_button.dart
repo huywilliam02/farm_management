@@ -1,4 +1,4 @@
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class ButtonText extends StatelessWidget {

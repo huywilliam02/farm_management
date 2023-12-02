@@ -17,6 +17,8 @@ class EditProfileController extends BaseController {
 
   final count = 0.obs;
 
+
+
   @override
   Future<void> onInit() async {
     // if (Get.find<LoginController>().loginModel.value != null) {

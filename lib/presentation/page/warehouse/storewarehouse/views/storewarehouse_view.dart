@@ -103,7 +103,11 @@ class _StorewarehouseViewState extends State<StorewarehouseView> {
                   suffixIcon: IconButton(
                       onPressed: () {},
                       icon: const Image(
-                          image: AssetImage("assets/icons/filtration.png")))),
+                        image: AssetImage(
+                          "assets/icons/filtration.png",
+                        ),
+                        height: 30,
+                      ))),
             ),
             Expanded(
               child: ListView.separated(

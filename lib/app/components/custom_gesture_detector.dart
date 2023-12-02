@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 
 import '../../presentation/controllers/agricultural_products/agricultural_products_constant.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
-import 'package:itfsd/app/resource/theme/app_text_style.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 
 class TabCropView extends StatefulWidget {
@@ -57,6 +57,8 @@ class _TabCropViewState extends State<TabCropView>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -82,6 +84,8 @@ class _TabCropViewState extends State<TabCropView>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(

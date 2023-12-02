@@ -3,7 +3,7 @@ import 'package:itfsd/base/base_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/core/constants/api_endpoint.dart';
 
 import '../../../controllers/area/view_area/view_area_controller.dart';

@@ -1,5 +1,7 @@
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/presentation/controllers/account/controllers/account_controller.dart';
 import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
+import 'package:itfsd/presentation/page/account/account_view.dart';
 import 'package:itfsd/presentation/page/edit_profile/edit_profile_view.dart';
 import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
 import 'package:itfsd/presentation/controllers/home/home_controller.dart';
@@ -27,7 +29,7 @@ class MainTabviewController extends BaseController {
     const HomeView(),
     const FarmView(),
     const ListIcondirayView(),
-    const EditProfileView()
+    const AccountView()
   ]);
   onItemTapped(String index) {
     page.value = index;
@@ -42,7 +44,7 @@ class MainTabviewController extends BaseController {
         Get.find<ListIcondirayView>();
         return selectedIndex.value = 2;
       case 'mine':
-        Get.find<EditProfileController>();
+        Get.find<AccountController>();
         return selectedIndex.value = 3;
       default:
         return selectedIndex.value = 0;

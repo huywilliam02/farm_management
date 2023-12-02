@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../constants/app_constants.dart';
+import '../../constants/color_constants.dart';
 
 class CommonCardButton extends StatelessWidget {
   const CommonCardButton({
@@ -20,7 +20,7 @@ class CommonCardButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Card(
-        elevation: 0.5,
+        elevation: 0.3,
         color: Colors.white,
         child: Column(
           children: [

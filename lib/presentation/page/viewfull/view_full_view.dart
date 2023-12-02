@@ -1,4 +1,3 @@
-
 import 'package:itfsd/base/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -63,7 +62,6 @@ class ViewFullView extends BaseView<ViewFullController> {
                                   width: 100,
                                 ),
                                 onPressed: () {
-
                                   showModalBottomSheet(
                                     context: context,
                                     shape: const RoundedRectangleBorder(
@@ -84,20 +82,18 @@ class ViewFullView extends BaseView<ViewFullController> {
                                             ),
                                             Expanded(
                                               child: ListView.separated(
-                                                  shrinkWrap: true,
-                                                  itemBuilder:
-                                                      (context, index) {
-                                                    return const ProductTypeView();
-                                                  },
-                                                  separatorBuilder:
-                                                      (context, index) =>
-                                                          const SizedBox(
-                                                            height: 10,
-                                                          ),
-                                                  itemCount: controller
-                                                      .listProduct
-                                                      .value
-                                                      .length,),
+                                                shrinkWrap: true,
+                                                itemBuilder: (context, index) {
+                                                  return const ProductTypeView();
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                itemCount: controller
+                                                    .listProduct.value.length,
+                                              ),
                                             ),
                                           ],
                                         ),

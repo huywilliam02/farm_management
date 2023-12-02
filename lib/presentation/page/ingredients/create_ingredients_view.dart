@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
-import 'package:itfsd/app/resource/theme/app_text_style.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/presentation/controllers/ingredients/ingredients_controller.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:quickalert/quickalert.dart';
 

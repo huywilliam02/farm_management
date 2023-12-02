@@ -7,7 +7,7 @@ import 'package:itfsd/data/model/chart/chart_resources/resourcesModel.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../../app/core/constants/app_constants.dart';
+import '../../../../app/core/constants/color_constants.dart';
 import '../../../controllers/chart/chart_resources/chart_resources_controller.dart';
 
 class ChartResourcesView extends BaseView<ChartResourcesController> {

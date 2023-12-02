@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_card_button.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/presentation/page/workinday/calendar_view.dart';
@@ -19,7 +20,6 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
 
   @override
   void initState() {
-
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
   }
@@ -47,7 +47,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              color: Colors.white,
+              color: ColorConstant.background_color,
               child: GridView.count(
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: 2,
@@ -58,6 +58,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                 padding: const EdgeInsets.all(10),
                 children: [
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -84,6 +85,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -110,6 +112,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -137,6 +140,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -163,6 +167,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                     ),
                   ),
                   Card(
+                    elevation: 0.3,
                     child: Column(
                       children: [
                         const SizedBox(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 
 class Showbottomcrops extends BaseView<EditProfileController> {
   const Showbottomcrops({Key? key}) : super(key: key);

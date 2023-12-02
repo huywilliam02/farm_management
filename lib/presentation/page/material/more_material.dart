@@ -1,13 +1,12 @@
-
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/util/number_format_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/material/material_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:quickalert/quickalert.dart';
@@ -201,13 +200,12 @@ class MoreMaterialView extends BaseView<MaterialController> {
                                         Center(
                                             child: CachedNetworkImage(
                                           imageUrl:
-                                              "http://116.118.49.43:8878${controller
-                                                      .listImage.value[index]}",
+                                              "http://116.118.49.43:8878${controller.listImage.value[index]}",
                                           errorWidget: (context, url, error) =>
                                               const Icon(Icons.info),
-                                          progressIndicatorBuilder:
-                                              (context, url, progress) =>
-                                                  const CircularProgressIndicator(),
+                                          progressIndicatorBuilder: (context,
+                                                  url, progress) =>
+                                              const CircularProgressIndicator(),
                                           fit: BoxFit.contain,
                                         )),
                                         Align(
