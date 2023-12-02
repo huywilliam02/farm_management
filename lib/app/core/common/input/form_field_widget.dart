@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../constants/app_constants.dart';
+import '../../constants/color_constants.dart';
 
 class FormFieldWidget extends StatelessWidget {
   FormFieldWidget(
@@ -43,36 +43,37 @@ class FormFieldWidget extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 62,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: TextFormField(
-        style: styleInput,
-        enableInteractiveSelection: enableInteractiveSelection,
-        initialValue: initValue,
-        enabled: isEnabled,
-        obscureText: isObscureText,
-        focusNode: focusNode,
-        decoration: InputDecoration(
-          errorText: errorText != "" ? errorText : null,
-          border: InputBorder.none,
-          fillColor: Colors.white70,
-          contentPadding: contentPadding,
-          labelText: labelText,
-          hintText: labelText,
-          hintTextDirection: TextDirection.ltr,
-          hintMaxLines: 3,
-          prefixIcon: icon,
-          suffixIcon: suffixIcon,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: TextFormField(
+          style: styleInput,
+          enableInteractiveSelection: enableInteractiveSelection,
+          initialValue: initValue,
+          enabled: isEnabled,
+          obscureText: isObscureText,
+          focusNode: focusNode,
+          decoration: InputDecoration(
+            errorText: errorText != "" ? errorText : null,
+            border: InputBorder.none,
+            fillColor: Colors.white70,
+            // labelText: labelText,
+            hintText: labelText,
+            hintTextDirection: TextDirection.ltr,
+            hintMaxLines: 3,
+            prefixIcon: icon,
+            suffixIcon: suffixIcon,
+          ),
+          keyboardType: textInputType,
+          controller: controllerEditting,
+          onChanged: (value) {
+            setValueFunc(value);
+          },
         ),
-        keyboardType: textInputType,
-        controller: controllerEditting,
-        onChanged: (value) {
-          setValueFunc(value);
-        },
       ),
     );
   }

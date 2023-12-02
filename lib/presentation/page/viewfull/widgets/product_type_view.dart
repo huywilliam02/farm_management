@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/viewfull/view_full_controller.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 
 class ProductTypeView extends BaseView<ViewFullController> {

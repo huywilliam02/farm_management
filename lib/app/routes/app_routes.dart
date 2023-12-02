@@ -48,6 +48,9 @@ abstract class Routes {
   static const CHART_USER = _Paths.CHART_USER;
   static const CHART_WAREHOUSE = _Paths.CHART_WAREHOUSE;
   static const DOCUMENT = _Paths.DOCUMENT;
+  static const ACCOUNT = _Paths.ACCOUNT;
+  static const SETTING_LANGUAGE = _Paths.SETTING_LANGUAGE;
+  static const CHAT_AI = _Paths.CHAT_AI;
 }
 
 abstract class _Paths {
@@ -97,4 +100,7 @@ abstract class _Paths {
   static const CHART_USER = '/chart-user';
   static const CHART_WAREHOUSE = '/chart-warehouse';
   static const DOCUMENT = '/document';
+  static const ACCOUNT = '/account';
+  static const SETTING_LANGUAGE = '/setting-language';
+  static const CHAT_AI = '/chat-ai';
 }

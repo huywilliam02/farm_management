@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import '../../../controllers/chart/chart_user/chart_user_controller.dart';

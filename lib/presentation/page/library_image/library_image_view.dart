@@ -1,5 +1,5 @@
 import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

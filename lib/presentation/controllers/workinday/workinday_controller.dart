@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:itfsd/base/base_controller.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:itfsd/data/model/crops/crop.dart';
 import 'package:itfsd/data/model/land/land.dart';
@@ -271,7 +271,6 @@ class WorkindayController extends BaseController {
   refeshForm() {
     landIdController.text = "";
     cropIdController.text = " ";
-
     implementatController.text = dateFormat.format(DateTime.now());
     completedatController.text = "";
     jobController.text = "";
@@ -382,8 +381,7 @@ class WorkindayController extends BaseController {
             backgroundColor: Colors.red.withOpacity(0.7),
             colorText: Colors.white);
       }
-    } catch (e){
-      
+    } catch (e) {
       Get.back();
       Get.snackbar("Lỗi", "Có gì đó không đúng");
     }

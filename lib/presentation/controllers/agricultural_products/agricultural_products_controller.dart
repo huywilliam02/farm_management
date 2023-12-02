@@ -11,21 +11,24 @@ class AgriculturalProductsController extends BaseController {
   Rx<String> weightAgriculturalProduct = "".obs;
   Rx<String> informationAgriculturalProduct = "".obs;
   RxList<String> listImage = <String>[].obs;
-  RxList<AgriculturalProductDetails> listAgriculturalProduct = <AgriculturalProductDetails>[].obs;
-  RxList<AgriculturalProductDetails> listToView = <AgriculturalProductDetails>[].obs;
+  RxList<AgriculturalProductDetails> listAgriculturalProduct =
+      <AgriculturalProductDetails>[].obs;
+  RxList<AgriculturalProductDetails> listToView =
+      <AgriculturalProductDetails>[].obs;
   TextEditingController nameAgriculturalProductController =
-  TextEditingController(text: '');
+      TextEditingController(text: '');
   TextEditingController moneyAgriculturalProductController =
-  TextEditingController(text: '');
+      TextEditingController(text: '');
   TextEditingController quantityAgriculturalProductController =
-  TextEditingController(text: '');
+      TextEditingController(text: '');
   TextEditingController weightAgriculturalProductController =
-  TextEditingController(text: '');
+      TextEditingController(text: '');
   TextEditingController informationAgriculturalProductController =
-  TextEditingController(text: '');
+      TextEditingController(text: '');
   TextEditingController farmcontroller =
-  TextEditingController(text: 'Mời chọn doanh nghiệp');
-  TextEditingController timetAgriculturalProductController = TextEditingController();
+      TextEditingController(text: 'Mời chọn doanh nghiệp');
+  TextEditingController timetAgriculturalProductController =
+      TextEditingController();
   TextEditingController searchController = TextEditingController(text: '');
   DateFormat dateFormat = DateFormat('dd/MM/yyyy');
   Rx<DateTime> dateStartChoose = DateTime.now().obs;
@@ -49,7 +52,6 @@ class AgriculturalProductsController extends BaseController {
       isLoading(false);
     } catch (e) {
       Get.back();
-
       Get.snackbar("Bị lỗi ", e.toString());
       log(e.toString());
     }
@@ -57,8 +59,6 @@ class AgriculturalProductsController extends BaseController {
 
     agriculturalProductscrollController.addListener(_scrollListener);
   }
-
-
 
   void _scrollListener() async {
     if (agriculturalProductscrollController.position.pixels ==
@@ -106,7 +106,8 @@ class AgriculturalProductsController extends BaseController {
       isLoading(true);
       indexPage = 1;
       noMoreRecord(false);
-      listAgriculturalProduct.value = await AgriculturalProductApi.getAllAgricultalProduct(indexPage);
+      listAgriculturalProduct.value =
+          await AgriculturalProductApi.getAllAgricultalProduct(indexPage);
       showAll();
       isLoading(false);
     } catch (e) {
@@ -131,7 +132,7 @@ class AgriculturalProductsController extends BaseController {
         lazyLoading(true);
         await Future.delayed(const Duration(seconds: 1));
         List<AgriculturalProductDetails> listTmp =
-        await AgriculturalProductApi.getAllAgricultalProduct(indexPage);
+            await AgriculturalProductApi.getAllAgricultalProduct(indexPage);
         if (listTmp.isEmpty) {
           // Get.snackbar("Thông báo", "Hết dữ liệu");
           noMoreRecord(true);
@@ -149,7 +150,7 @@ class AgriculturalProductsController extends BaseController {
 //search
       noMoreRecord(true);
       listAgriculturalProduct.value =
-      await AgriculturalProductApi.searchlistAgriculturalProduct(value);
+          await AgriculturalProductApi.searchlistAgriculturalProduct(value);
     } else {
       refeshDataAgriculturalProduct();
     }
@@ -185,7 +186,8 @@ class AgriculturalProductsController extends BaseController {
                   onValueChanged: (dates) {
                     if (isStart) {
                       dateStartChoose(dates[0]);
-                      timetAgriculturalProductController.text = dateFormat.format(dates[0]!);
+                      timetAgriculturalProductController.text =
+                          dateFormat.format(dates[0]!);
                     }
                     Get.back();
                   },
@@ -200,7 +202,7 @@ class AgriculturalProductsController extends BaseController {
   onImagePick() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-    await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
     if (pickedFile != null) {
       final LostDataResponse response2 = await picker.retrieveLostData();
       File file = File(pickedFile.path);
@@ -218,8 +220,8 @@ class AgriculturalProductsController extends BaseController {
     idFarmChoose("");
     listImage(model.images);
     Get.to(() => CreateAgriculralProductView(
-      idAgriculralProduct: model.id,
-    ));
+          idAgriculralProduct: model.id,
+        ));
   }
 
   onTabDeleteIamge(int index) {
@@ -228,7 +230,8 @@ class AgriculturalProductsController extends BaseController {
 
   deleteDataRequestFormAgriculturalProduct(String idAgriculturalProduct) async {
     try {
-      bool check = await AgriculturalProductApi.deleteAgriculturalProduct(idAgriculturalProduct);
+      bool check = await AgriculturalProductApi.deleteAgriculturalProduct(
+          idAgriculturalProduct);
       if (check) {
         //thông báo true
         refeshDataAgriculturalProduct();
@@ -242,7 +245,6 @@ class AgriculturalProductsController extends BaseController {
             colorText: Colors.white);
       }
     } catch (e) {
-
       Get.back();
       Get.snackbar("Lỗi", "Có gì đó không đúng");
     }

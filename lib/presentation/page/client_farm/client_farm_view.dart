@@ -144,7 +144,8 @@ class ClientFarmView extends BaseView<ClientFarmController> {
                                                                 .listClient[
                                                                     index]
                                                                 .name,
-                                                            style: AppTextStyle.textNameData,
+                                                            style: AppTextStyle
+                                                                .textNameData,
                                                           ),
                                                         ),
                                                       ],

@@ -12,7 +12,7 @@ import 'package:itfsd/data/database/database_local.dart';
 import 'package:itfsd/data/network/api/login/login_api.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 
 class StartAppController extends BaseController {
   String accessToken = '';

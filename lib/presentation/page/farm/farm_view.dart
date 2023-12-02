@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
@@ -9,13 +10,13 @@ import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/core/constants/api_endpoint.dart';
 import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
 
-
 class FarmView extends BaseView<FarmController> {
   const FarmView({Key? key}) : super(key: key);
 
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
+      backgroundColor: ColorConstant.background_color,
       appBar: CommonAppBar(
         title: "Danh sách nông trại",
         titleType: AppBarTitle.text,
@@ -31,16 +32,19 @@ class FarmView extends BaseView<FarmController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextFormField(
-              onChanged: (value) async {},
-              decoration: InputDecoration(
+            const CommonDivider(),
+            TextField(
+              onChanged: (value) async {
+                // await controller.onTypingSearchWorkInDay(value);
+              },
+              decoration: const InputDecoration(
                 hintText: "Tìm kiếm",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                prefixIcon: const Icon(Icons.search),
+                contentPadding: EdgeInsets.all(10),
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.search),
               ),
             ),
+            const CommonDivider(),
             SizedBox(
               height: UtilsReponsive.height(context, 10),
             ),

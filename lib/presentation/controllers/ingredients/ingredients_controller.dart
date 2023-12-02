@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/network/api/ingredients/ingredients_api.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:itfsd/data/model/igredients/ingredientsDetail.dart';
 import 'package:itfsd/data/model/igredients/ingredientsModel.dart';

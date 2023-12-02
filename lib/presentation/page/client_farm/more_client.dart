@@ -4,7 +4,7 @@ import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/client_farm/client_farm_controller.dart';
 import 'package:itfsd/presentation/page/client_farm/client_farm_view.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';

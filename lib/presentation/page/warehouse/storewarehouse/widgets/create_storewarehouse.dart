@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/wage/wage_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 
 class Createstorewarehouse extends BaseView<WageController> {
   const Createstorewarehouse({Key? key}) : super(key: key);

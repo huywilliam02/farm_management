@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/shoppings/shoppings_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 
 class PayShopping extends BaseView<ShoppingsController> {
   const PayShopping({Key? key}) : super(key: key);

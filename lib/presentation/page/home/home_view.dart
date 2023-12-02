@@ -1,5 +1,5 @@
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/components/buttons/button_tab_view.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';

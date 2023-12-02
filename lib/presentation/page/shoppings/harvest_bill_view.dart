@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/shoppings/shoppings_controller.dart';
 import 'package:itfsd/presentation/page/shoppings/pay_shopping.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 
 class HarvestBillView extends BaseView<ShoppingsController> {
   const HarvestBillView({Key? key}) : super(key: key);

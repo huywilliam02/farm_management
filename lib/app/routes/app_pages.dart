@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../presentation/controllers/account/bindings/account_binding.dart';
 import '../../presentation/controllers/agricultural_products/agricultural_products_binding.dart';
 import '../../presentation/controllers/area/view_area_binding.dart';
 import '../../presentation/controllers/bill_farm/bill_farm_binding.dart';
@@ -13,6 +14,7 @@ import '../../presentation/controllers/contract/contact_binding.dart';
 import '../../presentation/controllers/crops_farm/crops_farm_binding.dart';
 import '../../presentation/controllers/cropseason/cropseason_binding.dart';
 import '../../presentation/controllers/customer/customer_binding.dart';
+import '../../presentation/controllers/document/document_binding.dart';
 import '../../presentation/controllers/edit_profile/edit_profile_binding.dart';
 import '../../presentation/controllers/farm/farm_binding.dart';
 import '../../presentation/controllers/farming_calendar/farming_calendar_binding.dart';
@@ -27,7 +29,9 @@ import '../../presentation/controllers/material/material_binding.dart';
 import '../../presentation/controllers/otherobject/otherobject_binding.dart';
 import '../../presentation/controllers/planttracking/planttracking_binding.dart';
 import '../../presentation/controllers/requestform/requestform_binding.dart';
+import '../../presentation/controllers/setting_language/setting_language_binding.dart';
 import '../../presentation/controllers/shoppings/shoppings_binding.dart';
+import '../../presentation/controllers/sign_up/sign_up_binding.dart';
 import '../../presentation/controllers/start_app/start_app_binding.dart';
 import '../../presentation/controllers/supplier/supplier_binding.dart';
 import '../../presentation/controllers/unitfarm/unitfarm_binding.dart';
@@ -37,6 +41,7 @@ import '../../presentation/controllers/wage/wage_binding.dart';
 import '../../presentation/controllers/warehouse/storewarehouse/storewarehouse_binding.dart';
 import '../../presentation/controllers/warehouse/warehouse_binding.dart';
 import '../../presentation/controllers/workinday/workinday_binding.dart';
+import '../../presentation/page/account/account_view.dart';
 import '../../presentation/page/agricultural_products/agricultural_products_view.dart';
 import '../../presentation/page/area/more_area/more_land_view.dart';
 import '../../presentation/page/area/view_area/view_area_view.dart';
@@ -52,6 +57,7 @@ import '../../presentation/page/contract/contact_view.dart';
 import '../../presentation/page/crops_farm/crops_farm_view.dart';
 import '../../presentation/page/cropseason/cropseason_view.dart';
 import '../../presentation/page/customer/customer_view.dart';
+import '../../presentation/page/document/document_view.dart';
 import '../../presentation/page/edit_profile/edit_profile_view.dart';
 import '../../presentation/page/farm/farm_view.dart';
 import '../../presentation/page/farming_calendar/view-all-schedule.dart';
@@ -66,7 +72,9 @@ import '../../presentation/page/material/material_view.dart';
 import '../../presentation/page/otherobject/otherobject_view.dart';
 import '../../presentation/page/planttracking/planttracking_view.dart';
 import '../../presentation/page/requestform/requestform_page.dart';
+import '../../presentation/page/setting_language/setting_language_view.dart';
 import '../../presentation/page/shoppings/shoppings_view.dart';
+import '../../presentation/page/sign_up/sign_up_view.dart';
 import '../../presentation/page/start_app/start_app_view.dart';
 import '../../presentation/page/supplier/supplier_view.dart';
 import '../../presentation/page/unitfarm/unitfarm_view.dart';
@@ -79,8 +87,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/document/document_binding.dart';
-import '../../presentation/page/document/document_view.dart';
+import '../../presentation/controllers/chat_ai/chat_ai_binding.dart';
+import '../../presentation/page/chat_ai/chat_ai_view.dart';
 
 part 'app_routes.dart';
 
@@ -100,11 +108,11 @@ class AppPages {
       page: () => const LoginPage(),
       binding: LoginBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.SIGN_UP,
-    //   page: () => SignUpView(),
-    //   binding: SignUpBinding(),
-    // ),
+    GetPage(
+      name: _Paths.SIGN_UP,
+      page: () => SignUpView(),
+      binding: SignUpBinding(),
+    ),
     GetPage(
       name: _Paths.MAIN_TABVIEW,
       page: () => MainTabView(),
@@ -197,7 +205,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SUPPLIER,
-      page: () => const SupplierView(),
+      page: () => SupplierView(),
       binding: SupplierBinding(),
     ),
     GetPage(
@@ -307,8 +315,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DOCUMENT,
-      page: () =>  const DocumentView(),
+      page: () => const DocumentView(),
       binding: DocumentBinding(),
+    ),
+    GetPage(
+      name: _Paths.ACCOUNT,
+      page: () => const AccountView(),
+      binding: AccountBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING_LANGUAGE,
+      page: () => const SettingLanguageView(),
+      binding: SettingLanguageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_AI,
+      page: () => const ChatAiView(),
+      binding: ChatAiBinding(),
     ),
   ];
 }
