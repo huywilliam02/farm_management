@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:itfsd/app/resource/theme/app_text_style.dart';
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
 
 class CommonCreateEditItem extends StatelessWidget {
   final Widget widget;

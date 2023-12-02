@@ -6,7 +6,7 @@ import 'package:itfsd/app/core/common/common_scaffold.dart';
 import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/icons/common_icons.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/resource/theme/app_text_style.dart';
 import 'package:itfsd/app/util/number_format_utils.dart';
 import 'package:itfsd/base/base_view.dart';
