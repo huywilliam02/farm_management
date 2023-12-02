@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_constrain_box_button.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_constrain_box_button.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
-import 'package:itfsd/app/resource/theme/app_text_style.dart';
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:flutter/material.dart';
 
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
-import 'package:itfsd/app/core/common/common_create_edit_item.dart';
+import 'package:itfsd/app/core/common/input/common_create_edit_item.dart';
 import 'package:itfsd/presentation/controllers/account/controllers/account_controller.dart';
 import 'package:itfsd/presentation/controllers/login/login_controller.dart';
 import '../../controllers/edit_profile/edit_profile_controller.dart';
@@ -29,7 +29,7 @@ class EditProfileView extends BaseView<EditProfileController> {
         titleType: AppBarTitle.text,
         centerTitle: true,
         titleTextStyle: AppTextStyle.textTitleAppBar,
-        leadingIcon: IconUtils.back,
+        leadingIcon: IconsUtils.back,
         onLeadingPressed: () {
           Get.back();
         },

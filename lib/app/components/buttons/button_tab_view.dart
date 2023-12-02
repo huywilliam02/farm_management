@@ -1,5 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:itfsd/app/core/common/common_card_button.dart';
+import 'package:itfsd/app/core/common/menu/common_card_button.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,8 +10,10 @@ import 'package:itfsd/app/components/buttons/list_icon_view_tree.dart';
 import 'package:itfsd/app/components/buttons/list_icon_ware_house.dart';
 import 'package:itfsd/app/components/buttons/list_icon_wage.dart';
 import 'package:itfsd/app/components/buttons/tab_crop_view.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/presentation/page/bill_farm/bill_farm_view.dart';
+import 'package:itfsd/presentation/page/chat_ai/chat_ai_view.dart';
+import 'package:itfsd/presentation/page/chat_ai/widgets/chat_ai_view.dart';
 import 'package:itfsd/presentation/page/farm/more_farm.dart';
 import 'package:itfsd/presentation/page/fundnumber/fundnumber_view.dart';
 import 'package:itfsd/presentation/page/planttracking/planttracking_view.dart';
@@ -258,7 +260,7 @@ class _ButtonTabViewState extends State<ButtonTabView>
                 title: "Tư vấn",
                 iconButton: "assets/icons/socialmedia.png",
                 onPressed: () {
-                  // Get.to(() => const ListIconStatistics());
+                  Get.to(() => const ChatAiView());
                 },
               ),
               CommonCardButton(

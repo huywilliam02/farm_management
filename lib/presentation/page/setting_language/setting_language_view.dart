@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
@@ -20,7 +20,7 @@ class SettingLanguageView extends BaseView<SettingLanguageController> {
         titleType: AppBarTitle.text,
         centerTitle: true,
         titleTextStyle: AppTextStyle.textTitleAppBar,
-        leadingIcon: IconUtils.back,
+        leadingIcon: IconsUtils.back,
         onLeadingPressed: () {
           Get.back();
         },

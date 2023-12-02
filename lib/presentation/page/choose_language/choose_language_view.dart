@@ -1,7 +1,7 @@
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../base/base_view.dart';
-import '../../../app/core/constants/app_constants.dart';
+import '../../../app/core/constants/color_constants.dart';
 import '../../controllers/choose_language/choose_language_controller.dart';
 
 class ChooseLanguageView extends BaseView<ChooseLanguageController> {

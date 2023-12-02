@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:itfsd/app/resource/theme/app_text_style.dart';
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';

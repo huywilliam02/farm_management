@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/crops_farm/crops_farm_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:quickalert/quickalert.dart';

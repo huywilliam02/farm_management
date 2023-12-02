@@ -29,6 +29,7 @@ import '../../presentation/controllers/material/material_binding.dart';
 import '../../presentation/controllers/otherobject/otherobject_binding.dart';
 import '../../presentation/controllers/planttracking/planttracking_binding.dart';
 import '../../presentation/controllers/requestform/requestform_binding.dart';
+import '../../presentation/controllers/setting_language/setting_language_binding.dart';
 import '../../presentation/controllers/shoppings/shoppings_binding.dart';
 import '../../presentation/controllers/sign_up/sign_up_binding.dart';
 import '../../presentation/controllers/start_app/start_app_binding.dart';
@@ -71,6 +72,7 @@ import '../../presentation/page/material/material_view.dart';
 import '../../presentation/page/otherobject/otherobject_view.dart';
 import '../../presentation/page/planttracking/planttracking_view.dart';
 import '../../presentation/page/requestform/requestform_page.dart';
+import '../../presentation/page/setting_language/setting_language_view.dart';
 import '../../presentation/page/shoppings/shoppings_view.dart';
 import '../../presentation/page/sign_up/sign_up_view.dart';
 import '../../presentation/page/start_app/start_app_view.dart';
@@ -85,8 +87,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/setting_language/setting_language_binding.dart';
-import '../../presentation/page/setting_language/setting_language_view.dart';
+import '../../presentation/controllers/chat_ai/chat_ai_binding.dart';
+import '../../presentation/page/chat_ai/chat_ai_view.dart';
 
 part 'app_routes.dart';
 
@@ -325,6 +327,11 @@ class AppPages {
       name: _Paths.SETTING_LANGUAGE,
       page: () => const SettingLanguageView(),
       binding: SettingLanguageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_AI,
+      page: () => const ChatAiView(),
+      binding: ChatAiBinding(),
     ),
   ];
 }

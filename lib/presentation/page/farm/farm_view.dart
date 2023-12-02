@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';

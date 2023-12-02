@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/data/model/chart/chart_warehouse/statistics_warehouse.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

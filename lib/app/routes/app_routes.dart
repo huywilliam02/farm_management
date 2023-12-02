@@ -50,6 +50,7 @@ abstract class Routes {
   static const DOCUMENT = _Paths.DOCUMENT;
   static const ACCOUNT = _Paths.ACCOUNT;
   static const SETTING_LANGUAGE = _Paths.SETTING_LANGUAGE;
+  static const CHAT_AI = _Paths.CHAT_AI;
 }
 
 abstract class _Paths {
@@ -101,4 +102,5 @@ abstract class _Paths {
   static const DOCUMENT = '/document';
   static const ACCOUNT = '/account';
   static const SETTING_LANGUAGE = '/setting-language';
+  static const CHAT_AI = '/chat-ai';
 }

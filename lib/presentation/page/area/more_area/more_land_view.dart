@@ -1,11 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:itfsd/app/core/common/common_form_field_widget.dart';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/area/view_more_area/view_more_land_controller.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

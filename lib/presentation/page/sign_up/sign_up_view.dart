@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_constrain_box_button.dart';
-import 'package:itfsd/app/core/common/common_create_edit_item.dart';
-import 'package:itfsd/app/core/common/common_form_field_widget.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
-import 'package:itfsd/app/core/common/form_field_widget.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_constrain_box_button.dart';
+import 'package:itfsd/app/core/common/input/common_create_edit_item.dart';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/presentation/controllers/sign_up/sign_up_controller.dart';
 import '../../../base/base_view.dart';
@@ -20,7 +20,7 @@ class SignUpView extends BaseView<SignUpController> {
       appBar: CommonAppBar(
         title: "Liên hệ",
         titleType: AppBarTitle.text,
-        leadingIcon: Icon(Icons.arrow_back_ios_new),
+        leadingIcon: const Icon(Icons.arrow_back_ios_new),
         titleTextStyle: AppTextStyle.textTitleAppBar,
         centerTitle: true,
         onLeadingPressed: () {

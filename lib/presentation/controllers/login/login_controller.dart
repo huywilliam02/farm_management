@@ -12,7 +12,7 @@ import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../data/database/database_local.dart';
-import '../../../app/core/constants/app_constants.dart';
+import '../../../app/core/constants/color_constants.dart';
 
 class LoginController extends BaseController {
   Rx<bool> isLoading = false.obs;

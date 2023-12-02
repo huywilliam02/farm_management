@@ -4,10 +4,11 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:itfsd/app/components/buttons/list_icon_view_tree.dart';
-import 'package:itfsd/app/core/common/common_app_bar.dart';
-import 'package:itfsd/app/core/common/common_scaffold.dart';
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
+import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
@@ -34,13 +35,13 @@ class WorkindayView extends BaseView<WorkindayController> {
           titleTextStyle: AppTextStyle.textTitleAppBar,
           centerTitle: true,
           titleType: AppBarTitle.text,
-          leadingIcon: const Icon(Icons.arrow_back_ios_new),
+          leadingIcon: IconsUtils.back,
           onLeadingPressed: () {
             Get.offAll(() => const ListIconTreeView());
           },
           actions: [
             IconButton(
-              icon: const Icon(Icons.add),
+              icon: const Icon(IconsUtils.add),
               onPressed: () {
                 controller.refeshForm();
                 Get.to(() => MoreWorkInDayView());

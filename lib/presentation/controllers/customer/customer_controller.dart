@@ -8,7 +8,7 @@ import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/network/api/customer/customer.dart';
 import 'package:itfsd/presentation/page/customer/customer_view.dart';
 import 'package:itfsd/presentation/page/customer/customer_pageview.dart';
-import 'package:itfsd/app/core/constants/app_constants.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:itfsd/data/model/customer/customer_detail.dart';
 import 'package:itfsd/data/model/customer/customer_model.dart';
