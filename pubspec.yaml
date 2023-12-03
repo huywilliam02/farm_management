@@ -30,7 +30,6 @@ dependencies:
   calendar_date_picker2: ^0.5.2
   dropdown_button2: ^2.3.7
   google_fonts: ^5.1.0
-  money_formatter: ^0.0.4
   cached_network_image: ^3.2.3
   syncfusion_flutter_charts: ^23.1.44
   syncfusion_flutter_datagrid: ^23.1.44
@@ -47,6 +46,7 @@ dependencies:
   intl_translation: ^0.18.2
   ionicons: ^0.2.2
   provider: ^6.1.1
+  json_annotation: ^4.8.1
 
 
 
@@ -57,7 +57,7 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
-  generate: true
+#  generate: true
 
   assets:
       - assets/

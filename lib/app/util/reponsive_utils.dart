@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:money_formatter/money_formatter.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
 
 int _screenHeight = 812;
@@ -69,12 +67,5 @@ class UtilsReponsive {
 
   static Radius radius(BuildContext context, double r) {
     return Radius.circular(width(context, r));
-  }
-
-  static String format(double amount) {
-    MoneyFormatter fmf = MoneyFormatter(amount: amount);
-    MoneyFormatterOutput output = fmf.output;
-
-    return output.nonSymbol;
   }
 }

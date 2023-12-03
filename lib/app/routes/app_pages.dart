@@ -8,6 +8,7 @@ import '../../presentation/controllers/chart/chart_quanlity/chart_quanlity_bindi
 import '../../presentation/controllers/chart/chart_resources/chart_resources_binding.dart';
 import '../../presentation/controllers/chart/chart_user/chart_user_binding.dart';
 import '../../presentation/controllers/chart/chart_warehouse/chart_warehouse_binding.dart';
+import '../../presentation/controllers/chat_ai/chat_ai_binding.dart';
 import '../../presentation/controllers/choose_language/choose_language_binding.dart';
 import '../../presentation/controllers/client_farm/client_farm_binding.dart';
 import '../../presentation/controllers/contract/contact_binding.dart';
@@ -51,6 +52,7 @@ import '../../presentation/page/chart/chart_quanlity/chart_quanlity_view.dart';
 import '../../presentation/page/chart/chart_resources/chart_resources_view.dart';
 import '../../presentation/page/chart/chart_user/chart_user_view.dart';
 import '../../presentation/page/chart/chart_warehouse/chart_warehouse_view.dart';
+import '../../presentation/page/chat_ai/chat_ai_view.dart';
 import '../../presentation/page/choose_language/choose_language_view.dart';
 import '../../presentation/page/client_farm/client_farm_view.dart';
 import '../../presentation/page/contract/contact_view.dart';
@@ -87,8 +89,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/chat_ai/chat_ai_binding.dart';
-import '../../presentation/page/chat_ai/chat_ai_view.dart';
+import '../../presentation/controllers/news/news_binding.dart';
+import '../../presentation/page/news/news_view.dart';
 
 part 'app_routes.dart';
 
@@ -332,6 +334,11 @@ class AppPages {
       name: _Paths.CHAT_AI,
       page: () => const ChatAiView(),
       binding: ChatAiBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEWS,
+      page: () => const NewsView(),
+      binding: NewsBinding(),
     ),
   ];
 }

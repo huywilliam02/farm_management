@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
@@ -108,9 +109,9 @@ class MainTabView extends BaseView<MainTabviewController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      "assets/icons/home.png",
-                                      height: 30,
+                                    Icon(
+                                      IconsUtils.home,
+                                      size: 30,
                                       color: controller.selectedIndex.value == 0
                                           ? ColorConstant.secondary
                                           : ColorConstant.secondary1,
@@ -140,16 +141,17 @@ class MainTabView extends BaseView<MainTabviewController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      "assets/icons/farm.png",
-                                      height: 30,
+                                    Icon(
+                                      IconsUtils.daily,
+                                      size: 30,
                                       color: controller.selectedIndex.value == 1
                                           ? ColorConstant.secondary
                                           : ColorConstant.secondary1,
                                     ),
                                     Text(
-                                      'Nông trại',
+                                      'Nhật ký',
                                       style: TextStyle(
+                                        // fontSize: 20,
                                         color:
                                             controller.selectedIndex.value == 1
                                                 ? ColorConstant.secondary
@@ -183,18 +185,16 @@ class MainTabView extends BaseView<MainTabviewController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      "assets/icons/blogger.png",
-                                      height:
-                                          UtilsReponsive.height(context, 30),
+                                    Icon(
+                                      IconsUtils.news,
+                                      size: 30,
                                       color: controller.selectedIndex.value == 2
                                           ? ColorConstant.secondary
                                           : ColorConstant.secondary1,
                                     ),
                                     Text(
-                                      'Nhật ký',
+                                      'Bảng tin',
                                       style: TextStyle(
-                                        // fontSize: 20,
                                         color:
                                             controller.selectedIndex.value == 2
                                                 ? ColorConstant.secondary
@@ -217,9 +217,9 @@ class MainTabView extends BaseView<MainTabviewController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset(
-                                      "assets/icons/user.png",
-                                      height: 30,
+                                    Icon(
+                                      IconsUtils.person,
+                                      size: 30,
                                       color: controller.selectedIndex.value == 3
                                           ? ColorConstant.secondary
                                           : ColorConstant.secondary1,
