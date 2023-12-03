@@ -15,6 +15,12 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
   );
+  static TextStyle textTitleFormobligatory = GoogleFonts.roboto(
+    textStyle: TextStyleConstant.red22RobotoBold,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+  );
   static const textShowData = TextStyle(
     color: Colors.grey,
     fontWeight: FontWeight.w600,

@@ -14,7 +14,7 @@ import 'package:itfsd/data/model/category/unit.dart';
 import 'package:itfsd/data/model/farming_calendar/form_schedule.dart';
 import 'package:itfsd/data/model/farming_calendar/schedule-detail.dart';
 import 'package:itfsd/data/model/land/land.dart';
-import 'package:itfsd/data/model/user/user.dart';
+import 'package:itfsd/data/model/users/user.dart';
 import 'package:itfsd/presentation/page/farming_calendar/farming_calendar_view.dart';
 import 'package:itfsd/presentation/page/farming_calendar/view-all-schedule.dart';
 
@@ -40,7 +40,7 @@ class FarmingCalendarController extends BaseController {
   RxList<UnitModel> unitModel = <UnitModel>[].obs;
   RxList<Product> listProduct = <Product>[].obs;
   RxList<Product> listUnit = <Product>[].obs;
-  RxList<User> listUser = <User>[].obs;
+  RxList<UserModel> listUser = <UserModel>[].obs;
   RxList<DetailSchedule> listSchedule = <DetailSchedule>[].obs;
   RxList<DetailSchedule> listToView = <DetailSchedule>[].obs;
   Rx<String> idLandChoose = "".obs;

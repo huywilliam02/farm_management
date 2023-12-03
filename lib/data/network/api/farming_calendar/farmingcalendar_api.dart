@@ -7,7 +7,7 @@ import 'package:itfsd/data/model/category/product.dart';
 import 'package:itfsd/data/model/category/table_tree.dart';
 import 'package:itfsd/data/model/farming_calendar/form_schedule.dart';
 import 'package:itfsd/data/model/farming_calendar/schedule-detail.dart';
-import 'package:itfsd/data/model/user/user.dart';
+import 'package:itfsd/data/model/users/user.dart';
 
 class FarmingcalendarApi {
   static Future<List<TabletreeModel>> getAllcategoriesApi() async {
@@ -64,7 +64,7 @@ class FarmingcalendarApi {
     }
   }
 
-  static Future<List<User>> getAllUser() async {
+  static Future<List<UserModel>> getAllUser() async {
     var url = Uri.parse(
         'http://116.118.49.43:8878/api/user/gets?order=ASC&page=1&take=50');
     final response = await http.get(
@@ -78,15 +78,15 @@ class FarmingcalendarApi {
     log('getAllUser: ${response.statusCode} ${response.body}');
 
     if (response.statusCode.toString() == '200') {
-      List<User> listProduct = [];
+      List<UserModel> listProduct = [];
       final mapData =
           jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
-      listProduct = mapData.map<User>((json) {
-        return User.fromJson(json);
+      listProduct = mapData.map<UserModel>((json) {
+        return UserModel.fromJson(json);
       }).toList();
       return listProduct;
     } else {
-      return Future<List<User>>.value([]);
+      return Future<List<UserModel>>.value([]);
     }
   }
 

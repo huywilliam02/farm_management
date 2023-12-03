@@ -27,6 +27,7 @@ import '../../presentation/controllers/library_image/library_image_binding.dart'
 import '../../presentation/controllers/login/login_binding.dart';
 import '../../presentation/controllers/main_tabview/main_tabview_binding.dart';
 import '../../presentation/controllers/material/material_binding.dart';
+import '../../presentation/controllers/news/news_binding.dart';
 import '../../presentation/controllers/otherobject/otherobject_binding.dart';
 import '../../presentation/controllers/planttracking/planttracking_binding.dart';
 import '../../presentation/controllers/requestform/requestform_binding.dart';
@@ -71,6 +72,7 @@ import '../../presentation/page/library_image/library_image_view.dart';
 import '../../presentation/page/login/login_page.dart';
 import '../../presentation/page/main_tabview/main_tabview_view.dart';
 import '../../presentation/page/material/material_view.dart';
+import '../../presentation/page/news/news_view.dart';
 import '../../presentation/page/otherobject/otherobject_view.dart';
 import '../../presentation/page/planttracking/planttracking_view.dart';
 import '../../presentation/page/requestform/requestform_page.dart';
@@ -89,8 +91,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/news/news_binding.dart';
-import '../../presentation/page/news/news_view.dart';
+import '../../presentation/controllers/users/users_binding.dart';
+import '../../presentation/page/users/users_view.dart';
 
 part 'app_routes.dart';
 
@@ -339,6 +341,11 @@ class AppPages {
       name: _Paths.NEWS,
       page: () => const NewsView(),
       binding: NewsBinding(),
+    ),
+    GetPage(
+      name: _Paths.USERS,
+      page: () => const UsersView(),
+      binding: UsersBinding(),
     ),
   ];
 }

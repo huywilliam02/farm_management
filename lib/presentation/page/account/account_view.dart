@@ -95,6 +95,16 @@ class AccountView extends BaseView<AccountController> {
               ),
               const SizedBox(height: 20),
               SettingItem(
+                title: "Thêm thành viên",
+                icon: Ionicons.people,
+                bgColor: Colors.blueGrey,
+                iconColor: Colors.white,
+                onTap: () {
+                  Get.toNamed(Routes.USERS);
+                },
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
                 title: "Ngôn ngữ",
                 icon: Ionicons.earth,
                 bgColor: Colors.orange.shade100,
