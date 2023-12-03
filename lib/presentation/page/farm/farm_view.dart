@@ -23,9 +23,10 @@ class FarmView extends BaseView<FarmController> {
         titleTextStyle: AppTextStyle.textTitleAppBar,
         leadingIcon: const Icon(
           Icons.arrow_back_ios_new,
-          color: Colors.white,
         ),
-        onLeadingPressed: () {},
+        onLeadingPressed: () {
+          Get.back();
+        },
         centerTitle: true,
       ),
       body: SafeArea(

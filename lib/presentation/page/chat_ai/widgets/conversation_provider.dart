@@ -4,7 +4,8 @@ import 'package:itfsd/data/model/chat_ai/chat_ai_models.dart';
 class ConversationProvider extends ChangeNotifier {
   List<Conversation> _conversations = [];
   int _currentConversationIndex = 0;
-  String apikey = "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";
+  // String apikey = "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";
+  String apikey = "";
   String proxy = "";
   List<Conversation> get conversations => _conversations;
   int get currentConversationIndex => _currentConversationIndex;

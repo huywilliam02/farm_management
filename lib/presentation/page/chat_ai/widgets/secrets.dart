@@ -54,7 +54,7 @@ void showRenameDialog(BuildContext context) async {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      String newName = 'YOUR_API_KEY';
+      String newName = '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';
       return AlertDialog(
         title: const Text('Cài đặt API'),
         content: TextField(

@@ -1,6 +1,5 @@
 import 'package:itfsd/app/util/log_utils.dart';
 
-
 T run<T>(T Function() block) {
   return block();
 }

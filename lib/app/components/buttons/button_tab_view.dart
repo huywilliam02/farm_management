@@ -74,7 +74,7 @@ class _ButtonTabViewState extends State<ButtonTabView>
                 title: "Trang trại",
                 iconButton: "assets/icons/barn.png",
                 onPressed: () {
-                  Get.to(() => MoreFarm());
+                  Get.toNamed(Routes.FARM);
                 },
               ),
               CommonCardButton(
@@ -178,7 +178,7 @@ class _ButtonTabViewState extends State<ButtonTabView>
                 iconButton: "assets/icons/requestform.png",
                 onPressed: () {
                   // Get.to(() => MoreFarm());
-                  Get.toNamed(Routes.SIGN_UP);
+                  Get.toNamed(Routes.NEWS);
                 },
               ),
               CommonCardButton(

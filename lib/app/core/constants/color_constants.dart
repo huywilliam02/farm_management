@@ -229,4 +229,3 @@ class AppConstants {
 
   // static final myLocation = LatLng(51.5090214, -0.1982948);
 }
-

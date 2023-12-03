@@ -1,6 +1,7 @@
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/presentation/controllers/account/controllers/account_controller.dart';
 import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
+import 'package:itfsd/presentation/controllers/news/news_controller.dart';
 import 'package:itfsd/presentation/page/account/account_view.dart';
 import 'package:itfsd/presentation/page/edit_profile/edit_profile_view.dart';
 import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
@@ -11,6 +12,7 @@ import 'package:itfsd/presentation/page/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/app/components/buttons/tab_view_diary.dart';
+import 'package:itfsd/presentation/page/news/news_view.dart';
 
 class MainTabviewController extends BaseController {
   var selectedIndex = 0.obs;
@@ -23,12 +25,10 @@ class MainTabviewController extends BaseController {
     // Get.find<TabController>();
   }
 
-
-
   RxList<Widget> body = RxList([
     const HomeView(),
-    const FarmView(),
     const ListIcondirayView(),
+    const NewsView(),
     const AccountView()
   ]);
   onItemTapped(String index) {
@@ -38,10 +38,10 @@ class MainTabviewController extends BaseController {
         Get.find<HomeController>();
         return selectedIndex.value = 0;
       case 'farm':
-        Get.find<FarmController>();
+        Get.find<ListIcondirayView>();
         return selectedIndex.value = 1;
       case 'diray':
-        Get.find<ListIcondirayView>();
+        Get.find<NewsController>();
         return selectedIndex.value = 2;
       case 'mine':
         Get.find<AccountController>();
@@ -57,10 +57,10 @@ class MainTabviewController extends BaseController {
         Get.find<HomeController>();
         return selectedIndex.value = 0;
       case 1:
-        Get.find<FarmController>();
+        Get.find<EditProfileController>();
         return selectedIndex.value = 1;
       case 2:
-        Get.find<EditProfileController>();
+        Get.find<NewsController>();
         return selectedIndex.value = 2;
       case 3:
         Get.find<EditProfileController>();

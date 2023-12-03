@@ -5,6 +5,7 @@ import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
 import 'package:itfsd/presentation/controllers/home/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/presentation/controllers/login/login_controller.dart';
+import 'package:itfsd/presentation/controllers/news/news_controller.dart';
 import 'main_tabview_controller.dart';
 
 class MainTabviewBinding extends BaseBindings {
@@ -27,6 +28,9 @@ class MainTabviewBinding extends BaseBindings {
     );
     Get.lazyPut<AccountController>(
       () => AccountController(),
+    );
+      Get.lazyPut<NewsController>(
+      () => NewsController(),
     );
   }
 }
