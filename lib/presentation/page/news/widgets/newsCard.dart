@@ -16,7 +16,7 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 20, right: 20, top: 10),
+      margin: EdgeInsets.only(left: 5, right: 5, top: 10),
       width: double.infinity,
       height: 300,
       decoration: BoxDecoration(
@@ -33,7 +33,7 @@ class NewsCard extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.cover, image: NetworkImage(imageUrl)))),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 5),
+            margin: EdgeInsets.only(left: 10, right: 20, top: 5),
             child: Column(
               children: [
                 Text(

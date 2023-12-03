@@ -139,16 +139,22 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "News Content",
+                    widget.content,
                     style: TextStyle(
-                        fontSize: 25,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey[600]),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  Text(widget.content)
+                  Text(
+                    widget.description,
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black),
+                  ),
                 ],
               ),
             ),

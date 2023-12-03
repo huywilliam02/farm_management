@@ -15,16 +15,16 @@ class MainTabView extends BaseView<MainTabviewController> {
 
   @override
   Widget buildView(BuildContext context) {
-    return PopScope(
-      onPopInvoked: (didPop) => false,
-      // onWillPop: () async => false,
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
-          backgroundColor: ColorConstant.background_color,
           resizeToAvoidBottomInset: false,
+          backgroundColor: ColorConstant.background_color,
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           floatingActionButton: FloatingActionButton(
             onPressed: () {},
+            backgroundColor: ColorConstant.background_color,
             child: Center(
               child: Transform(
                 alignment: Alignment.center,
@@ -32,20 +32,16 @@ class MainTabView extends BaseView<MainTabviewController> {
                   math.pi / 4,
                 ),
                 child: Container(
-                  width: UtilsReponsive.width(context, 120),
-                  height: UtilsReponsive.height(context, 120),
+                  width: 120,
+                  height: 120,
                   decoration: const BoxDecoration(
+                    borderRadius:
+                        BorderRadius.only(bottomRight: Radius.circular(2)),
                     color: ColorConstant.background_color,
-                    border: Border(
-                      right: BorderSide(
-                          width: 1, color: ColorConstant.background_color),
-                      bottom: BorderSide(
-                          width: 1, color: ColorConstant.background_color),
-                    ),
                   ),
                   child: Container(
-                    width: UtilsReponsive.width(context, 100),
-                    height: UtilsReponsive.height(context, 100),
+                    width: 100,
+                    height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       gradient: const LinearGradient(
@@ -53,7 +49,7 @@ class MainTabView extends BaseView<MainTabviewController> {
                       ),
                       border: Border.all(
                         width: 3,
-                        color: ColorConstant.white,
+                        color: ColorConstant.grey,
                       ),
                     ),
                     child: InkWell(
@@ -63,15 +59,12 @@ class MainTabView extends BaseView<MainTabviewController> {
                       },
                       child: Center(
                         child: Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.rotationZ(
-                            -math.pi / 4,
-                          ),
-                          child: const Icon(
-                            Icons.map_rounded,
-                            color: ColorConstant.secondary1,
-                          ),
-                        ),
+                            alignment: Alignment.center,
+                            transform: Matrix4.rotationZ(
+                              -math.pi / 4,
+                            ),
+                            child: const Icon(Icons.map_outlined,
+                                color: ColorConstant.secondary1)),
                       ),
                     ),
                   ),
@@ -87,12 +80,12 @@ class MainTabView extends BaseView<MainTabviewController> {
           bottomNavigationBar: Obx(
             () => BottomAppBar(
               color: ColorConstant.background_color,
-              shape: const CircularNotchedRectangle(),
+              shape: CircularNotchedRectangle(),
               notchMargin: 0,
-              child: SizedBox(
+              child: Container(
                 height: UtilsReponsive.height(context, 60),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Row(
@@ -111,98 +104,77 @@ class MainTabView extends BaseView<MainTabviewController> {
                                   children: [
                                     Icon(
                                       IconsUtils.home,
-                                      size: 30,
                                       color: controller.selectedIndex.value == 0
-                                          ? ColorConstant.secondary
-                                          : ColorConstant.secondary1,
+                                          ? ColorConstant.secondary1
+                                          : ColorConstant.green,
                                     ),
-                                    Text(
-                                      'Trang chủ',
-                                      style: TextStyle(
-                                        color:
-                                            controller.selectedIndex.value == 0
-                                                ? ColorConstant.secondary
-                                                : ColorConstant.secondary1,
-                                      ),
-                                    )
+                                    Text("Trang chủ",
+                                        style: TextStyle(
+                                            color: controller
+                                                        .selectedIndex.value ==
+                                                    0
+                                                ? ColorConstant.secondary1
+                                                : ColorConstant.green))
                                   ],
                                 ),
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: MaterialButton(
-                              onPressed: () {
-                                controller.onItemTapped1(1);
-                              },
-                              minWidth: UtilsReponsive.width(context, 40),
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      IconsUtils.daily,
-                                      size: 30,
+                          MaterialButton(
+                            onPressed: () {
+                              controller.onItemTapped1(1);
+                            },
+                            minWidth: UtilsReponsive.width(context, 40),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(IconsUtils.daily,
                                       color: controller.selectedIndex.value == 1
-                                          ? ColorConstant.secondary
-                                          : ColorConstant.secondary1,
-                                    ),
-                                    Text(
-                                      'Nhật ký',
+                                          ? ColorConstant.secondary1
+                                          : ColorConstant.green),
+                                  Text("Nhật ký",
                                       style: TextStyle(
-                                        // fontSize: 20,
-                                        color:
-                                            controller.selectedIndex.value == 1
-                                                ? ColorConstant.secondary
-                                                : ColorConstant.secondary1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                          color:
+                                              controller.selectedIndex.value ==
+                                                      1
+                                                  ? ColorConstant.secondary1
+                                                  : ColorConstant.green))
+                                ],
                               ),
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
                     Expanded(
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: MaterialButton(
-                              onPressed: () {
-                                controller.onItemTapped1(2);
-                              },
-                              minWidth: UtilsReponsive.width(context, 40),
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      IconsUtils.news,
-                                      size: 30,
+                          MaterialButton(
+                            onPressed: () {
+                              controller.onItemTapped1(2);
+                            },
+                            minWidth: UtilsReponsive.width(context, 40),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(IconsUtils.news,
                                       color: controller.selectedIndex.value == 2
-                                          ? ColorConstant.secondary
-                                          : ColorConstant.secondary1,
-                                    ),
-                                    Text(
-                                      'Bảng tin',
+                                          ? ColorConstant.secondary1
+                                          : ColorConstant.green),
+                                  Text("Bảng tin",
                                       style: TextStyle(
-                                        color:
-                                            controller.selectedIndex.value == 2
-                                                ? ColorConstant.secondary
-                                                : ColorConstant.secondary1,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                          color:
+                                              controller.selectedIndex.value ==
+                                                      2
+                                                  ? ColorConstant.secondary1
+                                                  : ColorConstant.green))
+                                ],
                               ),
                             ),
                           ),
@@ -217,25 +189,20 @@ class MainTabView extends BaseView<MainTabviewController> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
-                                      IconsUtils.person,
-                                      size: 30,
-                                      color: controller.selectedIndex.value == 3
-                                          ? ColorConstant.secondary
-                                          : ColorConstant.secondary1,
-                                    ),
-                                    const SizedBox(
-                                      height: 2,
-                                    ),
-                                    Text(
-                                      'Tài khoản',
-                                      style: TextStyle(
+                                    Icon(IconsUtils.person,
                                         color:
                                             controller.selectedIndex.value == 3
-                                                ? ColorConstant.secondary
-                                                : ColorConstant.secondary1,
-                                      ),
-                                    ),
+                                                ? ColorConstant.secondary1
+                                                : ColorConstant.green),
+                                    Text(
+                                      "Tài khoản",
+                                      style: TextStyle(
+                                          color:
+                                              controller.selectedIndex.value ==
+                                                      3
+                                                  ? ColorConstant.secondary1
+                                                  : ColorConstant.green),
+                                    )
                                   ],
                                 ),
                               ),

@@ -14,7 +14,7 @@ class ColorConstant {
   static const transparent = Colors.transparent;
   static const primary = Color(0xff003366);
   static const secondary = Color(0xff00FF99);
-  static const secondary1 = Colors.grey;
+  static const secondary1 = Color.fromARGB(255, 166, 163, 163);
   static const black = Color(0xff000326);
   static const white = Color(0xfff0f2f1);
   static const gray9e9e9e = Color(0xff9e9e9e);
