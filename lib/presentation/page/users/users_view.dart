@@ -7,6 +7,7 @@ import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
+import 'package:itfsd/app/core/shared/format/date_time_format_constants.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/app/util/date_time_utils.dart';
 import 'package:itfsd/app/util/icon_utils.dart';
@@ -111,7 +112,7 @@ class UsersView extends BaseView<UsersController> {
       () => controller.isLoading.value
           ? const CommonLoadingPageProgressIndicator()
           : ListView.separated(
-              controller: controller.userscrollController,
+              controller: controller.userScrollController,
               primary: false,
               itemBuilder: (context, index) {
                 var user = controller.listUsers[index];
@@ -171,9 +172,13 @@ class UsersView extends BaseView<UsersController> {
                                                           .listUsers[index]
                                                           .updatedAt
                                                           .toString(),
-                                                      format: 'yyyy-MM-dd H:mm',
+                                                      format:
+                                                          DateTimeFormatConstants
+                                                              .uiDateTime,
                                                     )?.toStringWithFormat(
-                                                        'yyyy-MM-dd H:mm') ??
+                                                      DateTimeFormatConstants
+                                                          .uiDateDmy,
+                                                    ) ??
                                                     'Invalid date'
                                                 : 'No date available',
                                             style: AppTextStyle.textNumberData,

@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final userDetailsmodel = userDetailsmodelFromJson(jsonString);
+//     final userDetailsModel = userDetailsModelFromJson(jsonString);
 
 import 'dart:convert';
 
-UserDetailsModel userDetailsmodelFromJson(String str) =>
+UserDetailsModel userDetailsModelFromJson(String str) =>
     UserDetailsModel.fromJson(json.decode(str));
 
-String userDetailsmodelToJson(UserDetailsModel data) =>
+String userDetailsModelToJson(UserDetailsModel data) =>
     json.encode(data.toJson());
 
 class UserDetailsModel {
@@ -16,11 +16,15 @@ class UserDetailsModel {
   String id;
   String fullName;
   String jobTitle;
-  String? description;
-  String? avatar;
+  String description;
+  String avatar;
   String username;
+  String email;
+  String phoneNumber;
   String role;
   bool isLocked;
+  String homeTown;
+  String address;
 
   UserDetailsModel({
     required this.createdAt,
@@ -31,35 +35,47 @@ class UserDetailsModel {
     required this.description,
     required this.avatar,
     required this.username,
+    required this.email,
+    required this.phoneNumber,
     required this.role,
     required this.isLocked,
+    required this.homeTown,
+    required this.address,
   });
 
   factory UserDetailsModel.fromJson(Map<String, dynamic> json) =>
       UserDetailsModel(
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        id: json["id"],
-        fullName: json["fullName"],
+        createdAt: DateTime.parse(json["createdAt"] ?? "").toLocal(),
+        updatedAt: DateTime.parse(json["updatedAt"] ?? "").toLocal(),
+        id: json["id"] ?? "",
+        fullName: json["fullName"] ?? "",
         jobTitle: json["jobTitle"] ?? "",
-        description: json["description"],
-        avatar: json["avatar"],
-        username: json["username"],
-        role: json["role"],
-        isLocked: json["isLocked"],
+        description: json["description"] ?? "",
+        avatar: json["avatar"] ?? "",
+        username: json["username"] ?? "",
+        email: json["email"] ?? "",
+        phoneNumber: json["phoneNumber"] ?? "",
+        role: json["role"] ?? "",
+        isLocked: json["isLocked"] ?? false, // Assuming it's a boolean field
+        homeTown: json["homeTown"] ?? "",
+        address: json["address"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt.toLocal().toString(),
+        "updatedAt": updatedAt.toLocal().toString(),
         "id": id,
         "fullName": fullName,
         "jobTitle": jobTitle,
         "description": description,
         "avatar": avatar,
         "username": username,
+        "email": email,
+        "phoneNumber": phoneNumber,
         "role": role,
         "isLocked": isLocked,
+        "homeTown": homeTown,
+        "address": address,
       };
 }
 

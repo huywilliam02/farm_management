@@ -94,4 +94,17 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
   );
+
+  static TextStyle textRowTitle = GoogleFonts.roboto(
+    textStyle: TextStyleConstant.black16Roboto,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+  );
+  static TextStyle textRowLabel = GoogleFonts.roboto(
+    textStyle: TextStyleConstant.grey16RobotoBold,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+  );
 }

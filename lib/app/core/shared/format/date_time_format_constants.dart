@@ -3,7 +3,7 @@ class DateTimeFormatConstants {
 
   static const uiDateDmy = 'dd/MM/yyyy';
   static const uiTimeHm = 'HH:mm';
-  static const uiDateTime = 'dd/MM/yyyy HH:mm';
+  static const uiDateTime = 'yyyy-MM-dd H:mm';
 
   static const appServerRequest = 'yyyy-MM-dd';
 

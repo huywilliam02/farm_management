@@ -54,6 +54,8 @@ class UserApi {
       "role": model.role,
       "jobTitle": model.jobTitle,
       "isLocked": model.isLocked,
+      "homeTown": model.homeTown,
+      "address": model.address,
       "description": model.description,
     });
 
@@ -98,6 +100,8 @@ class UserApi {
       "role": model.role,
       "jobTitle": model.jobTitle,
       "isLocked": model.isLocked,
+      "homeTown": model.homeTown,
+      "address": model.address,
       "description": model.description,
     });
 
@@ -120,7 +124,6 @@ class UserApi {
       return false;
     }
   }
-
 
   static Future<bool> deleteUsers(String idUsers) async {
     var url = Uri.parse(
@@ -158,7 +161,7 @@ class UserApi {
     if (response.statusCode.toString() == '200') {
       List<UserDetailsModel> listCropsFarmDetail = [];
       final mapData =
-      jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
+          jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
       listCropsFarmDetail = mapData.map<UserDetailsModel>((json) {
         return UserDetailsModel.fromJson(json);
       }).toList();

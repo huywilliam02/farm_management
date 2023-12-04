@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/shared/role/role_constants.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/app/util/view_utils.dart';
@@ -11,7 +12,7 @@ import 'package:itfsd/data/model/users/user.dart';
 import 'package:itfsd/data/model/users/user_details.dart';
 import 'package:itfsd/data/network/api/users/user.dart';
 import 'package:itfsd/presentation/controllers/agricultural_products/agricultural_products_constant.dart';
-import 'package:itfsd/presentation/page/users/user_details.dart';
+import 'package:itfsd/presentation/page/users/widgets/user_details.dart';
 
 class UsersController extends BaseController {
   //TODO: Implement UsersController
@@ -24,6 +25,8 @@ class UsersController extends BaseController {
   Rx<String> avatar = "".obs;
   Rx<String> jobTitle = "".obs;
   Rx<String> role = "".obs;
+  Rx<String> homeTown = "".obs;
+  Rx<String> address = "".obs;
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -33,17 +36,24 @@ class UsersController extends BaseController {
   TextEditingController jobTitleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController roleController = TextEditingController();
+  TextEditingController homeTownController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   List<String> listIsLockedDropdown = <String>['Kích hoạt', 'Không kích hoạt'];
 
   List<String> listRoleDropdown = <String>[
-    'Admin',
-    'User',
+    'ADMIN',
+    'USER',
+    'FARMER',
+    'ASSOCIATIONS'
   ];
   Map<String, String> roleLabels = {
-    'Admin': 'Quản trị',
-    'User': 'Người dùng', // Add other roles as needed
+    'ADMIN': 'Quản trị',
+    'USER': 'Người dùng',
+    'FARMER': 'Chủ hội',
+    'ASSOCIATIONS': 'Hiệp hội',
   };
+  RoleConstants roleConstants = RoleConstants();
 
   Rx<String> dropdownRoleValue = "".obs;
   Rx<String> dropdownIsLockedValue = "".obs;
@@ -58,7 +68,7 @@ class UsersController extends BaseController {
   RxList<UserDetailsModel> listToView = <UserDetailsModel>[].obs;
   Rx<UserDetailsModel?> selectedUser = Rx<UserDetailsModel?>(null);
 
-  ScrollController userscrollController = ScrollController();
+  ScrollController userScrollController = ScrollController();
 
   @override
   Future<void> onInit() async {
@@ -72,7 +82,7 @@ class UsersController extends BaseController {
     } finally {
       isLoading(false);
     }
-    userscrollController = ScrollController()..addListener(scrollListener);
+    userScrollController = ScrollController()..addListener(scrollListener);
     super.onInit();
   }
 
@@ -95,6 +105,8 @@ class UsersController extends BaseController {
   void setValuePhoneNumber(String value) => phoneNumber.value = value;
   void setValueJobTitle(String value) => jobTitle.value = value;
   void setValueDescription(String value) => description.value = value;
+  void setValueHomeTown(String value) => homeTown.value = value;
+  void setValueAddress(String value) => address.value = value;
 
   void showAll() {
     listToView.clear();
@@ -102,7 +114,7 @@ class UsersController extends BaseController {
   }
 
   void scrollListener() {
-    final position = userscrollController.position;
+    final position = userScrollController.position;
     if (position.haveDimensions && position.maxScrollExtent > 0) {
       final isScrollAtEnd = position.pixels == position.maxScrollExtent;
       if (isScrollAtEnd) {
@@ -168,6 +180,8 @@ class UsersController extends BaseController {
       username: usernameController.text,
       password: passwordController.text,
       jobTitle: jobTitleController.text,
+      address: addressController.text,
+      homeTown: homeTownController.text,
       description: descriptionController.text,
       email: emailController.text,
       phoneNumber: phoneNumberController.text,

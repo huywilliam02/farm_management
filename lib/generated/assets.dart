@@ -278,6 +278,7 @@ class Assets {
   static const String ingredientsIngredientsView = 'lib/presentation/page/ingredients/ingredients_view.dart';
   static const String inputCommonCreateEditItem = 'lib/app/core/common/input/common_create_edit_item.dart';
   static const String inputCommonFormFieldWidget = 'lib/app/core/common/input/common_form_field_widget.dart';
+  static const String inputCommonRowIteam = 'lib/app/core/common/input/common_row_iteam.dart';
   static const String inputFormFieldWidget = 'lib/app/core/common/input/form_field_widget.dart';
   static const String landLand = 'lib/data/model/land/land.dart';
   static const String libMain = 'lib/main.dart';
@@ -332,7 +333,6 @@ class Assets {
   static const String otherobjectOtherobjectController = 'lib/presentation/controllers/otherobject/otherobject_controller.dart';
   static const String otherobjectOtherobjectView = 'lib/presentation/page/otherobject/otherobject_view.dart';
   static const String pageUsersUser = 'lib/presentation/page/users/user.dart';
-  static const String pageUsersUserDetails = 'lib/presentation/page/users/user_details.dart';
   static const String pageViewCommomPagedGridView = 'lib/app/core/common/page_view/commom_paged_grid_view.dart';
   static const String pageViewCommomPagedListView = 'lib/app/core/common/page_view/commom_paged_list_view.dart';
   static const String pageViewCommomPagedSliverGrid = 'lib/app/core/common/page_view/commom_paged_sliver_grid.dart';
@@ -358,6 +358,7 @@ class Assets {
   static const String requestformRequestformPage = 'lib/presentation/page/requestform/requestform_page.dart';
   static const String resourcesAiChatgpt = 'lib/app/resources/ai/chatgpt.json';
   static const String resourcesTest = 'lib/app/resources/test.dart';
+  static const String roleRoleConstants = 'lib/app/core/shared/role/role_constants.dart';
   static const String routesAppPages = 'lib/app/routes/app_pages.dart';
   static const String routesAppRoutes = 'lib/app/routes/app_routes.dart';
   static const String settingLanguageSettingLanguageBinding = 'lib/presentation/controllers/setting_language/setting_language_binding.dart';
@@ -451,6 +452,7 @@ class Assets {
   static const String widgetsSecrets = 'lib/presentation/page/chat_ai/widgets/secrets.dart';
   static const String widgetsSettingItem = 'lib/presentation/page/account/widgets/setting_item.dart';
   static const String widgetsSettingSwitch = 'lib/presentation/page/account/widgets/setting_switch.dart';
+  static const String widgetsUserDetails = 'lib/presentation/page/users/widgets/user_details.dart';
   static const String workersalarycontrollersWorkersalaryController = 'lib/presentation/controllers/wage/workersalarycontrollers/workersalary_controller.dart';
   static const String workersalaryviewsWorkersalaryView = 'lib/presentation/page/wage/workersalaryviews/workersalary_view.dart';
   static const String workindayCalendarView = 'lib/presentation/page/workinday/calendar_view.dart';

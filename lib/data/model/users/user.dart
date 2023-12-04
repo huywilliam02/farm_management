@@ -62,6 +62,8 @@ class UserModel {
   String? description;
   String? email;
   String? avatar;
+  String? homeTown;
+  String? address;
   String role;
   bool isLocked;
   DateTime? createdAt;
@@ -76,6 +78,8 @@ class UserModel {
     required this.password,
     required this.username,
     this.email,
+    this.address,
+    this.homeTown,
     required this.role,
     this.phoneNumber,
     required this.isLocked,
@@ -93,6 +97,8 @@ class UserModel {
         password: json["password"],
         phoneNumber: json["phoneNumber"],
         email: json["email"],
+        address: json["address"],
+        homeTown: json["homeTown"],
         role: json["role"],
         isLocked: json["isLocked"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -109,6 +115,8 @@ class UserModel {
         "password": password,
         "email": email,
         "role": role,
+        "address": address,
+        "homeTown": homeTown,
         "phoneNumber": phoneNumber,
         "isLocked": isLocked,
         "createdAt": createdAt,

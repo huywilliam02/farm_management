@@ -120,6 +120,22 @@ class CreateUsersView extends BaseView<UsersController> {
                 ),
               ),
               CommonCreateEditItem(
+                title: "Quê quán",
+                widget: CommonFormFieldWidget(
+                  textInputType: TextInputType.text,
+                  controllerEditting: controller.homeTownController,
+                  setValueFunc: controller.setValueHomeTown,
+                ),
+              ),
+              CommonCreateEditItem(
+                title: "Địa chỉ",
+                widget: CommonFormFieldWidget(
+                  textInputType: TextInputType.text,
+                  controllerEditting: controller.addressController,
+                  setValueFunc: controller.setValueAddress,
+                ),
+              ),
+              CommonCreateEditItem(
                 title: "Thông tin chung",
                 widget: SizedBox(
                   child: CommonFormFieldWidget(
