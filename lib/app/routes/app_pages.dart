@@ -37,6 +37,7 @@ import '../../presentation/controllers/sign_up/sign_up_binding.dart';
 import '../../presentation/controllers/start_app/start_app_binding.dart';
 import '../../presentation/controllers/supplier/supplier_binding.dart';
 import '../../presentation/controllers/unitfarm/unitfarm_binding.dart';
+import '../../presentation/controllers/users/users_binding.dart';
 import '../../presentation/controllers/view_landfull/view_landfull_binding.dart';
 import '../../presentation/controllers/viewfull/view_full_binding.dart';
 import '../../presentation/controllers/wage/wage_binding.dart';
@@ -82,6 +83,7 @@ import '../../presentation/page/sign_up/sign_up_view.dart';
 import '../../presentation/page/start_app/start_app_view.dart';
 import '../../presentation/page/supplier/supplier_view.dart';
 import '../../presentation/page/unitfarm/unitfarm_view.dart';
+import '../../presentation/page/users/users_view.dart';
 import '../../presentation/page/viewfull/view_full_view.dart';
 import '../../presentation/page/viewlandfull/more_landdivision/land_division_view.dart';
 import '../../presentation/page/viewlandfull/tab_viewland/view_land_view.dart';
@@ -91,8 +93,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/users/users_binding.dart';
-import '../../presentation/page/users/users_view.dart';
+import '../../presentation/controllers/users/create_user/create_user_binding.dart';
+import '../../presentation/page/users/create_user/create_user_view.dart';
 
 part 'app_routes.dart';
 
@@ -346,6 +348,11 @@ class AppPages {
       name: _Paths.USERS,
       page: () => const UsersView(),
       binding: UsersBinding(),
+    ),
+    GetPage(
+      name: _Paths.CREATE_USER,
+      page: () => const CreateUserView(),
+      binding: CreateUserBinding(),
     ),
   ];
 }

@@ -54,53 +54,65 @@ UserModel usermodelFromJson(String str) => UserModel.fromJson(json.decode(str));
 String usermodelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
-    String fullName;
-    String jobTitle;
-    String description;
-    String avatar;
-    String username;
-    String role;
-    bool isLocked;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    String? id;
+  String fullName;
+  String username;
+  String password;
+  String? phoneNumber;
+  String? jobTitle;
+  String? description;
+  String? email;
+  String? avatar;
+  String role;
+  bool isLocked;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? id;
 
-    UserModel({
-        required this.fullName,
-        required this.jobTitle,
-        required this.description,
-        required this.avatar,
-        required this.username,
-        required this.role,
-        required this.isLocked,
-         this.createdAt,
-         this.updatedAt,
-         this.id,
-    });
+  UserModel({
+    required this.fullName,
+    this.jobTitle,
+    this.description,
+    this.avatar,
+    required this.password,
+    required this.username,
+    this.email,
+    required this.role,
+    this.phoneNumber,
+    required this.isLocked,
+    this.createdAt,
+    this.updatedAt,
+    this.id,
+  });
 
-    factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         fullName: json["fullName"],
         jobTitle: json["jobTitle"],
         description: json["description"],
         avatar: json["avatar"],
         username: json["username"],
+        password: json["password"],
+        phoneNumber: json["phoneNumber"],
+        email: json["email"],
         role: json["role"],
         isLocked: json["isLocked"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         id: json["id"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "fullName": fullName,
         "jobTitle": jobTitle,
         "description": description,
         "avatar": avatar,
         "username": username,
+        "password": password,
+        "email": email,
         "role": role,
+        "phoneNumber": phoneNumber,
         "isLocked": isLocked,
         "createdAt": createdAt,
         "updatedAt": updatedAt,
         "id": id,
-    };
+      };
 }

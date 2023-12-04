@@ -55,7 +55,6 @@ class FarmController extends BaseController {
   getAllBusinessModel() async {
     listBusinessModel.value =
         await FarmApi.getAllDataByTypeCategory("BUSINESS_MODEL");
-
   }
 
   getAllBusinessType() async {
@@ -112,9 +111,9 @@ class FarmController extends BaseController {
 
   void showFarmDetails(Farm farm) {
     selectedFarm.value = farm;
-    Get.to(FarmDetailsView(
-      idFarm: farm.id,
-    ));
+    Get.to(() => FarmDetailsView(
+          idFarm: farm.id,
+        ));
   }
   // showData(Farm farm) {
   //   refeshDataFarm();

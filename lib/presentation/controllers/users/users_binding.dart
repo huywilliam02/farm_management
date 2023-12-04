@@ -6,8 +6,7 @@ import 'users_controller.dart';
 class UsersBinding extends BaseBindings {
   @override
   void injectService() {
-    Get.lazyPut<UsersController>(
-          () => UsersController(),
-    );
+    Get.lazyPut<UsersController>(() => UsersController(), fenix: true);
+
   }
 }

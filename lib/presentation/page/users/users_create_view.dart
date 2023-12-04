@@ -17,7 +17,8 @@ import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/users/users_controller.dart';
 
 class CreateUsersView extends BaseView<UsersController> {
-  const CreateUsersView({super.key});
+  String? userId;
+  CreateUsersView({super.key, this.userId});
 
   @override
   Widget buildView(BuildContext context) {
@@ -142,7 +143,7 @@ class CreateUsersView extends BaseView<UsersController> {
                               .map<DropdownMenuEntry<String>>((String value) {
                             return DropdownMenuEntry<String>(
                               value: value,
-                              label: value,
+                              label: controller.roleLabels[value] ?? value,
                               style: MenuItemButton.styleFrom(
                                 minimumSize: Size(10, 30),
                               ),
@@ -174,7 +175,9 @@ class CreateUsersView extends BaseView<UsersController> {
               ),
               CommonConstrainBoxButton(
                 text: "Tạo thành viên",
-                onPressed: () {},
+                onPressed: () {
+                  controller.createUser(userId);
+                },
               ),
             ],
           ),
@@ -184,7 +187,9 @@ class CreateUsersView extends BaseView<UsersController> {
   }
 
   Widget buildImageStack(BuildContext context) {
-    return SizedBox(
+    return Container(
+      decoration: const BoxDecoration(shape: BoxShape.circle),
+      clipBehavior: Clip.hardEdge,
       height: UtilsReponsive.height(context, 150),
       width: UtilsReponsive.width(context, 150),
       child: Stack(
@@ -234,22 +239,27 @@ class CreateUsersView extends BaseView<UsersController> {
       ),
     );
   }
+
   Widget getImageWidget() {
-    if (controller.avatar.value.startsWith('http')) {
+    if (controller.avatar.value != null &&
+        controller.avatar.value.startsWith('http')) {
       // If the avatar is a URL
       return CachedNetworkImage(
         imageUrl: controller.avatar.value,
         errorWidget: (context, url, error) => const Icon(Icons.error),
         progressIndicatorBuilder: (context, url, progress) =>
-        const CircularProgressIndicator(),
+            const CircularProgressIndicator(),
         fit: BoxFit.contain,
       );
-    } else {
+    } else if (controller.avatar.value != null) {
       // If the avatar is a local file path
       return Image.file(
         File(controller.avatar.value),
         fit: BoxFit.contain,
       );
+    } else {
+      // Handle the case where avatar.value is null
+      return const Icon(Icons.image, size: 40, color: Colors.grey);
     }
   }
 }

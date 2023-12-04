@@ -25,7 +25,7 @@ class CommonConstrainBoxButton extends StatelessWidget {
                 const Color.fromARGB(255, 40, 127, 60)),
             // padding: MaterialStateProperty.all(EdgeInsets.all(14)),
           ),
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
             text,
             style: TextStyleConstant.white16Roboto,

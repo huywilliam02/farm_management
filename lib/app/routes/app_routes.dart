@@ -53,6 +53,7 @@ abstract class Routes {
   static const CHAT_AI = _Paths.CHAT_AI;
   static const NEWS = _Paths.NEWS;
   static const USERS = _Paths.USERS;
+  static const CREATE_USER = _Paths.CREATE_USER;
 }
 
 abstract class _Paths {
@@ -107,4 +108,5 @@ abstract class _Paths {
   static const CHAT_AI = '/chat-ai';
   static const NEWS = '/news';
   static const USERS = '/users';
+  static const CREATE_USER = '/create-user';
 }

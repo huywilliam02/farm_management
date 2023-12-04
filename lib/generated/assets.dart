@@ -78,6 +78,7 @@ class Assets {
   static const String componentsCountDownTimer = 'lib/app/components/count_down_timer.dart';
   static const String componentsCustomGestureDetector = 'lib/app/components/custom_gesture_detector.dart';
   static const String componentsDefaultDialog = 'lib/app/components/default_dialog.dart';
+  static const String componentsShowNotData = 'lib/app/components/show_not_data.dart';
   static const String componentsTextButton = 'lib/app/components/text_button.dart';
   static const String configLogConfig = 'lib/app/config/log_config.dart';
   static const String constantsApiEndpoint = 'lib/app/core/constants/api_endpoint.dart';
@@ -85,6 +86,7 @@ class Assets {
   static const String constantsDataConstant = 'lib/app/core/constants/data_constant.dart';
   static const String constantsDeviceConstants = 'lib/app/core/constants/device_constants.dart';
   static const String constantsDurationConstants = 'lib/app/core/constants/duration_constants.dart';
+  static const String constantsLocaleConstants = 'lib/app/core/constants/locale_constants.dart';
   static const String constantsPagingConstant = 'lib/app/core/constants/paging_constant.dart';
   static const String contractContactBinding = 'lib/presentation/controllers/contract/contact_binding.dart';
   static const String contractContactController = 'lib/presentation/controllers/contract/contact_controller.dart';
@@ -94,6 +96,9 @@ class Assets {
   static const String controllersAccountController = 'lib/presentation/controllers/account/controllers/account_controller.dart';
   static const String coreNoParamUsecase = 'lib/app/core/no_param_usecase.dart';
   static const String corePramUsecase = 'lib/app/core/pram_usecase.dart';
+  static const String createUserCreateUserBinding = 'lib/presentation/controllers/users/create_user/create_user_binding.dart';
+  static const String createUserCreateUserController = 'lib/presentation/controllers/users/create_user/create_user_controller.dart';
+  static const String createUserCreateUserView = 'lib/presentation/page/users/create_user/create_user_view.dart';
   static const String cropsCrop = 'lib/data/model/crops/crop.dart';
   static const String cropsFarmCropsFarmApi = 'lib/data/network/api/crops_farm/crops_farm_api.dart';
   static const String cropsFarmCropsFarmBinding = 'lib/presentation/controllers/crops_farm/crops_farm_binding.dart';
@@ -261,6 +266,7 @@ class Assets {
   static const String igredientsIngredientsDetail = 'lib/data/model/igredients/ingredientsDetail.dart';
   static const String igredientsIngredientsModel = 'lib/data/model/igredients/ingredientsModel.dart';
   static const String imagesAri = 'assets/images/ari.jpg';
+  static const String imagesArtboard = 'assets/images/artboard.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBackroutwo = 'assets/images/backroutwo.jpg';
   static const String imagesBackru = 'assets/images/backru.jpg';
@@ -325,6 +331,8 @@ class Assets {
   static const String otherobjectOtherobjectBinding = 'lib/presentation/controllers/otherobject/otherobject_binding.dart';
   static const String otherobjectOtherobjectController = 'lib/presentation/controllers/otherobject/otherobject_controller.dart';
   static const String otherobjectOtherobjectView = 'lib/presentation/page/otherobject/otherobject_view.dart';
+  static const String pageUsersUser = 'lib/presentation/page/users/user.dart';
+  static const String pageUsersUserDetails = 'lib/presentation/page/users/user_details.dart';
   static const String pageViewCommomPagedGridView = 'lib/app/core/common/page_view/commom_paged_grid_view.dart';
   static const String pageViewCommomPagedListView = 'lib/app/core/common/page_view/commom_paged_list_view.dart';
   static const String pageViewCommomPagedSliverGrid = 'lib/app/core/common/page_view/commom_paged_sliver_grid.dart';
@@ -396,10 +404,12 @@ class Assets {
   static const String unitfarmUnitfarmView = 'lib/presentation/page/unitfarm/unitfarm_view.dart';
   static const String usecasesLoginUseCase = 'lib/domain/usecases/login_use_case.dart';
   static const String usersUser = 'lib/data/model/users/user.dart';
+  static const String usersUserDetails = 'lib/data/model/users/user_details.dart';
   static const String usersUsersBinding = 'lib/presentation/controllers/users/users_binding.dart';
   static const String usersUsersController = 'lib/presentation/controllers/users/users_controller.dart';
   static const String usersUsersCreateView = 'lib/presentation/page/users/users_create_view.dart';
   static const String usersUsersView = 'lib/presentation/page/users/users_view.dart';
+  static const String utilDateTimeUtils = 'lib/app/util/date_time_utils.dart';
   static const String utilDependency = 'lib/app/util/dependency.dart';
   static const String utilDevUtils = 'lib/app/util/dev_utils.dart';
   static const String utilIconUtils = 'lib/app/util/icon_utils.dart';
@@ -409,6 +419,7 @@ class Assets {
   static const String utilReponsiveUtils = 'lib/app/util/reponsive_utils.dart';
   static const String utilShared = 'lib/app/util/shared.dart';
   static const String utilStringExtention = 'lib/app/util/string_extention.dart';
+  static const String utilStringUtils = 'lib/app/util/string_utils.dart';
   static const String utilViewUtils = 'lib/app/util/view_utils.dart';
   static const String viewAreaMoreLand = 'lib/data/network/api/view_area/more_land.dart';
   static const String viewAreaViewAreaController = 'lib/presentation/controllers/area/view_area/view_area_controller.dart';
