@@ -1,6 +1,3 @@
-import 'package:itfsd/app/core/common/shimmer/listview/loading_item.dart';
-import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_controller.dart';
-
 import 'user.dart';
 
 class UsersView extends BaseView<UsersController> {
@@ -20,8 +17,10 @@ class UsersView extends BaseView<UsersController> {
         actions: [
           IconButton(
             onPressed: () {
-
-              Get.to(() => CreateUsersView(), transition: Transition.fadeIn);
+              controller.refreshForm();
+              Get.to(
+                () => CreateUsersView(),
+              );
             },
             icon: const Icon(IconsUtils.add),
           )
@@ -45,7 +44,7 @@ class UsersView extends BaseView<UsersController> {
               buildItemCountRow(),
               Expanded(
                 flex: 9,
-                child: buildSupplierList(),
+                child: buildUserList(),
               ),
             ],
           ),
@@ -100,7 +99,7 @@ class UsersView extends BaseView<UsersController> {
     );
   }
 
-  Widget buildSupplierList() {
+  Widget buildUserList() {
     final createUserController = Get.put(EditUserController());
     return Obx(
       () {

@@ -18,6 +18,7 @@ class _MyAppState extends State<MyApp> {
       Locale language = await DatabaseLocal.instance.getLocale();
       super.initState();
     }
+
     return GetMaterialApp(
       title: "ITFSD",
       fallbackLocale: const Locale('en'), // Ngôn ngữ dự phòng là tiếng Anh

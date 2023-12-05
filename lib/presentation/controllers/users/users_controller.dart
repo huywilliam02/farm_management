@@ -59,8 +59,6 @@ class UsersController extends BaseController {
 
   int currentPage = 1;
 
-  CommonPagingController<UserDetailsModel>? pagingController;
-
   @override
   Future<void> onInit() async {
     dropdownRoleValue.value = listRoleDropdown.first;
@@ -85,7 +83,6 @@ class UsersController extends BaseController {
 
   @override
   void onClose() {
-    pagingController?.dispose();
     super.onClose();
   }
 

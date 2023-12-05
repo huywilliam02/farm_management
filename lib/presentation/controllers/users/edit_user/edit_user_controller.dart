@@ -154,30 +154,6 @@ class EditUserController extends BaseController {
     }
   }
 
-  // Future<void> fetchMoreData() async {
-  //   try {
-  //     if (noMoreRecord.value || lazyLoading.value) return;
-  //     lazyLoading(true);
-  //     await Future.delayed(const Duration(seconds: 1));
-  //
-  //     int nextPage = currentPage + 1;
-  //     List<UserDetailsModel> listTmp = await UserApi.getAllDataUsers(nextPage);
-  //     if (listTmp.isEmpty) {
-  //       noMoreRecord(true);
-  //     }
-  //     listUsers.addAll(listTmp);
-  //     currentPage = nextPage;
-  //     // Append data to the paging controller
-  //     pagingController?.appendLoadMoreOutput(
-  //       LoadMoreOutput(data: listTmp, isLastPage: listTmp.isEmpty),
-  //     );
-  //   } catch (e) {
-  //     log('Error fetching more data: $e');
-  //   } finally {
-  //     lazyLoading(false);
-  //   }
-  // }
-
   Future<void> fetchMoreData() async {
     try {
       if (noMoreRecord.value || lazyLoading.value) return;
@@ -260,23 +236,29 @@ class EditUserController extends BaseController {
         ));
   }
 
-  void showData(UserDetailsModel userId) {
+  void showData(UserDetailsModel userDetails) {
+    print('showData is called with userId: $userDetails');
+    // Rest of the code...
+
+    print('usernameController: ${usernameController.text}');
+    print('fullnameController: ${fullnameController.text}');
+    print('avatar: ${avatar.value}');
     // Reset the form fields
     refreshForm();
     // Populate form fields with data from the selected user
-    usernameController.text = userId.username ?? "";
-    fullnameController.text = userId.fullName ?? "";
-    emailController.text = userId.email ?? "";
-    phoneNumberController.text = userId.phoneNumber ?? "";
-    jobTitleController.text = userId.jobTitle ?? "";
-    descriptionController.text = userId.description ?? "";
-    avatar.value = userId.avatar ?? "";
-    dropdownRoleValue.value = userId.role ?? "";
+    usernameController.text = userDetails.username ?? "";
+    fullnameController.text = userDetails.fullName ?? "";
+    emailController.text = userDetails.email ?? "";
+    phoneNumberController.text = userDetails.phoneNumber ?? "";
+    jobTitleController.text = userDetails.jobTitle ?? "";
+    descriptionController.text = userDetails.description ?? "";
+    avatar.value = HttpNetWorkUrlApi.baseURL + userDetails.avatar ?? "";
+    dropdownRoleValue.value = userDetails.role ?? "";
     dropdownIsLockedValue.value =
-        userId.isLocked ? "Kích hoạt" : "Không kích hoạt";
+        userDetails.isLocked ? "Kích hoạt" : "Không kích hoạt";
     Get.to(
       () => EditUserView(
-        userId: userId.id,
+        userId: userDetails.id,
       ),
     );
   }

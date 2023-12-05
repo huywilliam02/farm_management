@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
 
 class CommonFormFieldWidget extends StatelessWidget {
@@ -41,7 +39,6 @@ class CommonFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5),
-      decoration: BoxDecoration(),
       child: TextFormField(
         style: styleInput,
         enableInteractiveSelection: enableInteractiveSelection,
@@ -56,7 +53,10 @@ class CommonFormFieldWidget extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
           errorText: errorText != "" ? errorText : null,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(
+              color: ColorConstant.redStop,
+            ),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),

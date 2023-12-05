@@ -1,200 +1,102 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/input/common_create_edit_item.dart';
-import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
-import 'package:itfsd/app/core/common/input/form_field_widget.dart';
-import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
-import 'package:itfsd/app/core/common/menu/common_constrain_box_button.dart';
-import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
-import 'package:itfsd/app/core/constants/data_constant.dart';
-import 'package:itfsd/app/util/icon_utils.dart';
-import 'package:itfsd/app/util/reponsive_utils.dart';
-import 'package:itfsd/app/util/string_extention.dart';
-import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/presentation/controllers/users/users_controller.dart';
+import 'user.dart';
 
 class CreateUsersView extends BaseView<UsersController> {
   String? userId;
+
   CreateUsersView({super.key, this.userId});
 
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
       backgroundColor: ColorConstant.background_color,
-      appBar: CommonAppBar(
-        title: "Tạo thành viên",
-        titleType: AppBarTitle.text,
-        centerTitle: true,
-        titleTextStyle: AppTextStyle.textTitleAppBar,
-        leadingIcon: IconsUtils.back,
-        onLeadingPressed: () => Get.back(),
-      ),
+      appBar: _buildAppBar(),
       body: Padding(
-        padding: const EdgeInsets.only(
-          bottom: 10,
-          left: 10,
-          right: 10,
-          top: 10,
-        ),
+        padding: const EdgeInsets.all(10),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CommonCreateEditItem(
-                title: "Hình ảnh",
-                widget: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    SizedBox(
-                      height: UtilsReponsive.height(context, 160),
-                      width: double.infinity,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          SizedBox(
-                            height: UtilsReponsive.height(context, 160),
-                            width: double.infinity,
-                            child: Obx(
-                              () => controller.avatar.isNotEmpty
-                                  ? buildImageStack(context)
-                                  : buildImagePickerButton(context),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              CommonCreateEditItem(
+              _buildImageSection(context),
+              _buildTextFieldItem(
                 title: "Họ và tên",
                 obligatory: "*",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.fullnameController,
-                  setValueFunc: controller.setValueFullName,
-                ),
+                controller: controller.fullnameController,
+                setValueFunc: controller.setValueFullName,
+                inputType: TextInputType.text,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Tài khoản",
                 obligatory: "*",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.usernameController,
-                  setValueFunc: controller.setValueUserName,
-                ),
+                controller: controller.usernameController,
+                setValueFunc: controller.setValueUserName,
+                inputType: TextInputType.text,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Mật khẩu",
                 obligatory: "*",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.passwordController,
-                  setValueFunc: controller.setValuePassword,
-                ),
+                controller: controller.passwordController,
+                setValueFunc: controller.setValuePassword,
+                inputType: TextInputType.text,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Email",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.emailAddress,
-                  controllerEditting: controller.emailController,
-                  setValueFunc: controller.setValueEmail,
-                ),
+                controller: controller.emailController,
+                inputType: TextInputType.emailAddress,
+                setValueFunc: controller.setValueEmail,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Số điện thoại",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.phone,
-                  controllerEditting: controller.phoneNumberController,
-                  setValueFunc: controller.setValuePhoneNumber,
-                ),
+                controller: controller.phoneNumberController,
+                inputType: TextInputType.phone,
+                setValueFunc: controller.setValuePhoneNumber,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Chức danh",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.jobTitleController,
-                  setValueFunc: controller.setValueJobTitle,
-                ),
+                controller: controller.jobTitleController,
+                inputType: TextInputType.text,
+                setValueFunc: controller.setValueJobTitle,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Quê quán",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.homeTownController,
-                  setValueFunc: controller.setValueHomeTown,
-                ),
+                controller: controller.homeTownController,
+                inputType: TextInputType.text,
+                setValueFunc: controller.setValueHomeTown,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Địa chỉ",
-                widget: CommonFormFieldWidget(
-                  textInputType: TextInputType.text,
-                  controllerEditting: controller.addressController,
-                  setValueFunc: controller.setValueAddress,
-                ),
+                controller: controller.addressController,
+                inputType: TextInputType.text,
+                setValueFunc: controller.setValueAddress,
               ),
-              CommonCreateEditItem(
+              _buildTextFieldItem(
                 title: "Thông tin chung",
-                widget: SizedBox(
-                  child: CommonFormFieldWidget(
-                    textInputType: TextInputType.text,
-                    controllerEditting: controller.descriptionController,
-                    setValueFunc: controller.setValueDescription,
-                  ),
-                ),
+                controller: controller.descriptionController,
+                inputType: TextInputType.text,
+                setValueFunc: controller.setValueDescription,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CommonCreateEditItem(
+                  _buildDropdownItem(
                     title: "Chọn quyền",
-                    widget: Obx(() => DropdownMenu<String>(
-                          initialSelection: controller.dropdownRoleValue.value,
-                          onSelected: (String? value) {
-                            controller.dropdownRoleValue.value = value!;
-                          },
-                          dropdownMenuEntries: controller.listRoleDropdown
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                              value: value,
-                              label: controller.roleLabels[value] ?? value,
-                              style: MenuItemButton.styleFrom(
-                                minimumSize: Size(10, 30),
-                              ),
-                            );
-                          }).toList(),
-                        )),
+                    listValues: controller.listRoleDropdown,
+                    selectedValue: controller.dropdownRoleValue.value,
+                    onSelected: (String? value) {
+                      controller.dropdownRoleValue.value = value!;
+                    },
                   ),
-                  CommonCreateEditItem(
+                  _buildDropdownItem(
                     title: "Hoạt động",
-                    widget: Obx(() => DropdownMenu<String>(
-                          initialSelection:
-                              controller.dropdownIsLockedValue.value,
-                          onSelected: (String? value) {
-                            controller.dropdownIsLockedValue.value = value!;
-                          },
-                          dropdownMenuEntries: controller.listIsLockedDropdown
-                              .map<DropdownMenuEntry<String>>((String value) {
-                            return DropdownMenuEntry<String>(
-                              value: value,
-                              label: value,
-                            );
-                          }).toList(),
-                        )),
+                    listValues: controller.listIsLockedDropdown,
+                    selectedValue: controller.dropdownIsLockedValue.value,
+                    onSelected: (String? value) {
+                      controller.dropdownIsLockedValue.value = value!;
+                    },
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              CommonConstrainBoxButton(
-                text: "Tạo thành viên",
-                onPressed: () {
-                  controller.createUser(userId);
-                },
-              ),
+              SizedBox(height: 20),
+              _buildConstrainBoxButton("Tạo thành viên"),
             ],
           ),
         ),
@@ -202,7 +104,98 @@ class CreateUsersView extends BaseView<UsersController> {
     );
   }
 
-  Widget buildImageStack(BuildContext context) {
+  PreferredSizeWidget _buildAppBar() {
+    return CommonAppBar(
+      title: "Tạo thành viên",
+      titleType: AppBarTitle.text,
+      centerTitle: true,
+      titleTextStyle: AppTextStyle.textTitleAppBar,
+      leadingIcon: IconsUtils.back,
+      onLeadingPressed: () {
+        Get.back();
+      },
+    );
+  }
+
+  Widget _buildImageSection(BuildContext context) {
+    return CommonCreateEditItem(
+      title: "Hình ảnh",
+      widget: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            height: UtilsReponsive.height(context, 160),
+            width: double.infinity,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                SizedBox(
+                  height: UtilsReponsive.height(context, 160),
+                  width: double.infinity,
+                  child: Obx(() => controller.avatar.isNotEmpty
+                      ? _buildImageStack(context)
+                      : _buildImagePickerButton(context)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTextFieldItem({
+    required String title,
+    String? obligatory = "",
+    required TextEditingController controller,
+    required Function(String) setValueFunc,
+    TextInputType? inputType,
+  }) {
+    return CommonCreateEditItem(
+      title: title,
+      obligatory: obligatory!,
+      widget: CommonFormFieldWidget(
+        textInputType: inputType ?? TextInputType.text,
+        controllerEditting: controller,
+        setValueFunc: setValueFunc,
+      ),
+    );
+  }
+
+  Widget _buildDropdownItem({
+    required String title,
+    required List<String> listValues,
+    required String selectedValue,
+    void Function(String?)? onSelected,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CommonCreateEditItem(
+          title: title,
+          widget: DropdownMenu<String>(
+            initialSelection: selectedValue,
+            onSelected: onSelected,
+            menuStyle: MenuStyle(
+              minimumSize: MaterialStateProperty.all(const Size(150, 300)),
+            ),
+            dropdownMenuEntries:
+                listValues.map<DropdownMenuEntry<String>>((String value) {
+              return DropdownMenuEntry<String>(
+                value: value,
+                label: controller.roleLabels[value] ?? value,
+                style: MenuItemButton.styleFrom(
+                  minimumSize: const Size(20, 50),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageStack(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(shape: BoxShape.circle),
       clipBehavior: Clip.hardEdge,
@@ -212,10 +205,10 @@ class CreateUsersView extends BaseView<UsersController> {
         children: [
           GestureDetector(
             onTap: () {
-              // Handle tap on the single image
+              controller.onImagePick();
             },
             child: Center(
-              child: getImageWidget(),
+              child: _getImageWidget(),
             ),
           ),
           Align(
@@ -225,7 +218,6 @@ class CreateUsersView extends BaseView<UsersController> {
               backgroundColor: Colors.white,
               child: IconButton(
                 onPressed: () {
-                  // Handle delete for the single image
                   controller.avatar.value = ""; // Clear the image path
                 },
                 icon: const Icon(Icons.close),
@@ -237,7 +229,7 @@ class CreateUsersView extends BaseView<UsersController> {
     );
   }
 
-  Widget buildImagePickerButton(BuildContext context) {
+  Widget _buildImagePickerButton(BuildContext context) {
     return SizedBox(
       height: UtilsReponsive.height(context, 150),
       width: UtilsReponsive.width(context, 150),
@@ -256,10 +248,9 @@ class CreateUsersView extends BaseView<UsersController> {
     );
   }
 
-  Widget getImageWidget() {
+  Widget _getImageWidget() {
     if (controller.avatar.value != null &&
         controller.avatar.value.startsWith('http')) {
-      // If the avatar is a URL
       return CachedNetworkImage(
         imageUrl: controller.avatar.value,
         errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -268,14 +259,21 @@ class CreateUsersView extends BaseView<UsersController> {
         fit: BoxFit.contain,
       );
     } else if (controller.avatar.value != null) {
-      // If the avatar is a local file path
       return Image.file(
         File(controller.avatar.value),
         fit: BoxFit.contain,
       );
     } else {
-      // Handle the case where avatar.value is null
       return const Icon(Icons.image, size: 40, color: Colors.grey);
     }
+  }
+
+  Widget _buildConstrainBoxButton(String text) {
+    return CommonConstrainBoxButton(
+      text: text,
+      onPressed: () {
+        controller.createUser(userId);
+      },
+    );
   }
 }
