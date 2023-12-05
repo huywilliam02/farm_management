@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_binding.dart';
+import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
 
 import '../../presentation/controllers/account/bindings/account_binding.dart';
 import '../../presentation/controllers/agricultural_products/agricultural_products_binding.dart';
@@ -93,8 +95,7 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-import '../../presentation/controllers/users/create_user/create_user_binding.dart';
-import '../../presentation/page/users/create_user/create_user_view.dart';
+
 
 part 'app_routes.dart';
 
@@ -350,9 +351,9 @@ class AppPages {
       binding: UsersBinding(),
     ),
     GetPage(
-      name: _Paths.CREATE_USER,
-      page: () => const CreateUserView(),
-      binding: CreateUserBinding(),
+      name: _Paths.EDIT_USER,
+      page: () => EditUserView(),
+      binding: EditUserBinding(),
     ),
   ];
 }

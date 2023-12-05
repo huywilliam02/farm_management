@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:itfsd/app/routes/app_pages.dart';
+import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
 
-class UsersController extends BaseController {
-  //TODO: Implement UsersController
+class EditUserController extends BaseController {
   Rx<String> username = "".obs;
   Rx<String> password = "".obs;
   Rx<String> fullname = "".obs;
@@ -67,7 +68,6 @@ class UsersController extends BaseController {
     dropdownIsLockedValue.value = listIsLockedDropdown.first;
     try {
       isLoading(true);
-
       refreshData();
     } catch (e) {
       ViewUtils.handleInitError(e);
@@ -251,6 +251,34 @@ class UsersController extends BaseController {
     jobTitleController.text = "";
     descriptionController.text = "";
     avatar.value = "";
+  }
+
+  void showUserDetails(UserDetailsModel model) {
+    selectedUser.value = model;
+    Get.to(() => UserDetailsView(
+          idUser: model.id,
+        ));
+  }
+
+  void showData(UserDetailsModel userId) {
+    // Reset the form fields
+    refreshForm();
+    // Populate form fields with data from the selected user
+    usernameController.text = userId.username ?? "";
+    fullnameController.text = userId.fullName ?? "";
+    emailController.text = userId.email ?? "";
+    phoneNumberController.text = userId.phoneNumber ?? "";
+    jobTitleController.text = userId.jobTitle ?? "";
+    descriptionController.text = userId.description ?? "";
+    avatar.value = userId.avatar ?? "";
+    dropdownRoleValue.value = userId.role ?? "";
+    dropdownIsLockedValue.value =
+        userId.isLocked ? "Kích hoạt" : "Không kích hoạt";
+    Get.to(
+      () => EditUserView(
+        userId: userId.id,
+      ),
+    );
   }
 
   Future<void> onTypingSearch(String value) async {

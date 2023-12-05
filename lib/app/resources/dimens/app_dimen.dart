@@ -10,8 +10,13 @@ class AppDimen {
     required this.screenType,
   });
 
-  static late AppDimen current;
-
+  // static late AppDimen current;
+  static AppDimen current = AppDimen._(
+    screenWidth: 0.0,
+    screenHeight: 0.0,
+    devicePixelRatio: 0.0,
+    screenType: ScreenType.mobile,
+  );
   final double screenWidth;
   final double screenHeight;
   final double devicePixelRatio;
@@ -41,13 +46,16 @@ class AppDimen {
   }) {
     switch (screenType) {
       case ScreenType.mobile:
-        return mobile.w;
+        return mobile.w ?? 0.0;
+        ;
       case ScreenType.tablet:
         return tablet?.w ??
-            ((mobile * DeviceConstants.maxMobileWidth) / DeviceConstants.designDeviceWidth);
+            ((mobile * DeviceConstants.maxMobileWidth) /
+                DeviceConstants.designDeviceWidth);
       case ScreenType.ultraTablet:
         return ultraTablet?.w ??
-            ((mobile * DeviceConstants.maxMobileWidth) / DeviceConstants.designDeviceWidth);
+            ((mobile * DeviceConstants.maxMobileWidth) /
+                DeviceConstants.designDeviceWidth);
     }
   }
 

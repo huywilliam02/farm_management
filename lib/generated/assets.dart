@@ -88,6 +88,7 @@ class Assets {
   static const String constantsDurationConstants = 'lib/app/core/constants/duration_constants.dart';
   static const String constantsLocaleConstants = 'lib/app/core/constants/locale_constants.dart';
   static const String constantsPagingConstant = 'lib/app/core/constants/paging_constant.dart';
+  static const String constantsUiConstants = 'lib/app/core/constants/ui_constants.dart';
   static const String contractContactBinding = 'lib/presentation/controllers/contract/contact_binding.dart';
   static const String contractContactController = 'lib/presentation/controllers/contract/contact_controller.dart';
   static const String contractContactView = 'lib/presentation/page/contract/contact_view.dart';
@@ -278,13 +279,15 @@ class Assets {
   static const String ingredientsIngredientsView = 'lib/presentation/page/ingredients/ingredients_view.dart';
   static const String inputCommonCreateEditItem = 'lib/app/core/common/input/common_create_edit_item.dart';
   static const String inputCommonFormFieldWidget = 'lib/app/core/common/input/common_form_field_widget.dart';
-  static const String inputCommonRowIteam = 'lib/app/core/common/input/common_row_iteam.dart';
+  static const String inputCommonShowData = 'lib/app/core/common/input/common_show_data.dart';
   static const String inputFormFieldWidget = 'lib/app/core/common/input/form_field_widget.dart';
   static const String landLand = 'lib/data/model/land/land.dart';
   static const String libMain = 'lib/main.dart';
   static const String libraryImageLibraryImageBinding = 'lib/presentation/controllers/library_image/library_image_binding.dart';
   static const String libraryImageLibraryImageController = 'lib/presentation/controllers/library_image/library_image_controller.dart';
   static const String libraryImageLibraryImageView = 'lib/presentation/page/library_image/library_image_view.dart';
+  static const String listviewListViewLoading = 'lib/app/core/common/shimmer/listview/list_view_loading.dart';
+  static const String listviewLoadingItem = 'lib/app/core/common/shimmer/listview/loading_item.dart';
   static const String loadingViewCommonFirstPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_first_page_progress_indicator.dart';
   static const String loadingViewCommonLoadingPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
   static const String loadingViewCommonNewPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_new_page_progress_indicator.dart';

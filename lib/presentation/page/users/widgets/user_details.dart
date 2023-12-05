@@ -9,13 +9,11 @@ import 'package:itfsd/app/util/date_time_utils.dart';
 import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/core/constants/api_endpoint.dart';
-import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
-import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/presentation/controllers/users/users_controller.dart';
+import 'package:itfsd/presentation/page/users/user.dart';
 
-class UserDetailsView extends BaseView<UsersController> {
+class UserDetailsView extends BaseView<EditUserController> {
   UserDetailsView({Key? key, this.idUser}) : super(key: key);
   String? idUser;
   @override
@@ -28,13 +26,13 @@ class UserDetailsView extends BaseView<UsersController> {
         centerTitle: true,
         titleTextStyle: AppTextStyle.textTitleAppBar,
         leadingIcon: IconsUtils.back,
-        onLeadingPressed: () => Get.back(),
+        onLeadingPressed: () {
+          // controller.refreshData();
+          Get.back();
+        },
         actions: [
           IconButton(
-            onPressed: () {
-              controller.refreshForm();
-              // Get.to(() => CreateUsersView(), transition: Transition.fadeIn);
-            },
+            onPressed: () {},
             icon: const Icon(IconsUtils.edit),
           )
         ],
@@ -45,8 +43,8 @@ class UserDetailsView extends BaseView<UsersController> {
           children: [
             Obx(
               () {
-                var selectedFarm = controller.selectedUser.value;
-                return selectedFarm != null
+                var selectedUser = controller.selectedUser.value;
+                return selectedUser != null
                     ? Column(
                         children: [
                           Container(
@@ -57,7 +55,7 @@ class UserDetailsView extends BaseView<UsersController> {
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
                                   HttpNetWorkUrlApi.baseURL +
-                                      selectedFarm.avatar,
+                                      selectedUser.avatar,
                                 ),
                               ),
                             ),
@@ -72,35 +70,34 @@ class UserDetailsView extends BaseView<UsersController> {
                                 CommonShowData(
                                   iconData: IconsUtils.username,
                                   title: "Họ và tên",
-                                  label: selectedFarm.fullName,
+                                  label: selectedUser.fullName,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.job,
                                   title: "Chức danh",
-                                  label: selectedFarm.jobTitle,
+                                  label: selectedUser.jobTitle,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.email,
                                   title: "Email",
-                                  label: selectedFarm.email,
+                                  label: selectedUser.email,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.phone,
                                   title: "Số điện thoại",
-                                  label: selectedFarm.phoneNumber,
+                                  label: selectedUser.phoneNumber,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.datetime,
                                   title: "Ngày tham gia",
-                                  label: selectedFarm.updatedAt != null
+                                  label: selectedUser.updatedAt != null
                                       ? DateTimeUtils.tryParse(
-                                            date: selectedFarm.updatedAt
+                                            date: selectedUser.updatedAt
                                                 .toString(),
                                             format: DateTimeFormatConstants
                                                 .uiDateTime,
                                           )?.toStringWithFormat(
-                                            DateTimeFormatConstants
-                                                .uiDateDmy,
+                                            DateTimeFormatConstants.uiDateDmy,
                                           ) ??
                                           'Invalid date'
                                       : 'No date available',
@@ -109,22 +106,22 @@ class UserDetailsView extends BaseView<UsersController> {
                                   iconData: IconsUtils.role,
                                   title: "Quyền hạn",
                                   label: controller.roleConstants
-                                      .getRoleLabel(selectedFarm.role),
+                                      .getRoleLabel(selectedUser.role),
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.homeTown,
                                   title: "Quê quán",
-                                  label: selectedFarm.homeTown,
+                                  label: selectedUser.homeTown,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.homeTown,
                                   title: "Địa chỉ",
-                                  label: selectedFarm.address,
+                                  label: selectedUser.address,
                                 ),
                                 CommonShowData(
                                   iconData: IconsUtils.description,
                                   title: "Thông tin chung",
-                                  label: selectedFarm.description,
+                                  label: selectedUser.description,
                                 ),
                               ],
                             ),

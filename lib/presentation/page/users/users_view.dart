@@ -1,23 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:itfsd/app/core/common/shimmer/listview/loading_item.dart';
+import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_controller.dart';
 
-import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/divider/common.divider.dart';
-import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
-import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
-import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
-import 'package:itfsd/app/core/constants/color_constants.dart';
-import 'package:itfsd/app/core/shared/format/date_time_format_constants.dart';
-import 'package:itfsd/app/resources/theme/app_text_style.dart';
-import 'package:itfsd/app/util/date_time_utils.dart';
-import 'package:itfsd/app/util/icon_utils.dart';
-import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/presentation/page/users/users_create_view.dart';
-
-import '../../controllers/users/users_controller.dart';
+import 'user.dart';
 
 class UsersView extends BaseView<UsersController> {
   const UsersView({Key? key}) : super(key: key);
+
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
@@ -32,30 +20,35 @@ class UsersView extends BaseView<UsersController> {
         actions: [
           IconButton(
             onPressed: () {
-              controller.refreshForm();
+
               Get.to(() => CreateUsersView(), transition: Transition.fadeIn);
             },
             icon: const Icon(IconsUtils.add),
           )
         ],
       ),
-      body: RefreshIndicator(
-        onRefresh: () async => await controller.refreshData(),
-        child: Column(
-          children: [
-            const CommonDivider(),
-            buildSearchTextField(),
-            const CommonDivider(),
-            buildItemCountRow(),
-            Expanded(
-              flex: 9,
-              child: buildSupplierList(),
-            ),
-            if (controller.lazyLoading.value)
-              const CommonLoadingPageProgressIndicator()
-            else
-              const SizedBox(),
-          ],
+      body: NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification scrollInfo) {
+          if (!controller.lazyLoading.value &&
+              scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
+            controller.fetchMoreDataThrottled();
+          }
+          return true;
+        },
+        child: RefreshIndicator(
+          onRefresh: () async => await controller.refreshData(),
+          child: Column(
+            children: [
+              const CommonDivider(),
+              buildSearchTextField(),
+              const CommonDivider(),
+              buildItemCountRow(),
+              Expanded(
+                flex: 9,
+                child: buildSupplierList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -82,7 +75,7 @@ class UsersView extends BaseView<UsersController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Hiện thị: ${controller.itemCount}",
+              "Hiện thị: ${controller.listUsers.length}",
               style: const TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w600,
@@ -108,111 +101,113 @@ class UsersView extends BaseView<UsersController> {
   }
 
   Widget buildSupplierList() {
+    final createUserController = Get.put(EditUserController());
     return Obx(
-      () => controller.isLoading.value
-          ? const CommonLoadingPageProgressIndicator()
-          : ListView.separated(
-              controller: controller.userScrollController,
-              primary: false,
-              itemBuilder: (context, index) {
-                var user = controller.listUsers[index];
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
-                  child: InkWell(
-                    onTap: () {
-                      controller.showUserDetails(user);
-                    },
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        clipBehavior: Clip.hardEdge,
-                                        height: 50,
-                                        width: 50,
-                                        decoration: const BoxDecoration(
-                                            shape: BoxShape.circle),
-                                        child: CachedNetworkImage(
-                                          imageUrl:
-                                              "http://116.118.49.43:8878${controller.listUsers.value[index].avatar}",
-                                          errorWidget: (context, url, error) =>
-                                              Image.asset(
-                                            "assets/images/avatar.png",
-                                          ),
-                                          progressIndicatorBuilder: (context,
-                                                  url, progress) =>
-                                              const CommonLoadingPageProgressIndicator(),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            controller
-                                                .listUsers[index].fullName,
-                                            style: AppTextStyle.textNameData,
-                                          ),
-                                          Text(
-                                            controller.listUsers[index]
-                                                        .updatedAt !=
-                                                    null
-                                                ? DateTimeUtils.tryParse(
-                                                      date: controller
-                                                          .listUsers[index]
-                                                          .updatedAt
-                                                          .toString(),
-                                                      format:
-                                                          DateTimeFormatConstants
-                                                              .uiDateTime,
-                                                    )?.toStringWithFormat(
-                                                      DateTimeFormatConstants
-                                                          .uiDateDmy,
-                                                    ) ??
-                                                    'Invalid date'
-                                                : 'No date available',
-                                            style: AppTextStyle.textNumberData,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+      () {
+        if (controller.isLoading.value && controller.listUsers.value.isEmpty) {
+          return const ListViewLoader();
+        } else if (controller.listUsers.isEmpty) {
+          return const CommonNoItemsFoundIndicator();
+        } else {
+          return ListView.separated(
+            separatorBuilder: (context, index) => const CommonDivider(),
+            itemCount: controller.listUsers.length,
+            itemBuilder: (BuildContext context, int index) {
+              UserDetailsModel user = controller.listUsers[index];
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
+                child: InkWell(
+                  onTap: () {
+                    createUserController.showUserDetails(user);
+                  },
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Column(
                               children: [
-                                Image.asset(
-                                  "assets/icons/next.png",
-                                  height: 15,
-                                  color: Colors.grey,
+                                Row(
+                                  children: [
+                                    Container(
+                                      clipBehavior: Clip.hardEdge,
+                                      height: 50,
+                                      width: 50,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                            "http://116.118.49.43:8878${user.avatar}",
+                                        errorWidget: (context, url, error) {
+                                          return Image.asset(
+                                              "assets/images/avatar.png");
+                                        },
+                                        progressIndicatorBuilder:
+                                            (context, url, progress) {
+                                          return const LoadingItem();
+                                        },
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          user.fullName,
+                                          style: AppTextStyle.textNameData,
+                                        ),
+                                        Text(
+                                          user.updatedAt != null
+                                              ? DateTimeUtils.tryParse(
+                                                    date: user.updatedAt
+                                                        .toString(),
+                                                    format:
+                                                        DateTimeFormatConstants
+                                                            .uiDateTime,
+                                                  )?.toStringWithFormat(
+                                                    DateTimeFormatConstants
+                                                        .uiDateDmy,
+                                                  ) ??
+                                                  'Invalid date'
+                                              : 'No date available',
+                                          style: AppTextStyle.textNumberData,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 25,
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Image.asset(
+                                "assets/icons/next.png",
+                                height: 15,
+                                color: Colors.grey,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 25,
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                );
-              },
-              separatorBuilder: (context, index) => const CommonDivider(),
-              itemCount: controller.listUsers.value.length,
-            ),
+                ),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

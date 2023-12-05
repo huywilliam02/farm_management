@@ -38,9 +38,6 @@ class FarmController extends BaseController {
   final count = 0.obs;
   final isLoading = true.obs;
 
-  late final pagingController = CommonPagingController<Farm>()
-    ..disposeBy(DisposeBag());
-
   @override
   Future<void> onInit() async {
     await getAllBusinessModel();

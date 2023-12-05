@@ -126,8 +126,8 @@ class UserApi {
   }
 
   static Future<bool> deleteUsers(String idUsers) async {
-    var url = Uri.parse(
-        'http://116.118.49.43:8878/api/bill-request/delete?id=$idUsers');
+    var url =
+        Uri.parse('http://116.118.49.43:8878/api/user/delete?id=$idUsers');
     final response = await http.delete(
       url,
       headers: <String, String>{

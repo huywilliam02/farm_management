@@ -10,6 +10,7 @@ class CommonPagingController<T> implements Disposable {
   CommonPagingController({
     this.invisibleItemsThreshold = PagingConstants.defaultInvisibleItemsThreshold,
     this.firstPageKey = PagingConstants.initialPage,
+    required this.onLoadMore,
   }) : pagingController = PagingController<int, T>(
           firstPageKey: firstPageKey,
           invisibleItemsThreshold: invisibleItemsThreshold,
@@ -19,6 +20,7 @@ class CommonPagingController<T> implements Disposable {
 
   final int? invisibleItemsThreshold;
   final int firstPageKey;
+  final VoidCallback onLoadMore;
 
   // call when error
   set error(AppException? appException) {
