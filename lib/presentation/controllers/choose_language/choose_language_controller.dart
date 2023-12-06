@@ -2,7 +2,7 @@ import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/database/database_local.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/presentation/page/login/login_choose_page.dart';
+import 'package:itfsd/presentation/page/login/widgets/login_choose_page.dart';
 
 class ChooseLanguageController extends BaseController {
   updateLanguage(int index)async{

@@ -99,7 +99,8 @@ class MaterialView extends BaseView<MaterialController> {
                               );
                             },
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 2),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 2),
                               child: Column(
                                 children: [
                                   Row(
@@ -109,16 +110,15 @@ class MaterialView extends BaseView<MaterialController> {
                                           children: [
                                             Row(
                                               children: [
-                                                Image.network(
-                                                  HttpNetWorkUrlApi.baseURL +
-                                                      controller
-                                                          .listMaterial[index]
-                                                          .images
-                                                          .first,
-                                                  fit: BoxFit.cover,
-                                                  height: 50,
-                                                  width: 50,
-                                                ),
+                                                // Image.network(
+                                                //   HttpNetWorkUrlApi.baseURL +
+                                                //       controller
+                                                //           .listMaterial[index]
+                                                //           .images.first,
+                                                //   fit: BoxFit.cover,
+                                                //   height: 50,
+                                                //   width: 50,
+                                                // ),
                                                 SizedBox(
                                                   width: UtilsReponsive.width(
                                                       context, 10),
@@ -203,7 +203,6 @@ class MaterialView extends BaseView<MaterialController> {
                                                           ),
                                                         ],
                                                       ),
-
                                                     ],
                                                   ),
                                                 ),
@@ -213,9 +212,9 @@ class MaterialView extends BaseView<MaterialController> {
                                         ),
                                       ),
                                       Text(
-                                        NumberFormatUtils.formatDong(
-                                            controller.listMaterial[index].price
-                                                .toDouble()),
+                                        NumberFormatUtils.formatDong(controller
+                                            .listMaterial[index].price
+                                            .toDouble()),
                                         style: AppTextStyle.textPriceData,
                                       ),
                                       const SizedBox(

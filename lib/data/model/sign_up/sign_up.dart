@@ -1,40 +1,42 @@
+// To parse this JSON data, do
+//
+//     final signUpModel = signUpModelFromJson(jsonString);
+
+import 'dart:convert';
+
+SignUpModel signUpModelFromJson(String str) =>
+    SignUpModel.fromJson(json.decode(str));
+
+String signUpModelToJson(SignUpModel data) => json.encode(data.toJson());
+
 class SignUpModel {
-  String? fullName;
-  String? username;
-  String? password;
-  String? createdAt;
-  String? updatedAt;
-  String? id;
-  bool? isLocked;
+  String fullName;
+  String enterprise;
+  String email;
+  String phone;
+  String description;
 
-  SignUpModel(
-      {this.fullName,
-      this.username,
-      this.password,
-      this.createdAt,
-      this.updatedAt,
-      this.id,
-      this.isLocked});
+  SignUpModel({
+    required this.fullName,
+    required this.enterprise,
+    required this.email,
+    required this.phone,
+    required this.description,
+  });
 
-  SignUpModel.fromJson(Map<String, dynamic> json) {
-    fullName = json['fullName'];
-    username = json['username'];
-    password = json['password'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    id = json['id'];
-    isLocked = json['isLocked'];
-  }
+  factory SignUpModel.fromJson(Map<String, dynamic> json) => SignUpModel(
+        fullName: json["fullName"],
+        enterprise: json["enterprise"],
+        email: json["email"],
+        phone: json["phone"],
+        description: json["description"],
+      );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['fullName'] = fullName;
-    data['username'] = username;
-    data['password'] = password;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    data['id'] = id;
-    data['isLocked'] = isLocked;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+        "fullName": fullName,
+        "enterprise": enterprise,
+        "email": email,
+        "phone": phone,
+        "description": description,
+      };
 }

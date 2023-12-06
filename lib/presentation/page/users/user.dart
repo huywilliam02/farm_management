@@ -23,7 +23,7 @@ export 'package:itfsd/app/util/date_time_utils.dart';
 export 'package:itfsd/app/util/icon_utils.dart';
 export 'package:itfsd/base/base_view.dart';
 export 'package:itfsd/data/model/users/user_details.dart';
-export 'package:itfsd/presentation/page/users/users_create_view.dart';
+export 'package:itfsd/presentation/page/users/edit_user/create_user_view.dart';
 export 'package:itfsd/app/core/common/page_view/error_view/common_new_page_error_indicator.dart';
 export 'package:itfsd/app/core/common/page_view/controller/common_paging_controller.dart';
 export 'package:itfsd/app/core/shared/role/role_constants.dart';

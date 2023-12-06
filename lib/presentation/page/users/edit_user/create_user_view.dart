@@ -1,10 +1,9 @@
+import 'package:itfsd/presentation/page/users/user.dart';
 import 'dart:io';
-import 'user.dart';
 
 class CreateUsersView extends BaseView<UsersController> {
+  CreateUsersView({Key? key, this.userId}) : super(key: key);
   String? userId;
-
-  CreateUsersView({super.key, this.userId});
 
   @override
   Widget buildView(BuildContext context) {
@@ -20,7 +19,7 @@ class CreateUsersView extends BaseView<UsersController> {
               _buildTextFieldItem(
                 title: "Họ và tên",
                 obligatory: "*",
-                controller: controller.fullnameController,
+                controller: controller.fullNameController,
                 setValueFunc: controller.setValueFullName,
                 inputType: TextInputType.text,
               ),
@@ -42,61 +41,59 @@ class CreateUsersView extends BaseView<UsersController> {
                 title: "Email",
                 controller: controller.emailController,
                 inputType: TextInputType.emailAddress,
-                setValueFunc: controller.setValueEmail,
+                setValueFunc: (p0) {},
               ),
               _buildTextFieldItem(
                 title: "Số điện thoại",
                 controller: controller.phoneNumberController,
                 inputType: TextInputType.phone,
-                setValueFunc: controller.setValuePhoneNumber,
+                setValueFunc: (p0) {},
               ),
               _buildTextFieldItem(
                 title: "Chức danh",
                 controller: controller.jobTitleController,
                 inputType: TextInputType.text,
-                setValueFunc: controller.setValueJobTitle,
+                setValueFunc: (p0) {},
               ),
               _buildTextFieldItem(
                 title: "Quê quán",
                 controller: controller.homeTownController,
                 inputType: TextInputType.text,
-                setValueFunc: controller.setValueHomeTown,
+                setValueFunc: (p0) {},
               ),
               _buildTextFieldItem(
                 title: "Địa chỉ",
                 controller: controller.addressController,
                 inputType: TextInputType.text,
-                setValueFunc: controller.setValueAddress,
+                setValueFunc: (p0) {},
               ),
               _buildTextFieldItem(
                 title: "Thông tin chung",
                 controller: controller.descriptionController,
                 inputType: TextInputType.text,
-                setValueFunc: controller.setValueDescription,
+                setValueFunc: (p0) {},
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildDropdownItem(
-                    title: "Chọn quyền",
-                    listValues: controller.listRoleDropdown,
-                    selectedValue: controller.dropdownRoleValue.value,
-                    onSelected: (String? value) {
-                      controller.dropdownRoleValue.value = value!;
-                    },
-                  ),
-                  _buildDropdownItem(
-                    title: "Hoạt động",
-                    listValues: controller.listIsLockedDropdown,
-                    selectedValue: controller.dropdownIsLockedValue.value,
-                    onSelected: (String? value) {
-                      controller.dropdownIsLockedValue.value = value!;
-                    },
-                  ),
-                ],
+              _buildDropdownItem(
+                title: "Chọn quyền",
+                listValues: controller.listRoleDropdown,
+                selectedValue: controller.dropdownRoleValue.value,
+                onSelected: (String? value) {
+                  controller.dropdownRoleValue.value = value!;
+                },
               ),
-              SizedBox(height: 20),
-              _buildConstrainBoxButton("Tạo thành viên"),
+              _buildDropdownItem(
+                title: "Hoạt động",
+                listValues: controller.listIsLockedDropdown,
+                selectedValue: controller.dropdownIsLockedValue.value,
+                onSelected: (String? value) {
+                  controller.dropdownIsLockedValue.value = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              // _buildConstrainBoxButton("Thêm thành viên"),
+              _buildConstrainBoxButton(
+                "Thêm thành viên",
+              ),
             ],
           ),
         ),
@@ -111,36 +108,7 @@ class CreateUsersView extends BaseView<UsersController> {
       centerTitle: true,
       titleTextStyle: AppTextStyle.textTitleAppBar,
       leadingIcon: IconsUtils.back,
-      onLeadingPressed: () {
-        Get.back();
-      },
-    );
-  }
-
-  Widget _buildImageSection(BuildContext context) {
-    return CommonCreateEditItem(
-      title: "Hình ảnh",
-      widget: Stack(
-        alignment: Alignment.center,
-        children: [
-          SizedBox(
-            height: UtilsReponsive.height(context, 160),
-            width: double.infinity,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  height: UtilsReponsive.height(context, 160),
-                  width: double.infinity,
-                  child: Obx(() => controller.avatar.isNotEmpty
-                      ? _buildImageStack(context)
-                      : _buildImagePickerButton(context)),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      onLeadingPressed: () => Get.back(),
     );
   }
 
@@ -168,64 +136,77 @@ class CreateUsersView extends BaseView<UsersController> {
     required String selectedValue,
     void Function(String?)? onSelected,
   }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CommonCreateEditItem(
-          title: title,
-          widget: DropdownMenu<String>(
-            initialSelection: selectedValue,
-            onSelected: onSelected,
-            menuStyle: MenuStyle(
-              minimumSize: MaterialStateProperty.all(const Size(150, 300)),
+    return CommonCreateEditItem(
+      title: title,
+      widget: DropdownMenu<String>(
+        initialSelection: selectedValue,
+        onSelected: onSelected,
+        dropdownMenuEntries:
+            listValues.map<DropdownMenuEntry<String>>((String value) {
+          return DropdownMenuEntry<String>(
+            value: value,
+            label: controller.roleLabels[value] ?? value,
+            style: MenuItemButton.styleFrom(
+              minimumSize: const Size(280, 50),
             ),
-            dropdownMenuEntries:
-                listValues.map<DropdownMenuEntry<String>>((String value) {
-              return DropdownMenuEntry<String>(
-                value: value,
-                label: controller.roleLabels[value] ?? value,
-                style: MenuItemButton.styleFrom(
-                  minimumSize: const Size(20, 50),
-                ),
-              );
-            }).toList(),
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+  Widget _buildImageSection(BuildContext context) {
+    return CommonCreateEditItem(
+      title: "Hình ảnh",
+      widget: Stack(
+        alignment: Alignment.center,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                height: UtilsReponsive.height(context, 250),
+                width: double.infinity,
+                child: Obx(() => controller.avatar.isNotEmpty
+                    ? _buildImageStack(context)
+                    : _buildImagePickerButton(context)),
+              ),
+            ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildImageStack(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(shape: BoxShape.circle),
-      clipBehavior: Clip.hardEdge,
-      height: UtilsReponsive.height(context, 150),
-      width: UtilsReponsive.width(context, 150),
-      child: Stack(
-        children: [
-          GestureDetector(
-            onTap: () {
-              controller.onImagePick();
-            },
-            child: Center(
-              child: _getImageWidget(),
+    return Stack(
+      children: [
+        GestureDetector(
+          onTap: () {
+            // Handle tap on the single image
+            controller.onImagePick();
+          },
+          child: Container(
+            width: double.infinity,
+            height: 300,
+            child: _getImageWidget(),
+          ),
+        ),
+        Align(
+          alignment: Alignment.topLeft,
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.white,
+            child: IconButton(
+              onPressed: () {
+                // Handle delete for the single image
+                controller.avatar.value = ""; // Clear the image path
+              },
+              icon: const Icon(Icons.close),
             ),
           ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: Colors.white,
-              child: IconButton(
-                onPressed: () {
-                  controller.avatar.value = ""; // Clear the image path
-                },
-                icon: const Icon(Icons.close),
-              ),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -250,18 +231,28 @@ class CreateUsersView extends BaseView<UsersController> {
 
   Widget _getImageWidget() {
     if (controller.avatar.value != null &&
+        controller.avatar.value.isNotEmpty &&
         controller.avatar.value.startsWith('http')) {
       return CachedNetworkImage(
-        imageUrl: controller.avatar.value,
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-        progressIndicatorBuilder: (context, url, progress) =>
-            const CircularProgressIndicator(),
-        fit: BoxFit.contain,
+        imageUrl: HttpNetWorkUrlApi.baseURL + controller.avatar.value,
+        errorWidget: (context, url, error) {
+          // Handle the error, e.g., show a placeholder image
+          return Image.asset("assets/placeholder_image.png");
+        },
+        progressIndicatorBuilder: (context, url, progress) {
+          if (progress == null) {
+            return const CircularProgressIndicator();
+          } else {
+            return const SizedBox(); // Show a loading indicator
+          }
+        },
+        fit: BoxFit.cover,
       );
-    } else if (controller.avatar.value != null) {
+    } else if (controller.avatar.value != null &&
+        controller.avatar.value.isNotEmpty) {
       return Image.file(
         File(controller.avatar.value),
-        fit: BoxFit.contain,
+        fit: BoxFit.cover,
       );
     } else {
       return const Icon(Icons.image, size: 40, color: Colors.grey);

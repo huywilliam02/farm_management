@@ -12,7 +12,7 @@ import 'package:http_parser/http_parser.dart';
 class UserApi {
   static Future<List<UserDetailsModel>> getAllDataUsers(int indexPage) async {
     var url = Uri.parse(
-        'http://116.118.49.43:8878/api/user/gets?order=ASC&page=$indexPage&take=10');
+        'http://116.118.49.43:8878/api/users?order=ASC&page=$indexPage&take=10');
     final response = await http.get(
       url,
       headers: <String, String>{
@@ -36,13 +36,13 @@ class UserApi {
     }
   }
 
-  static Future<bool> createNewUsers(UserModel model, String avatarPath) async {
+  static Future<bool> createNewUser(UserModel model, String? avatarPath) async {
     var dioRequest = dio.Dio();
 
     dioRequest.options.headers = {
       'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
-      'Content-Type': 'multipart/form-data',
-      'Accept': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
     };
 
     var formData = dio.FormData.fromMap({
@@ -59,7 +59,7 @@ class UserApi {
       "description": model.description,
     });
 
-    if (avatarPath != null) {
+    if (avatarPath != null && avatarPath.isNotEmpty) {
       final multiPartFile = await dio.MultipartFile.fromFile(
         avatarPath,
         contentType: MediaType("image", "jpeg"),
@@ -67,19 +67,78 @@ class UserApi {
       formData.files.add(MapEntry('avatar', multiPartFile));
     }
 
-    var response = await dioRequest.post(
-      'http://116.118.49.43:8878/api/user/createUser',
-      data: formData,
-    );
+    try {
+      var response = await dioRequest.post(
+        'http://116.118.49.43:8878/api/users',
+        data: formData,
+      );
 
-    log('createUsers- status code : ${response.statusCode}');
-    log('createUsers - body code : ');
-    if (response.statusCode == 201) {
-      return true;
-    } else {
+      log('Dio Response - Status code: ${response.statusCode}');
+      log('Dio Response - Data: ${response.data}');
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        log('Error creating user - Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      log('Dio Error: $e');
       return false;
     }
   }
+
+  // static Future<bool> createNewUser(UserModel model, String avatarPath) async {
+  //   var dioRequest = dio.Dio();
+  //
+  //   dioRequest.options.headers = {
+  //     'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
+  //     'Content-Type': 'application/json', // Update content type if necessary
+  //     'Accept': 'application/json',
+  //   };
+  //
+  //   var body = {
+  //     "username": model.username,
+  //     "password": model.password,
+  //     "fullName": model.fullName,
+  //     "email": model.email,
+  //     "phoneNumber": model.phoneNumber,
+  //     "role": model.role,
+  //     "jobTitle": model.jobTitle,
+  //     "isLocked": model.isLocked,
+  //     "homeTown": model.homeTown,
+  //     "address": model.address,
+  //     "description": model.description,
+  //   };
+  //
+  //   if (avatarPath != null) {
+  //     final multiPartFile = await dio.MultipartFile.fromFile(
+  //       avatarPath,
+  //       contentType: MediaType("image", "jpeg"),
+  //     );
+  //     body['avatar'] = multiPartFile;
+  //   }
+  //
+  //   try {
+  //     var response = await dioRequest.post(
+  //       'http://116.118.49.43:8878/api/users',
+  //       data: body,
+  //     );
+  //
+  //     log('Dio Response - Status code: ${response.statusCode}');
+  //     log('Dio Response - Data: ${response.data}');
+  //
+  //     if (response.statusCode == 201) {
+  //       return true;
+  //     } else {
+  //       log('Error creating user - Status code: ${response.statusCode}, Error: ${response.data}');
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     log('Dio Error: $e');
+  //     return false;
+  //   }
+  // }
 
   static Future<bool> updateNewUsers(
       String userId, UserModel model, String avatarPath) async {
@@ -113,7 +172,7 @@ class UserApi {
       formData.files.add(MapEntry('avatar', multiPartFile));
     }
     var response = await dioRequest.post(
-      'http://116.118.49.43:8878/api/user/createUser',
+      'http://116.118.49.43:8878/api/users',
       data: formData,
     );
     log('createUsers- status code : ${response.statusCode}');
@@ -145,10 +204,10 @@ class UserApi {
     }
   }
 
-  static Future<List<UserDetailsModel>> searchlistUserDetails(
+  static Future<List<UserDetailsModel>> searchListUserDetails(
       String searchData) async {
     var url = Uri.parse(
-        'http://116.118.49.43:8878/api/user/gets?order=ASC&page=1&take=10&search=$searchData');
+        'http://116.118.49.43:8878/api/users?order=ASC&page=1&take=10&search=$searchData');
     final response = await http.get(
       url,
       headers: <String, String>{

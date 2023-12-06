@@ -19,7 +19,7 @@ class EditUserView extends BaseView<EditUserController> {
               _buildTextFieldItem(
                 title: "Họ và tên",
                 obligatory: "*",
-                controller: controller.fullnameController,
+                controller: controller.fullNameController,
                 setValueFunc: controller.setValueFullName,
                 inputType: TextInputType.text,
               ),
@@ -169,28 +169,6 @@ class EditUserView extends BaseView<EditUserController> {
   }
 
   Widget _buildImageStack(BuildContext context) {
-    // return Container(
-    //     width: double.infinity,
-    //     decoration: BoxDecoration(
-    //       image: DecorationImage(
-    //         fit: BoxFit.cover,
-    //         image: NetworkImage(controller.avatar.value),
-    //       ),
-    //     ),
-    //     child: Align(
-    //       alignment: Alignment.topLeft,
-    //       child: CircleAvatar(
-    //         radius: 20,
-    //         backgroundColor: Colors.white,
-    //         child: IconButton(
-    //           onPressed: () {
-    //             // Handle delete for the single image
-    //             controller.avatar.value = ""; // Clear the image path
-    //           },
-    //           icon: const Icon(Icons.close),
-    //         ),
-    //       ),
-    //     ));
     return Stack(
       children: [
         GestureDetector(

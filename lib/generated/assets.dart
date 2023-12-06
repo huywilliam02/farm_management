@@ -97,9 +97,6 @@ class Assets {
   static const String controllersAccountController = 'lib/presentation/controllers/account/controllers/account_controller.dart';
   static const String coreNoParamUsecase = 'lib/app/core/no_param_usecase.dart';
   static const String corePramUsecase = 'lib/app/core/pram_usecase.dart';
-  static const String createUserCreateUserBinding = 'lib/presentation/controllers/users/create_user/create_user_binding.dart';
-  static const String createUserCreateUserController = 'lib/presentation/controllers/users/create_user/create_user_controller.dart';
-  static const String createUserCreateUserView = 'lib/presentation/page/users/create_user/create_user_view.dart';
   static const String cropsCrop = 'lib/data/model/crops/crop.dart';
   static const String cropsFarmCropsFarmApi = 'lib/data/network/api/crops_farm/crops_farm_api.dart';
   static const String cropsFarmCropsFarmBinding = 'lib/presentation/controllers/crops_farm/crops_farm_binding.dart';
@@ -130,6 +127,10 @@ class Assets {
   static const String editProfileEditProfileController = 'lib/presentation/controllers/edit_profile/edit_profile_controller.dart';
   static const String editProfileEditProfileView = 'lib/presentation/page/edit_profile/edit_profile_view.dart';
   static const String editProfileEditprofile = 'lib/data/network/api/edit_profile/editprofile.dart';
+  static const String editUserCreateUserView = 'lib/presentation/page/users/edit_user/create_user_view.dart';
+  static const String editUserEditUserBinding = 'lib/presentation/controllers/users/edit_user/edit_user_binding.dart';
+  static const String editUserEditUserController = 'lib/presentation/controllers/users/edit_user/edit_user_controller.dart';
+  static const String editUserEditUserView = 'lib/presentation/page/users/edit_user/edit_user_view.dart';
   static const String entitiesLogin = 'lib/domain/entities/login.dart';
   static const String errorViewCommonFirstPageErrorIndicator = 'lib/app/core/common/page_view/error_view/common_first_page_error_indicator.dart';
   static const String errorViewCommonNewPageErrorIndicator = 'lib/app/core/common/page_view/error_view/common_new_page_error_indicator.dart';
@@ -207,6 +208,7 @@ class Assets {
   static const String iconsForm = 'assets/icons/form.png';
   static const String iconsFormtax = 'assets/icons/formtax.png';
   static const String iconsGallery = 'assets/icons/gallery.png';
+  static const String iconsGoogle = 'assets/icons/google.png';
   static const String iconsHandshake = 'assets/icons/handshake.png';
   static const String iconsHandshakee = 'assets/icons/handshakee.png';
   static const String iconsHarvester = 'assets/icons/harvester.png';
@@ -291,14 +293,13 @@ class Assets {
   static const String loadingViewCommonFirstPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_first_page_progress_indicator.dart';
   static const String loadingViewCommonLoadingPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
   static const String loadingViewCommonNewPageProgressIndicator = 'lib/app/core/common/page_view/loading_view/common_new_page_progress_indicator.dart';
+  static const String loginLogin = 'lib/presentation/page/login/login.dart';
   static const String loginLoginApi = 'lib/data/network/api/login/login_api.dart';
   static const String loginLoginBinding = 'lib/presentation/controllers/login/login_binding.dart';
-  static const String loginLoginChoosePage = 'lib/presentation/page/login/login_choose_page.dart';
   static const String loginLoginController = 'lib/presentation/controllers/login/login_controller.dart';
   static const String loginLoginModel = 'lib/data/model/login/login_model.dart';
   static const String loginLoginModel.g = 'lib/data/model/login/login_model.g.dart';
   static const String loginLoginPage = 'lib/presentation/page/login/login_page.dart';
-  static const String loginSplash = 'lib/presentation/page/login/splash.dart';
   static const String logoLogo = 'assets/logo/logo.png';
   static const String mainTabviewMainTabviewBinding = 'lib/presentation/controllers/main_tabview/main_tabview_binding.dart';
   static const String mainTabviewMainTabviewController = 'lib/presentation/controllers/main_tabview/main_tabview_controller.dart';
@@ -335,6 +336,7 @@ class Assets {
   static const String otherobjectOtherobjectBinding = 'lib/presentation/controllers/otherobject/otherobject_binding.dart';
   static const String otherobjectOtherobjectController = 'lib/presentation/controllers/otherobject/otherobject_controller.dart';
   static const String otherobjectOtherobjectView = 'lib/presentation/page/otherobject/otherobject_view.dart';
+  static const String pageSignUpSignUp = 'lib/presentation/page/sign_up/sign_up.dart';
   static const String pageUsersUser = 'lib/presentation/page/users/user.dart';
   static const String pageViewCommomPagedGridView = 'lib/app/core/common/page_view/commom_paged_grid_view.dart';
   static const String pageViewCommomPagedListView = 'lib/app/core/common/page_view/commom_paged_list_view.dart';
@@ -362,6 +364,7 @@ class Assets {
   static const String resourcesAiChatgpt = 'lib/app/resources/ai/chatgpt.json';
   static const String resourcesTest = 'lib/app/resources/test.dart';
   static const String roleRoleConstants = 'lib/app/core/shared/role/role_constants.dart';
+  static const String roleRoleUserConstants = 'lib/app/core/shared/role/role_user_constants.dart';
   static const String routesAppPages = 'lib/app/routes/app_pages.dart';
   static const String routesAppRoutes = 'lib/app/routes/app_routes.dart';
   static const String settingLanguageSettingLanguageBinding = 'lib/presentation/controllers/setting_language/setting_language_binding.dart';
@@ -411,7 +414,6 @@ class Assets {
   static const String usersUserDetails = 'lib/data/model/users/user_details.dart';
   static const String usersUsersBinding = 'lib/presentation/controllers/users/users_binding.dart';
   static const String usersUsersController = 'lib/presentation/controllers/users/users_controller.dart';
-  static const String usersUsersCreateView = 'lib/presentation/page/users/users_create_view.dart';
   static const String usersUsersView = 'lib/presentation/page/users/users_view.dart';
   static const String utilDateTimeUtils = 'lib/app/util/date_time_utils.dart';
   static const String utilDependency = 'lib/app/util/dependency.dart';
@@ -445,16 +447,17 @@ class Assets {
   static const String widgetsChatAiView = 'lib/presentation/page/chat_ai/widgets/chat_ai_view.dart';
   static const String widgetsConversationProvider = 'lib/presentation/page/chat_ai/widgets/conversation_provider.dart';
   static const String widgetsCreateStorewarehouse = 'lib/presentation/page/warehouse/storewarehouse/widgets/create_storewarehouse.dart';
-  static const String widgetsCustomFormField = 'lib/presentation/page/login/widgets/custom_form_field.dart';
   static const String widgetsDrawer = 'lib/presentation/page/chat_ai/widgets/drawer.dart';
   static const String widgetsEditStoreware = 'lib/presentation/page/warehouse/storewarehouse/widgets/edit_storeware.dart';
   static const String widgetsForwardButton = 'lib/presentation/page/account/widgets/forward_button.dart';
+  static const String widgetsLoginChoosePage = 'lib/presentation/page/login/widgets/login_choose_page.dart';
   static const String widgetsNewsCard = 'lib/presentation/page/news/widgets/newsCard.dart';
   static const String widgetsPopMenu = 'lib/presentation/page/chat_ai/widgets/pop_menu.dart';
   static const String widgetsProductTypeView = 'lib/presentation/page/viewfull/widgets/product_type_view.dart';
   static const String widgetsSecrets = 'lib/presentation/page/chat_ai/widgets/secrets.dart';
   static const String widgetsSettingItem = 'lib/presentation/page/account/widgets/setting_item.dart';
   static const String widgetsSettingSwitch = 'lib/presentation/page/account/widgets/setting_switch.dart';
+  static const String widgetsSplash = 'lib/presentation/page/login/widgets/splash.dart';
   static const String widgetsUserDetails = 'lib/presentation/page/users/widgets/user_details.dart';
   static const String workersalarycontrollersWorkersalaryController = 'lib/presentation/controllers/wage/workersalarycontrollers/workersalary_controller.dart';
   static const String workersalaryviewsWorkersalaryView = 'lib/presentation/page/wage/workersalaryviews/workersalary_view.dart';

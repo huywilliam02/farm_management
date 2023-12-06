@@ -37,7 +37,6 @@ class _SplashStartState extends State<SplashStart>
           child: CircularProgressIndicator(
             // value: 0.5,
             strokeWidth: 5,
-
             color: Colors.greenAccent,
             backgroundColor: Colors.grey,
           ),

@@ -1,9 +1,13 @@
+import 'dart:ffi';
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
+import 'package:itfsd/app/core/common/shimmer/listview/loading_item.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/base/base_view.dart';
@@ -52,14 +56,33 @@ class AccountView extends BaseView<AccountController> {
                           },
                           child: Row(
                             children: [
-                              Image.asset("assets/images/avatar.png",
-                                  width: 70, height: 70),
+                              Container(
+                                clipBehavior: Clip.hardEdge,
+                                height: 70,
+                                width: 70,
+                                decoration: const BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      "http://116.118.49.43:8878${controller.avatar}",
+                                  errorWidget: (context, url, error) {
+                                    return Image.asset(
+                                        "assets/images/avatar.png");
+                                  },
+                                  progressIndicatorBuilder:
+                                      (context, url, progress) {
+                                    return const LoadingItem();
+                                  },
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                               const SizedBox(width: 20),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Huy",
+                                    controller.fullName.value,
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
@@ -67,12 +90,13 @@ class AccountView extends BaseView<AccountController> {
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    controller.userName.value,
+                                    controller.roleConstants
+                                        .getRoleLabel(controller.role.value),
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                               const Spacer(),

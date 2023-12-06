@@ -1,146 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:itfsd/data/model/login/login_model.dart';
-import 'package:itfsd/data/model/sign_up/sign_up.dart';
-import 'package:itfsd/presentation/controllers/agricultural_products/agricultural_products_constant.dart';
-
-// import 'package:intl/intl.dart';
-// import 'package:location/location.dart';
-// import 'package:permission_handler/permission_handler.dart';
+import 'package:itfsd/presentation/page/login/login.dart';
 
 class SignUpController extends BaseController {
-  Rx<String> usernameInput = "".obs;
-  Rx<String> fullnameInput = "".obs;
-  Rx<String> passwordInput = "".obs;
-  Rx<String> rePasswordInput = "".obs;
-  Rx<String> email = "".obs;
-  Rx<bool> isLoading = false.obs;
-  Rx<String> erruserNameInput = "".obs;
-  Rx<String> errPasswordInput = "".obs;
-  Rx<String> errfullnameInput = "".obs;
-  Rx<bool> enableButton = false.obs;
-  Rx<bool> checkpassword = true.obs;
+  RxString fullName = ''.obs;
+  RxString enterprise = ''.obs;
+  RxString email = ''.obs;
+  RxString phone = ''.obs;
+  RxString description = ''.obs;
+
+  RxBool isLoading = false.obs;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+  TextEditingController enterpriseController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
+  Rx<String> validateErrFullName = "".obs;
+  Rx<String> validateErrEnterprise = "".obs;
+  Rx<String> validateErrEmail = "".obs;
+  Rx<String> validateErrPhone = "".obs;
+  Rx<String> validateErrDescription = "".obs;
+
+  Rx<bool> hasInternet = false.obs;
 
   @override
   void onInit() async {
     super.onInit();
   }
 
-  @override
-  void onReady() async {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  setNameInput(String? value) {
-    if (value != null) {
-      checkName(value);
-      usernameInput.value = value;
+  validateFullName(String value) {
+    if (value == "") {
+      validateErrFullName.value = "Vui lòng nhập tên";
+    } else {
+      validateErrFullName.value = "";
     }
   }
 
-  setPasswordInput(String? value) {
-    if (value != null) {
-      passwordInput.value = value;
-      checkPassword();
+  validateEnterprise(String value) {
+    if (value == "") {
+      validateErrEnterprise.value = "Vui lòng nhập tên doanh nghiệp";
+    } else {
+      validateErrEnterprise.value = "";
     }
   }
 
-  setRePasswordInput(String? value) {
+  validateEmail(String value) {
+    if (value == "") {
+      validateErrEmail.value = "Vui lòng nhập email";
+    } else {
+      validateErrEmail.value = "";
+    }
+  }
+
+  validatePhone(String value) {
+    if (value == "") {
+      validateErrPhone.value = "Vui lòng nhập số điện thoại";
+    } else {
+      validateErrPhone.value = "";
+    }
+  }
+
+  validateDescription(String value) {
+    if (value == "") {
+      validateErrDescription.value = "Vui lòng nhập thông tin";
+    } else {
+      validateErrDescription.value = "";
+    }
+  }
+
+  setFullNameInput(String? value) {
     if (value != null) {
-      rePasswordInput.value = value;
-      checkPassword();
+      validateFullName(value);
+      fullName.value = value;
+    }
+  }
+
+  setEnterpriseInput(String? value) {
+    if (value != null) {
+      validateEnterprise(value);
+      enterprise.value = value;
     }
   }
 
   setEmailInput(String? value) {
     if (value != null) {
+      validateEmail(value);
       email.value = value;
-      checkEmail(value);
     }
   }
 
-  checkEmail(String value) {
-      if (value == "") {
-      errfullnameInput.value = "Name must not empty";
-    } else {
-      errfullnameInput.value = "";
+  setPhoneInput(String? value) {
+    if (value != null) {
+      validatePhone(value);
+      phone.value = value;
     }
-    checkEnableButton();
   }
 
-  checkPassword() {
-    if (passwordInput.value.length < 8) {
-      errPasswordInput.value = "Password must be more than 8 character";
-    } else if (passwordInput != rePasswordInput) {
-      errPasswordInput.value = "Repassword not the same";
-    } else {
-      errPasswordInput.value = "";
+  setDescriptionInput(String? value) {
+    if (value != null) {
+      validateDescription(value);
+      description.value = value;
     }
-    checkEnableButton();
   }
 
-  checkName(String value) {
-    if (value == "") {
-      erruserNameInput.value = "Name must not empty";
-    } else {
-      erruserNameInput.value = "";
-    }
-    checkEnableButton();
+  SignUpModel buildSignUpModel() {
+    return SignUpModel(
+      fullName: fullNameController.text,
+      enterprise: enterpriseController.text,
+      email: emailController.text,
+      phone: phoneController.text,
+      description: descriptionController.text,
+    );
   }
 
-  bool checkEmpty() {
-    if (usernameInput.isNotEmpty &&
-        passwordInput.isNotEmpty &&
-        rePasswordInput.isNotEmpty &&
-        email.isNotEmpty) {
-      return true;
+  Future<void> createContact() async {
+    try {
+      validateFullName(fullName.value);
+      validateEnterprise(enterprise.value);
+      validateEmail(email.value);
+      validatePhone(phone.value);
+      validateDescription(description.value);
+      SignUpModel formData = buildSignUpModel();
+      bool check = await SignUpApi.createContact(formData);
+      if (check) {
+        handleSuccess();
+      } else {
+        ViewUtils.showSnackbarMessage("Tạo liên hệ không thành công", check);
+      }
+    } catch (e) {
+    } finally {
+      isLoading(false);
     }
-    return false;
   }
 
-  checkEnableButton() {
-    if (erruserNameInput.isEmpty &&
-        errfullnameInput.isEmpty &&
-        errPasswordInput.isEmpty &&
-        checkEmpty()) {
-      enableButton(true);
-    } else {
-      enableButton(false);
-    }
+  void handleSuccess() {
+    Get.back();
+    Get.snackbar(
+      "Thông báo",
+      "Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất",
+      icon: const Icon(Icons.person, color: Colors.white),
+      snackPosition: SnackPosition.TOP,
+      backgroundColor: Colors.green,
+      borderRadius: 20,
+      margin: const EdgeInsets.all(15),
+      colorText: Colors.white,
+      duration: const Duration(seconds: 5),
+      isDismissible: true,
+      dismissDirection: DismissDirection.horizontal,
+      forwardAnimationCurve: Curves.easeOutBack,
+    );
   }
-  //
-  // signUp() async {
-  //   isLoading(true);
-  //   if (errfullnameInput.isEmpty && errPasswordInput.isEmpty && erruserNameInput.isEmpty) {
-  //     SignUpModel signUpModel = SignUpModel(
-  //       username: usernameInput.value,
-  //       fullName: fullnameInput.value,
-  //       password: passwordInput.value,
-  //     );
-  //     try {
-  //       LoginModel? loginModel = await SignUpApi.register(signUpModel);
-  //       if (loginModel != null) {
-  //         Get.find<LoginController>().loginModel.value = loginModel;
-  //         // Get.find<LoginController>().accessToken =
-  //         //     await DatabaseLocal.instance.getJwtToken();
-  //         // await DatabaseLocal.instance.reNewLoginModel(loginModel);
-  //         Get.offAllNamed(Routes.MAIN_TABVIEW);
-  //         Get.snackbar("Notification", "hel", backgroundColor: Colors.white);
-  //       }
-  //     } catch (e) {
-  //       enableButton(false);
-  //       isLoading(false);
-  //       Get.offNamed(Routes.SIGN_UP);
-  //       Get.snackbar("Thông báo", "${e.toString().split("Exception: ")[1]}".tr,
-  //           backgroundColor: ColorConstant.white);
-  //     } finally {
-  //       isLoading(false);
-  //     }
-  //   }
-  // }
 }

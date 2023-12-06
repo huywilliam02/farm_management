@@ -2,7 +2,7 @@ import 'package:itfsd/base/base_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:itfsd/presentation/page/login/splash.dart';
+import 'package:itfsd/presentation/page/login/widgets/splash.dart';
 
 import '../../controllers/start_app/start_app_controller.dart';
 

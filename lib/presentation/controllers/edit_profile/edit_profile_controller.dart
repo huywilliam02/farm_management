@@ -1,4 +1,5 @@
 
+import 'package:itfsd/app/core/shared/role/role_constants.dart';
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/database/database_local.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
@@ -14,6 +15,7 @@ class EditProfileController extends BaseController {
   Rx<String> userName = "".obs;
   Rx<String> fullName = "".obs;
   String accessToken = "";
+  RoleConstants roleConstants = RoleConstants();
 
   final count = 0.obs;
 

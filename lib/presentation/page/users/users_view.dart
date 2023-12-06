@@ -15,15 +15,16 @@ class UsersView extends BaseView<UsersController> {
         leadingIcon: IconsUtils.back,
         onLeadingPressed: () => Get.back(),
         actions: [
-          IconButton(
-            onPressed: () {
-              controller.refreshForm();
-              Get.to(
-                () => CreateUsersView(),
-              );
-            },
-            icon: const Icon(IconsUtils.add),
-          )
+          if (controller
+              .hasAdminOrFarmerRole) // Kiểm tra quyền admin hoặc chủ hội
+            IconButton(
+              onPressed: () {
+                controller.refreshForm();
+                Get.off(() => CreateUsersView());
+                // Get.to(() => CreateUsersView());
+              },
+              icon: const Icon(IconsUtils.add),
+            )
         ],
       ),
       body: NotificationListener<ScrollNotification>(

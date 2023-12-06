@@ -1,127 +1,124 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
-import 'package:itfsd/app/core/common/menu/common_constrain_box_button.dart';
-import 'package:itfsd/app/core/common/input/common_create_edit_item.dart';
-import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
-import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
-import 'package:itfsd/app/core/common/input/form_field_widget.dart';
-import 'package:itfsd/app/core/constants/color_constants.dart';
-import 'package:itfsd/app/core/constants/data_constant.dart';
-import 'package:itfsd/presentation/controllers/sign_up/sign_up_controller.dart';
-import '../../../base/base_view.dart';
+import 'sign_up.dart';
 
 class SignUpView extends BaseView<SignUpController> {
-  const SignUpView({super.key});
+  const SignUpView({Key? key}) : super(key: key);
+
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
       backgroundColor: ColorConstant.background_color,
-      appBar: CommonAppBar(
-        title: "Liên hệ",
-        titleType: AppBarTitle.text,
-        leadingIcon: const Icon(Icons.arrow_back_ios_new),
-        titleTextStyle: AppTextStyle.textTitleAppBar,
-        centerTitle: true,
-        onLeadingPressed: () {
-          Get.back();
-        },
-      ),
+      appBar: _buildAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 15,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                const Center(
-                  child: Image(
-                    image: AssetImage("assets/logo/logo.png"),
-                    height: 150,
-                    width: 200,
-                    fit: BoxFit.contain,
+                _buildLogo(),
+                Obx(
+                  () => _buildFormField(
+                    title: "Họ và tên",
+                    controller: controller.fullNameController,
+                    inputType: TextInputType.text,
+                    icon: Icons.person,
+                    errorText: controller.validateErrFullName.value,
+                    setValueFunc: controller.setFullNameInput,
                   ),
                 ),
-                const Text(
-                  "Liên hệ",
-                  style: TextStyleConstant.black22RobotoBold,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CommonCreateEditItem(
-                  title: "Họ và tên",
-                  widget: CommonFormFieldWidget(
-                    textInputType: TextInputType.text,
-                    icon: const Icon(Icons.person_outline_outlined),
-                    errorText: controller.erruserNameInput.value,
-                    setValueFunc: controller.setNameInput,
+                Obx(
+                  () => _buildFormField(
+                    title: "Tên doanh nghiệp",
+                    controller: controller.enterpriseController,
+                    inputType: TextInputType.text,
+                    icon: Icons.house_outlined,
+                    errorText: controller.validateErrEnterprise.value,
+                    setValueFunc: controller.setEnterpriseInput,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CommonCreateEditItem(
-                  title: "Tên doanh nghiệp",
-                  widget: CommonFormFieldWidget(
-                    textInputType: TextInputType.text,
-                    icon: const Icon(Icons.maps_home_work_outlined),
-                    errorText: controller.erruserNameInput.value,
-                    setValueFunc: controller.setNameInput,
+                Obx(
+                  () => _buildFormField(
+                    title: "Email",
+                    controller: controller.emailController,
+                    inputType: TextInputType.emailAddress,
+                    icon: Icons.email_outlined,
+                    errorText: controller.validateErrEmail.value,
+                    setValueFunc: controller.setEmailInput,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CommonCreateEditItem(
-                  title: "Email",
-                  widget: CommonFormFieldWidget(
-                    textInputType: TextInputType.text,
-                    labelText: "Email",
-                    icon: const Icon(Icons.email_outlined),
-                    errorText: controller.erruserNameInput.value,
-                    setValueFunc: controller.setNameInput,
+                Obx(
+                  () => _buildFormField(
+                    title: "Số điện thoại",
+                    controller: controller.phoneController,
+                    inputType: TextInputType.phone,
+                    icon: Icons.local_phone_outlined,
+                    errorText: controller.validateErrPhone.value,
+                    setValueFunc: controller.setPhoneInput,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CommonCreateEditItem(
-                  title: "Số điện thoại",
-                  widget: CommonFormFieldWidget(
-                    textInputType: TextInputType.number,
-                    icon: const Icon(Icons.local_phone_outlined),
-                    errorText: controller.erruserNameInput.value,
-                    setValueFunc: controller.setNameInput,
+                Obx(
+                  () => _buildFormField(
+                    title: "Thông tin chung",
+                    controller: controller.descriptionController,
+                    inputType: TextInputType.text,
+                    icon: Icons.error_outline,
+                    errorText: controller.validateErrDescription.value,
+                    setValueFunc: controller.setDescriptionInput,
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CommonCreateEditItem(
-                  title: "Thông tin chung",
-                  widget: CommonFormFieldWidget(
-                    textInputType: TextInputType.text,
-                    icon: const Icon(Icons.info_outline),
-                    errorText: controller.erruserNameInput.value,
-                    setValueFunc: controller.setNameInput,
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 CommonConstrainBoxButton(
-                  text: "Đăng ký",
-                  onPressed: () {},
+                  text: 'Đăng ký',
+                  onPressed: controller.createContact,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return CommonAppBar(
+      title: 'Liên hệ',
+      titleType: AppBarTitle.text,
+      leadingIcon: const Icon(Icons.arrow_back_ios_new),
+      titleTextStyle: AppTextStyle.textTitleAppBar,
+      centerTitle: true,
+      onLeadingPressed: () {
+        Get.back();
+      },
+    );
+  }
+
+  Widget _buildLogo() {
+    return const Center(
+      child: Image(
+        image: AssetImage('assets/logo/logo.png'),
+        height: 150,
+        width: 200,
+        fit: BoxFit.contain,
+      ),
+    );
+  }
+
+  Widget _buildFormField({
+    required String title,
+    required TextEditingController controller,
+    required TextInputType inputType,
+    required IconData icon,
+    required String errorText,
+    required Function(String?) setValueFunc,
+  }) {
+    return CommonCreateEditItem(
+      title: title,
+      widget: CommonFormFieldWidget(
+        controllerEditting: controller,
+        textInputType: inputType,
+        icon: Icon(icon),
+        errorText: errorText,
+        setValueFunc: setValueFunc,
       ),
     );
   }

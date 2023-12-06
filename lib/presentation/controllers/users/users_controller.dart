@@ -18,7 +18,7 @@ class UsersController extends BaseController {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController fullnameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController jobTitleController = TextEditingController();
@@ -29,18 +29,14 @@ class UsersController extends BaseController {
 
   List<String> listIsLockedDropdown = <String>['Kích hoạt', 'Không kích hoạt'];
 
-  List<String> listRoleDropdown = <String>[
-    'ADMIN',
-    'USER',
-    'FARMER',
-    'ASSOCIATIONS'
-  ];
+  List<String> listRoleDropdown = <String>['USER', 'FARMER', 'ASSOCIATIONS'];
+  List<String> listRoleAdminDropdown = <String>['ADMIN', 'FARMER'];
   Map<String, String> roleLabels = {
-    'ADMIN': 'Quản trị',
     'USER': 'Người dùng',
     'FARMER': 'Chủ hội',
     'ASSOCIATIONS': 'Hiệp hội',
   };
+  Rx<String> dropdownRoleAdminValue = "".obs;
   RoleConstants roleConstants = RoleConstants();
 
   Rx<String> dropdownRoleValue = "".obs;
@@ -61,11 +57,11 @@ class UsersController extends BaseController {
 
   @override
   Future<void> onInit() async {
+    dropdownRoleAdminValue.value = listRoleAdminDropdown.first;
     dropdownRoleValue.value = listRoleDropdown.first;
     dropdownIsLockedValue.value = listIsLockedDropdown.first;
     try {
       isLoading(true);
-
       refreshData();
     } catch (e) {
       ViewUtils.handleInitError(e);
@@ -109,6 +105,12 @@ class UsersController extends BaseController {
         fetchMoreData();
       }
     }
+  }
+
+  bool get hasAdminOrFarmerRole {
+    final userRole = dropdownRoleAdminValue.value;
+    print("AdminRole: ${dropdownRoleAdminValue.value}");
+    return listRoleAdminDropdown.contains(userRole);
   }
 
   bool isFetching = false;
@@ -200,7 +202,7 @@ class UsersController extends BaseController {
   }
 
   Future<void> createUser(String? userId) async {
-    log(fullnameController.text);
+    log(fullNameController.text);
     log(usernameController.text);
     log(passwordController.text);
     log(emailController.text);
@@ -210,7 +212,7 @@ class UsersController extends BaseController {
     log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
     log(avatar.toString());
     UserModel formData = UserModel(
-      fullName: fullnameController.text,
+      fullName: fullNameController.text,
       username: usernameController.text,
       password: passwordController.text,
       jobTitle: jobTitleController.text,
@@ -219,29 +221,27 @@ class UsersController extends BaseController {
       description: descriptionController.text,
       email: emailController.text,
       phoneNumber: phoneNumberController.text,
-      // avatar: avatar.string,
-      avatar: "http://116.118.49.43:8878${avatar.string ?? ''}",
       role: dropdownRoleValue.value ?? listRoleDropdown.first,
       isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
           ? true
           : false,
+      avatar: avatar.isNotEmpty ? avatar.value : "",
+      // avatar: avatarPath ?? "",
     );
-    bool check = userId != null
-        ? await UserApi.updateNewUsers(userId, formData, avatar.value)
-        : await UserApi.createNewUsers(formData, avatar.value);
+    bool check = await UserApi.createNewUser(formData, avatar.value);
+
     if (check) {
       Get.back();
-      ViewUtils.showSnackbarMessage("Tạo nhà thành viên thành công", check);
-      // refreshData(); // Corrected function name
+      ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+      refreshData(); // Corrected function name
     } else {
-      ViewUtils.showSnackbarMessage(
-          "Tạo nhà thành viên không thành công", check);
+      ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
     }
   }
 
   refreshForm() {
     usernameController.text = "";
-    fullnameController.text = '';
+    fullNameController.text = '';
     passwordController.text = '';
     emailController.text = "";
     phoneNumberController.text = "";
@@ -254,7 +254,7 @@ class UsersController extends BaseController {
     if (value.isNotEmpty) {
       noMoreRecord(true);
       List<UserDetailsModel> searchResults =
-          await UserApi.searchlistUserDetails(value);
+          await UserApi.searchListUserDetails(value);
 
       if (searchResults.isEmpty) {
         // Clear existing data when there are no search results
@@ -271,14 +271,19 @@ class UsersController extends BaseController {
 
   onImagePick() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+    final XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 100,
+    );
 
     if (pickedFile != null) {
       final LostDataResponse response2 = await picker.retrieveLostData();
       File file = File(pickedFile.path);
       avatar ??= "".obs;
+
+      // Set the correct path to the picked image
       avatar.value = file.path;
+
       print("Picked image: ${avatar.value}");
     }
   }

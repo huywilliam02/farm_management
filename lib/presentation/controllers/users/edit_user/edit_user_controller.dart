@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:itfsd/app/core/shared/role/role_user_constants.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
@@ -19,7 +20,7 @@ class EditUserController extends BaseController {
 
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController fullnameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController jobTitleController = TextEditingController();
@@ -28,20 +29,10 @@ class EditUserController extends BaseController {
   TextEditingController homeTownController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
-  List<String> listIsLockedDropdown = <String>['Kích hoạt', 'Không kích hoạt'];
+  List<String> listIsLockedDropdown = RoleUserConstants.listIsLockedDropdown;
 
-  List<String> listRoleDropdown = <String>[
-    'ADMIN',
-    'USER',
-    'FARMER',
-    'ASSOCIATIONS'
-  ];
-  Map<String, String> roleLabels = {
-    'ADMIN': 'Quản trị',
-    'USER': 'Người dùng',
-    'FARMER': 'Chủ hội',
-    'ASSOCIATIONS': 'Hiệp hội',
-  };
+  List<String> listRoleDropdown = RoleUserConstants.listRoleDropdown;
+  Map<String, String> roleLabels = RoleUserConstants.roleLabels;
   RoleConstants roleConstants = RoleConstants();
 
   Rx<String> dropdownRoleValue = "".obs;
@@ -59,6 +50,8 @@ class EditUserController extends BaseController {
   ScrollController userScrollController = ScrollController();
 
   int currentPage = 1;
+  bool isFetching = false;
+  DateTime? lastFetchTime;
 
   CommonPagingController<UserDetailsModel>? pagingController;
 
@@ -113,9 +106,6 @@ class EditUserController extends BaseController {
       }
     }
   }
-
-  bool isFetching = false;
-  DateTime? lastFetchTime;
 
   Future<void> fetchMoreDataThrottled() async {
     if (isFetching) return;
@@ -178,8 +168,8 @@ class EditUserController extends BaseController {
     }
   }
 
-  Future<void> createUser(String? userId) async {
-    log(fullnameController.text);
+  Future<void> createUser(String? userId,{String? avatarPath}) async {
+    log(fullNameController.text);
     log(usernameController.text);
     log(passwordController.text);
     log(emailController.text);
@@ -188,8 +178,9 @@ class EditUserController extends BaseController {
     log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
     log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
     log(avatar.toString());
+    String avatarPath = avatar.string ?? '';
     UserModel formData = UserModel(
-      fullName: fullnameController.text,
+      fullName: fullNameController.text,
       username: usernameController.text,
       password: passwordController.text,
       jobTitle: jobTitleController.text,
@@ -199,7 +190,8 @@ class EditUserController extends BaseController {
       email: emailController.text,
       phoneNumber: phoneNumberController.text,
       // avatar: avatar.string,
-      avatar: "http://116.118.49.43:8878${avatar.string ?? ''}",
+      avatar: avatarPath ?? "",
+      // avatar: "http://116.118.49.43:8878$avatarPath",
       role: dropdownRoleValue.value ?? listRoleDropdown.first,
       isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
           ? true
@@ -207,20 +199,19 @@ class EditUserController extends BaseController {
     );
     bool check = userId != null
         ? await UserApi.updateNewUsers(userId, formData, avatar.value)
-        : await UserApi.createNewUsers(formData, avatar.value);
+        : await UserApi.createNewUser(formData , avatar.value);
     if (check) {
       Get.back();
-      ViewUtils.showSnackbarMessage("Tạo nhà thành viên thành công", check);
-      // refreshData(); // Corrected function name
+      ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+      refreshData(); // Corrected function name
     } else {
-      ViewUtils.showSnackbarMessage(
-          "Tạo nhà thành viên không thành công", check);
+      ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
     }
   }
 
   refreshForm() {
     usernameController.text = "";
-    fullnameController.text = '';
+    fullNameController.text = '';
     passwordController.text = '';
     emailController.text = "";
     phoneNumberController.text = "";
@@ -241,13 +232,13 @@ class EditUserController extends BaseController {
     // Rest of the code...
 
     print('usernameController: ${usernameController.text}');
-    print('fullnameController: ${fullnameController.text}');
+    print('fullnameController: ${fullNameController.text}');
     print('avatar: ${avatar.value}');
     // Reset the form fields
     refreshForm();
     // Populate form fields with data from the selected user
     usernameController.text = userDetails.username ?? "";
-    fullnameController.text = userDetails.fullName ?? "";
+    fullNameController.text = userDetails.fullName ?? "";
     emailController.text = userDetails.email ?? "";
     phoneNumberController.text = userDetails.phoneNumber ?? "";
     jobTitleController.text = userDetails.jobTitle ?? "";
@@ -261,25 +252,6 @@ class EditUserController extends BaseController {
         userId: userDetails.id,
       ),
     );
-  }
-
-  Future<void> onTypingSearch(String value) async {
-    if (value.isNotEmpty) {
-      noMoreRecord(true);
-      List<UserDetailsModel> searchResults =
-          await UserApi.searchlistUserDetails(value);
-
-      if (searchResults.isEmpty) {
-        // Clear existing data when there are no search results
-        listUsers.clear();
-      } else {
-        // Update the list with search results
-        listUsers.assignAll(searchResults);
-      }
-    } else {
-      // Clear existing data when the search query is empty
-      refreshData();
-    }
   }
 
   onImagePick() async {
