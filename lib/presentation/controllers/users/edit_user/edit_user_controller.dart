@@ -167,18 +167,55 @@ class EditUserController extends BaseController {
       lazyLoading(false);
     }
   }
+  //
+  // Future<void> createUser(String? userId, {String? avatarPath}) async {
+  //   log(fullNameController.text);
+  //   log(usernameController.text);
+  //   log(passwordController.text);
+  //   log(emailController.text);
+  //   log(phoneNumberController.text);
+  //   log(jobTitleController.text);
+  //   log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
+  //   log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
+  //   log(avatar.toString());
+  //   String avatarPath = avatar.string ?? '';
+  //   UserModel formData = UserModel(
+  //     fullName: fullNameController.text,
+  //     username: usernameController.text,
+  //     password: passwordController.text,
+  //     jobTitle: jobTitleController.text,
+  //     address: addressController.text,
+  //     homeTown: homeTownController.text,
+  //     description: descriptionController.text,
+  //     email: emailController.text,
+  //     phoneNumber: phoneNumberController.text,
+  //     // avatar: avatar.string,
+  //     avatar: avatarPath ?? "",
+  //     role: dropdownRoleValue.value ?? listRoleDropdown.first,
+  //     isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
+  //         ? true
+  //         : false,
+  //   );
+  //   bool check = userId != null
+  //       ? await UserApi.updateNewUsers(userId, formData, avatar.value)
+  //       : await UserApi.createNewUser(formData, avatar.value);
+  //   if (check) {
+  //     Get.back();
+  //     ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+  //     refreshData(); // Corrected function name
+  //   } else {
+  //     ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
+  //   }
+  // }
 
-  Future<void> createUser(String? userId,{String? avatarPath}) async {
+  Future<void> updateUser(String? userId) async {
     log(fullNameController.text);
     log(usernameController.text);
-    log(passwordController.text);
     log(emailController.text);
     log(phoneNumberController.text);
     log(jobTitleController.text);
     log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
     log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
-    log(avatar.toString());
-    String avatarPath = avatar.string ?? '';
     UserModel formData = UserModel(
       fullName: fullNameController.text,
       username: usernameController.text,
@@ -189,23 +226,20 @@ class EditUserController extends BaseController {
       description: descriptionController.text,
       email: emailController.text,
       phoneNumber: phoneNumberController.text,
-      // avatar: avatar.string,
-      avatar: avatarPath ?? "",
-      // avatar: "http://116.118.49.43:8878$avatarPath",
       role: dropdownRoleValue.value ?? listRoleDropdown.first,
+      // avatar: avatar.isNotEmpty ? avatar.value : "",
       isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
           ? true
           : false,
     );
-    bool check = userId != null
-        ? await UserApi.updateNewUsers(userId, formData, avatar.value)
-        : await UserApi.createNewUser(formData , avatar.value);
+    bool check = await UserApi.updateNewUser(userId, formData);
+
     if (check) {
       Get.back();
-      ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+      ViewUtils.showSnackbarMessage("Chỉnh sửa thành công", check);
       refreshData(); // Corrected function name
     } else {
-      ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
+      ViewUtils.showSnackbarMessage("Chỉnh sửa không thành công", check);
     }
   }
 

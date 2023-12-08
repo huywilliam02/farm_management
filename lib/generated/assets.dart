@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String accountAccount = 'lib/presentation/page/account/account.dart';
   static const String accountAccountView = 'lib/presentation/page/account/account_view.dart';
   static const String agriculturalProductsAgriculturalProductsApi = 'lib/data/network/api/agricultural_products/agricultural_products_api.dart';
   static const String agriculturalProductsAgriculturalProductsBinding = 'lib/presentation/controllers/agricultural_products/agricultural_products_binding.dart';
@@ -11,6 +12,7 @@ class Assets {
   static const String agriculturalProductsAgriculturalProductsView = 'lib/presentation/page/agricultural_products/agricultural_products_view.dart';
   static const String agriculturalProductsCreateAgriculralProductView = 'lib/presentation/page/agricultural_products/create_AgriculralProduct_view.dart';
   static const String aiChatgpt = 'lib/app/resources/ai/chatgpt.json';
+  static const String animationLoyOut = 'assets/animation/loy_out.json';
   static const String apiFarmFarm = 'lib/data/network/api/farm/farm.dart';
   static const String apiSignUpSignUp = 'lib/data/network/api/sign_up/sign_up.dart';
   static const String apiUsersUser = 'lib/data/network/api/users/user.dart';
@@ -77,7 +79,7 @@ class Assets {
   static const String componentsCacheImage = 'lib/app/components/cache_image.dart';
   static const String componentsCountDownTimer = 'lib/app/components/count_down_timer.dart';
   static const String componentsCustomGestureDetector = 'lib/app/components/custom_gesture_detector.dart';
-  static const String componentsDefaultDialog = 'lib/app/components/default_dialog.dart';
+  static const String componentsDialogWidget = 'lib/app/components/dialog_widget.dart';
   static const String componentsShowNotData = 'lib/app/components/show_not_data.dart';
   static const String componentsTextButton = 'lib/app/components/text_button.dart';
   static const String configLogConfig = 'lib/app/config/log_config.dart';
@@ -117,6 +119,11 @@ class Assets {
   static const String customerCustomerPageview = 'lib/presentation/page/customer/customer_pageview.dart';
   static const String customerCustomerView = 'lib/presentation/page/customer/customer_view.dart';
   static const String databaseDatabaseLocal = 'lib/data/database/database_local.dart';
+  static const String dialogDiaLogs = 'lib/app/core/common/dialog/dia_logs.dart';
+  static const String dialogDialogIconButton = 'lib/app/core/common/dialog/dialog_icon_button.dart';
+  static const String dialogIconOutlineButton = 'lib/app/core/common/dialog/icon_outline_button.dart';
+  static const String dialogMaterialDialogs = 'lib/app/core/common/dialog/material_dialogs.dart';
+  static const String dialogTypes = 'lib/app/core/shared/dialog/types.dart';
   static const String dimensAppDimen = 'lib/app/resources/dimens/app_dimen.dart';
   static const String dimensDimes = 'lib/app/resources/dimens/dimes.dart';
   static const String dividerCommon.divider = 'lib/app/core/common/divider/common.divider.dart';
@@ -131,6 +138,7 @@ class Assets {
   static const String editUserEditUserBinding = 'lib/presentation/controllers/users/edit_user/edit_user_binding.dart';
   static const String editUserEditUserController = 'lib/presentation/controllers/users/edit_user/edit_user_controller.dart';
   static const String editUserEditUserView = 'lib/presentation/page/users/edit_user/edit_user_view.dart';
+  static const String editprofileEditProfile = 'lib/data/model/editprofile/edit_profile.dart';
   static const String entitiesLogin = 'lib/domain/entities/login.dart';
   static const String errorViewCommonFirstPageErrorIndicator = 'lib/app/core/common/page_view/error_view/common_first_page_error_indicator.dart';
   static const String errorViewCommonNewPageErrorIndicator = 'lib/app/core/common/page_view/error_view/common_new_page_error_indicator.dart';
@@ -280,6 +288,7 @@ class Assets {
   static const String ingredientsIngredientsController = 'lib/presentation/controllers/ingredients/ingredients_controller.dart';
   static const String ingredientsIngredientsView = 'lib/presentation/page/ingredients/ingredients_view.dart';
   static const String inputCommonCreateEditItem = 'lib/app/core/common/input/common_create_edit_item.dart';
+  static const String inputCommonDropDown = 'lib/app/core/common/input/common_drop_down.dart';
   static const String inputCommonFormFieldWidget = 'lib/app/core/common/input/common_form_field_widget.dart';
   static const String inputCommonShowData = 'lib/app/core/common/input/common_show_data.dart';
   static const String inputFormFieldWidget = 'lib/app/core/common/input/form_field_widget.dart';

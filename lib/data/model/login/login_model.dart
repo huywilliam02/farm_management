@@ -15,11 +15,11 @@ String accountModelToJson(LoginModel data) => json.encode(data.toJson());
 @HiveType(typeId: 0)
 class LoginModel extends HiveObject {
   @HiveField(0)
-  String createdAt;
+  String? createdAt;
   @HiveField(1)
-  String updatedAt;
+  String? updatedAt;
   @HiveField(2)
-  String id;
+  String? id;
   @HiveField(3)
   String fullName;
   @HiveField(4)
@@ -72,7 +72,7 @@ class LoginModel extends HiveObject {
         email: json["email"] ?? "",
         phoneNumber: json["phoneNumber"] ?? "",
         role: json["role"] ?? "",
-        isLocked: json["isLocked"] ?? "",
+        isLocked: json["isLocked"] ?? false,
         homeTown: json["homeTown"] ?? "",
         address: json["address"] ?? "",
       );

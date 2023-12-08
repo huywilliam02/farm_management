@@ -2,8 +2,8 @@ import 'package:itfsd/presentation/page/users/user.dart';
 import 'dart:io';
 
 class EditUserView extends BaseView<EditUserController> {
-  EditUserView({Key? key, this.userId}) : super(key: key);
-  String? userId;
+  const EditUserView({Key? key, this.userId}) : super(key: key);
+  final String? userId;
 
   @override
   Widget buildView(BuildContext context) {
@@ -15,7 +15,7 @@ class EditUserView extends BaseView<EditUserController> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _buildImageSection(context),
+              // _buildImageSection(context),
               _buildTextFieldItem(
                 title: "Họ và tên",
                 obligatory: "*",
@@ -93,13 +93,14 @@ class EditUserView extends BaseView<EditUserController> {
 
   PreferredSizeWidget _buildAppBar() {
     return CommonAppBar(
-      title: "Chỉnh sửa thành viên",
-      titleType: AppBarTitle.text,
-      centerTitle: true,
-      titleTextStyle: AppTextStyle.textTitleAppBar,
-      leadingIcon: IconsUtils.back,
-      onLeadingPressed: () => Get.back(),
-    );
+        title: "Chỉnh sửa thành viên",
+        titleType: AppBarTitle.text,
+        centerTitle: true,
+        titleTextStyle: AppTextStyle.textTitleAppBar,
+        leadingIcon: IconsUtils.back,
+        onLeadingPressed: () {
+          Get.toNamed(Routes.USERS);
+        });
   }
 
   Widget _buildTextFieldItem({
@@ -250,7 +251,7 @@ class EditUserView extends BaseView<EditUserController> {
     return CommonConstrainBoxButton(
       text: text,
       onPressed: () {
-        controller.createUser(userId);
+        controller.updateUser(userId);
       },
     );
   }

@@ -29,7 +29,7 @@ class MainTabviewController extends BaseController {
     const HomeView(),
     const ListIcondirayView(),
     const NewsView(),
-    const AccountView()
+    AccountView()
   ]);
   onItemTapped(String index) {
     page.value = index;

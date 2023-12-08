@@ -16,7 +16,7 @@ class UserModel {
   String homeTown;
   String address;
   String role;
-  bool isLocked;
+  bool? isLocked;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? id;
@@ -33,7 +33,7 @@ class UserModel {
     this.homeTown = "",
     required this.role,
     this.phoneNumber = "",
-    required this.isLocked,
+    this.isLocked = false,
     this.createdAt,
     this.updatedAt,
     this.id,
@@ -52,7 +52,7 @@ class UserModel {
       address: json["address"] ?? "",
       homeTown: json["homeTown"] ?? "",
       role: json["role"],
-      isLocked: json["isLocked"] ?? false,
+      // isLocked: json["isLocked"] ?? false,
       createdAt:
           json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
       updatedAt:
@@ -74,7 +74,7 @@ class UserModel {
       "address": address,
       "homeTown": homeTown,
       "phoneNumber": phoneNumber,
-      "isLocked": isLocked,
+      // "isLocked": isLocked,
       "createdAt": createdAt?.toIso8601String(),
       "updatedAt": updatedAt?.toIso8601String(),
       "id": id,

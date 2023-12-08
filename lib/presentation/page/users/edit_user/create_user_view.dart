@@ -16,26 +16,35 @@ class CreateUsersView extends BaseView<UsersController> {
           child: Column(
             children: [
               _buildImageSection(context),
-              _buildTextFieldItem(
-                title: "Họ và tên",
-                obligatory: "*",
-                controller: controller.fullNameController,
-                setValueFunc: controller.setValueFullName,
-                inputType: TextInputType.text,
+              Obx(
+                () => _buildTextFieldItem(
+                  title: "Họ và tên",
+                  obligatory: "*",
+                  controller: controller.fullNameController,
+                  setValueFunc: controller.setValueFullName,
+                  errorText: controller.validateErrFullName.value,
+                  inputType: TextInputType.text,
+                ),
               ),
-              _buildTextFieldItem(
-                title: "Tài khoản",
-                obligatory: "*",
-                controller: controller.usernameController,
-                setValueFunc: controller.setValueUserName,
-                inputType: TextInputType.text,
+              Obx(
+                () => _buildTextFieldItem(
+                  title: "Tài khoản",
+                  obligatory: "*",
+                  controller: controller.usernameController,
+                  setValueFunc: controller.setValueUserName,
+                  errorText: controller.validateErrUserName.value,
+                  inputType: TextInputType.text,
+                ),
               ),
-              _buildTextFieldItem(
-                title: "Mật khẩu",
-                obligatory: "*",
-                controller: controller.passwordController,
-                setValueFunc: controller.setValuePassword,
-                inputType: TextInputType.text,
+              Obx(
+                () => _buildTextFieldItem(
+                  title: "Mật khẩu",
+                  obligatory: "*",
+                  controller: controller.passwordController,
+                  setValueFunc: controller.setValuePassword,
+                  errorText: controller.validateErrPassword.value,
+                  inputType: TextInputType.text,
+                ),
               ),
               _buildTextFieldItem(
                 title: "Email",
@@ -43,11 +52,15 @@ class CreateUsersView extends BaseView<UsersController> {
                 inputType: TextInputType.emailAddress,
                 setValueFunc: (p0) {},
               ),
-              _buildTextFieldItem(
-                title: "Số điện thoại",
-                controller: controller.phoneNumberController,
-                inputType: TextInputType.phone,
-                setValueFunc: (p0) {},
+              Obx(
+                () => _buildTextFieldItem(
+                  title: "Số điện thoại",
+                  obligatory: "*",
+                  controller: controller.phoneNumberController,
+                  errorText: controller.validateErrPhone.value,
+                  inputType: TextInputType.phone,
+                  setValueFunc: controller.setValuePhone,
+                ),
               ),
               _buildTextFieldItem(
                 title: "Chức danh",
@@ -73,24 +86,25 @@ class CreateUsersView extends BaseView<UsersController> {
                 inputType: TextInputType.text,
                 setValueFunc: (p0) {},
               ),
-              _buildDropdownItem(
-                title: "Chọn quyền",
-                listValues: controller.listRoleDropdown,
-                selectedValue: controller.dropdownRoleValue.value,
-                onSelected: (String? value) {
-                  controller.dropdownRoleValue.value = value!;
-                },
+              Obx(
+                () => _buildCommonDropdown(
+                  title: "Chọn quyền",
+                  listValues: controller.listRoleDropdown,
+                  selectedValue: controller.dropdownRoleValue.value,
+                  onSelected: (String? value) {
+                    controller.dropdownRoleValue.value = value!;
+                  },
+                ),
               ),
-              _buildDropdownItem(
-                title: "Hoạt động",
-                listValues: controller.listIsLockedDropdown,
-                selectedValue: controller.dropdownIsLockedValue.value,
-                onSelected: (String? value) {
-                  controller.dropdownIsLockedValue.value = value!;
-                },
-              ),
+              // Obx(() => _buildCommonDropdown(
+              //       title: "",
+              //       listValues: controller.listIsLockedDropdown,
+              //       selectedValue: controller.dropdownIsLockedValue.value,
+              //       onSelected: (String? value) {
+              //         controller.dropdownIsLockedValue.value = value!;
+              //       },
+              //     )),
               const SizedBox(height: 20),
-              // _buildConstrainBoxButton("Thêm thành viên"),
               _buildConstrainBoxButton(
                 "Thêm thành viên",
               ),
@@ -108,7 +122,9 @@ class CreateUsersView extends BaseView<UsersController> {
       centerTitle: true,
       titleTextStyle: AppTextStyle.textTitleAppBar,
       leadingIcon: IconsUtils.back,
-      onLeadingPressed: () => Get.back(),
+      onLeadingPressed: () {
+        Get.toNamed(Routes.USERS);
+      },
     );
   }
 
@@ -118,7 +134,9 @@ class CreateUsersView extends BaseView<UsersController> {
     required TextEditingController controller,
     required Function(String) setValueFunc,
     TextInputType? inputType,
+    String? errorText,
   }) {
+    final UsersController usersController = Get.put(UsersController());
     return CommonCreateEditItem(
       title: title,
       obligatory: obligatory!,
@@ -126,32 +144,38 @@ class CreateUsersView extends BaseView<UsersController> {
         textInputType: inputType ?? TextInputType.text,
         controllerEditting: controller,
         setValueFunc: setValueFunc,
+        errorText: errorText != "" ? errorText : null,
+        onEditingComplete: () {
+          if (setValueFunc == usersController.setValueUserName) {
+            usersController
+                .validateUserName(usersController.usernameController.text);
+          } else if (setValueFunc == usersController.setValueFullName) {
+            usersController
+                .validateFullName(usersController.fullNameController.text);
+          } else if (setValueFunc == usersController.setValuePassword) {
+            usersController
+                .validatePassword(usersController.passwordController.text);
+          } else if (setValueFunc == usersController.setValuePhone) {
+            usersController
+                .validatePhone(usersController.phoneNumberController.text);
+          }
+        },
       ),
     );
   }
 
-  Widget _buildDropdownItem({
+  Widget _buildCommonDropdown({
     required String title,
     required List<String> listValues,
     required String selectedValue,
-    void Function(String?)? onSelected,
+    required void Function(String?)? onSelected,
   }) {
-    return CommonCreateEditItem(
+    return CommonDropdown(
       title: title,
-      widget: DropdownMenu<String>(
-        initialSelection: selectedValue,
-        onSelected: onSelected,
-        dropdownMenuEntries:
-            listValues.map<DropdownMenuEntry<String>>((String value) {
-          return DropdownMenuEntry<String>(
-            value: value,
-            label: controller.roleLabels[value] ?? value,
-            style: MenuItemButton.styleFrom(
-              minimumSize: const Size(280, 50),
-            ),
-          );
-        }).toList(),
-      ),
+      listValues: listValues,
+      selectedValue: selectedValue,
+      onSelected: onSelected,
+      dropdownLabels: controller.roleLabels,
     );
   }
 

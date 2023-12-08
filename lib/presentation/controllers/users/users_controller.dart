@@ -36,6 +36,7 @@ class UsersController extends BaseController {
     'FARMER': 'Chủ hội',
     'ASSOCIATIONS': 'Hiệp hội',
   };
+
   Rx<String> dropdownRoleAdminValue = "".obs;
   RoleConstants roleConstants = RoleConstants();
 
@@ -82,15 +83,68 @@ class UsersController extends BaseController {
     super.onClose();
   }
 
-  void setValueUserName(String value) => username.value = value;
-  void setValuePassword(String value) => password.value = value;
-  void setValueFullName(String value) => fullname.value = value;
   void setValueEmail(String value) => email.value = value;
-  void setValuePhoneNumber(String value) => phoneNumber.value = value;
   void setValueJobTitle(String value) => jobTitle.value = value;
   void setValueDescription(String value) => description.value = value;
   void setValueHomeTown(String value) => homeTown.value = value;
   void setValueAddress(String value) => address.value = value;
+
+  Rx<String> validateErrUserName = "".obs;
+  Rx<String> validateErrFullName = "".obs;
+  Rx<String> validateErrPassword = "".obs;
+  Rx<String> validateErrPhone = "".obs;
+
+  // void validateUserName(String value) {
+  //   validateErrUserName(value.isEmpty ? "Vui lòng nhập tài khoản" : "");
+  // }
+
+  void validateUserName(String? value) {
+    if (value == null || value.isEmpty) {
+      validateErrUserName.value = "Vui lòng nhập tài khoản.";
+    } else {
+      validateErrUserName.value = ""; // Clear error if validation is successful
+    }
+  }
+
+  void validateFullName(String value) {
+    validateErrFullName(value.isEmpty ? "Vui lòng nhập tên" : "");
+  }
+
+  void validatePassword(String value) {
+    validateErrPassword(value.isEmpty ? "Mật khẩu phải có 8 ký tự" : "");
+  }
+
+  void validatePhone(String value) {
+    validateErrPhone(value.isEmpty ? "Vui lòng nhập số điện thoại" : "");
+  }
+
+  void setValueUserName(String? value) {
+    if (value != null) {
+      validateUserName(value);
+      username(value);
+    }
+  }
+
+  void setValueFullName(String? value) {
+    if (value != null) {
+      validateFullName(value);
+      fullname(value);
+    }
+  }
+
+  void setValuePassword(String? value) {
+    if (value != null) {
+      validatePassword(value);
+      password(value);
+    }
+  }
+
+  void setValuePhone(String? value) {
+    if (value != null) {
+      validatePhone(value);
+      phoneNumber(value);
+    }
+  }
 
   void showAll() {
     listToView.clear();
@@ -209,35 +263,113 @@ class UsersController extends BaseController {
     log(phoneNumberController.text);
     log(jobTitleController.text);
     log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
-    log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
     log(avatar.toString());
-    UserModel formData = UserModel(
-      fullName: fullNameController.text,
-      username: usernameController.text,
-      password: passwordController.text,
-      jobTitle: jobTitleController.text,
-      address: addressController.text,
-      homeTown: homeTownController.text,
-      description: descriptionController.text,
-      email: emailController.text,
-      phoneNumber: phoneNumberController.text,
-      role: dropdownRoleValue.value ?? listRoleDropdown.first,
-      isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
-          ? true
-          : false,
-      avatar: avatar.isNotEmpty ? avatar.value : "",
-      // avatar: avatarPath ?? "",
-    );
-    bool check = await UserApi.createNewUser(formData, avatar.value);
+    try {
+      // Validate user input
+      validateUserName(username.value);
+      validateFullName(fullname.value);
+      validatePassword(password.value);
+      validatePhone(phoneNumber.value);
 
-    if (check) {
-      Get.back();
-      ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
-      refreshData(); // Corrected function name
-    } else {
-      ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
+      // Check for validation errors
+      if (validateErrUserName.value.isNotEmpty ||
+          validateErrPassword.value.isNotEmpty ||
+          validateErrPhone.value.isNotEmpty ||
+          validateErrFullName.value.isNotEmpty) {
+        return;
+      }
+
+      // Create UserModel object
+      UserModel formData = UserModel(
+        fullName: fullNameController.text,
+        username: usernameController.text,
+        password: passwordController.text,
+        jobTitle: jobTitleController.text,
+        address: addressController.text,
+        homeTown: homeTownController.text,
+        description: descriptionController.text,
+        email: emailController.text,
+        phoneNumber: phoneNumberController.text,
+        role: dropdownRoleValue.value ?? listRoleDropdown.first,
+        avatar: avatar.isNotEmpty ? avatar.value : "",
+      );
+
+      // Call the API to create a new user
+      bool check = await UserApi.createNewUser(formData, avatar.value);
+
+      if (check) {
+        Get.back();
+        ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+        refreshData();
+      } else {
+        ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
+      }
+    } catch (e) {
+      // Handle exceptions
+      Get.snackbar(
+        "Thông báo",
+        "Lỗi có vấn đề",
+        backgroundColor: ColorConstant.white,
+      );
+    } finally {
+      isLoading(false);
     }
   }
+
+  // Future<void> createUser(String? userId) async {
+  //   log(fullNameController.text);
+  //   log(usernameController.text);
+  //   log(passwordController.text);
+  //   log(emailController.text);
+  //   log(phoneNumberController.text);
+  //   log(jobTitleController.text);
+  //   log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
+  //   // log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
+  //   log(avatar.toString());
+  //   isLoading(true);
+  //   try {
+  //     validateUserName(username.value);
+  //     validateFullName(fullname.value);
+  //     validatePassword(password.value);
+  //     validatePhone(phoneNumber.value);
+  //     if (validateErrUserName.value.isEmpty &&
+  //         validateErrPassword.value.isEmpty &&
+  //         validateErrPhone.value.isEmpty &&
+  //         validateErrFullName.value.isEmpty) {
+  //       UserModel formData = UserModel(
+  //         fullName: fullNameController.text,
+  //         username: usernameController.text,
+  //         password: passwordController.text,
+  //         jobTitle: jobTitleController.text,
+  //         address: addressController.text,
+  //         homeTown: homeTownController.text,
+  //         description: descriptionController.text,
+  //         email: emailController.text,
+  //         phoneNumber: phoneNumberController.text,
+  //         role: dropdownRoleValue.value ?? listRoleDropdown.first,
+  //         // isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
+  //         //     ? true
+  //         //     : false,
+  //         avatar: avatar.isNotEmpty ? avatar.value : "",
+  //       );
+  //       bool check = await UserApi.createNewUser(formData, avatar.value);
+  //
+  //       if (check) {
+  //         Get.back();
+  //         ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
+  //         refreshData(); // Corrected function name
+  //       } else {}
+  //     }
+  //   } catch (e) {
+  //     Get.snackbar(
+  //       "Thông báo",
+  //       "Tạo thành viên không thành công",
+  //       backgroundColor: ColorConstant.white,
+  //     );
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
 
   refreshForm() {
     usernameController.text = "";

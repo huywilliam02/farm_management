@@ -41,22 +41,21 @@ class UserApi {
 
     dioRequest.options.headers = {
       'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'content-Type': 'application/json; charset=utf-8',
+      'accept': '*/*',
     };
 
     var formData = dio.FormData.fromMap({
-      "username": model.username,
-      "password": model.password,
-      "fullName": model.fullName,
-      "email": model.email,
-      "phoneNumber": model.phoneNumber,
-      "role": model.role,
-      "jobTitle": model.jobTitle,
-      "isLocked": model.isLocked,
-      "homeTown": model.homeTown,
-      "address": model.address,
-      "description": model.description,
+      'homeTown': model.homeTown,
+      'address': model.address,
+      'role': model.role,
+      'username': model.username,
+      'phoneNumber': model.phoneNumber,
+      'fullName': model.fullName,
+      'jobTitle': model.jobTitle,
+      'password': model.password,
+      'email': model.email,
+      'description': model.description,
     });
 
     if (avatarPath != null && avatarPath.isNotEmpty) {
@@ -66,7 +65,6 @@ class UserApi {
       );
       formData.files.add(MapEntry('avatar', multiPartFile));
     }
-
     try {
       var response = await dioRequest.post(
         'http://116.118.49.43:8878/api/users',
@@ -140,49 +138,63 @@ class UserApi {
   //   }
   // }
 
-  static Future<bool> updateNewUsers(
-      String userId, UserModel model, String avatarPath) async {
-    var dioRequest = dio.Dio();
-
-    dioRequest.options.headers = {
-      'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
-      'Content-Type': 'multipart/form-data',
-      'Accept': 'application/json'
-    };
-
-    var formData = dio.FormData.fromMap({
-      "username": model.username,
-      "password": model.password,
-      "fullName": model.fullName,
-      "email": model.email,
-      "phoneNumber": model.phoneNumber,
-      "role": model.role,
-      "jobTitle": model.jobTitle,
-      "isLocked": model.isLocked,
-      "homeTown": model.homeTown,
-      "address": model.address,
-      "description": model.description,
-    });
-
-    if (avatarPath != null) {
-      final multiPartFile = await dio.MultipartFile.fromFile(
-        avatarPath,
-        contentType: MediaType("image", "jpeg"),
-      );
-      formData.files.add(MapEntry('avatar', multiPartFile));
-    }
-    var response = await dioRequest.post(
-      'http://116.118.49.43:8878/api/users',
-      data: formData,
+  static Future<bool> updateNewUser(String? idUser, UserModel formEdit) async {
+    log(jsonEncode(formEdit.toJson()));
+    var url = Uri.parse(
+      'http://116.118.49.43:8878/api/users/admin?userId=$idUser',
     );
-    log('createUsers- status code : ${response.statusCode}');
-    log('createUsers - body code : ');
-    if (response.statusCode == 201) {
+    final response = await http.put(url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8',
+          'Authorization':
+              'bearer ${Get.find<StartAppController>().accessToken}'
+        },
+        body: jsonEncode(formEdit.toJson()));
+    log('updateSchedule: ${response.statusCode} ${response.body}');
+
+    if (response.statusCode == 200) {
       return true;
     } else {
       return false;
     }
   }
+
+  // static Future<bool> updateNewUser(UserModel model, String idUser) async {
+  //   var dioRequest = dio.Dio();
+  //
+  //   dioRequest.options.headers = {
+  //     'accept': '*/*',
+  //     'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
+  //     'Content-Type': 'application/json',
+  //   };
+  //   // var formData = dio.FormData.fromMap({
+  //   //   "fullName": model.fullName,
+  //   //   "jobTitle": model.jobTitle,
+  //   //   "phoneNumber": model.phoneNumber,
+  //   //   "description": model.description,
+  //   //   "address": model.address,
+  //   //   "homeTown": model.homeTown,
+  //   //   "password": model.password,
+  //   //   "username": model.username,
+  //   //   "email": model.email,
+  //   //   "role": model.role,
+  //   //   "isLocked": model.isLocked,
+  //   // });
+  //
+  //   var response = await dioRequest.put(
+  //     'http://116.118.49.43:8878/api/users/admin?userId=$idUser',
+  //     // data: formData,
+  //   );
+  //
+  //   log('UpdateUsers- status code : ${response.statusCode}');
+  //
+  //   if (response.statusCode == 200) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
   static Future<bool> deleteUsers(String idUsers) async {
     var url =

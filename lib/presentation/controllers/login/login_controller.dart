@@ -84,7 +84,6 @@ class LoginController extends BaseController {
       await DatabaseLocal.instance.removeJwtToken();
       validateUserName(username.value);
       validatePassword(password.value);
-
       if (validateErrusername.value.isEmpty &&
           validateErrPassword.value.isEmpty) {
         String response = await LoginApi.login(username.value, password.value);

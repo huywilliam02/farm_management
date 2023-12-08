@@ -1,26 +1,19 @@
-import 'dart:ffi';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
-import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
-import 'package:itfsd/app/core/common/shimmer/listview/loading_item.dart';
-import 'package:itfsd/app/core/constants/data_constant.dart';
-import 'package:itfsd/app/routes/app_pages.dart';
-import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/presentation/page/account/widgets/forward_button.dart';
-import 'package:itfsd/presentation/page/account/widgets/setting_item.dart';
-import 'package:itfsd/presentation/page/account/widgets/setting_switch.dart';
-
-import '../../controllers/account/controllers/account_controller.dart';
+import 'package:itfsd/app/core/common/dialog/dialog_icon_button.dart';
+import 'package:itfsd/app/core/common/dialog/icon_outline_button.dart';
+import 'package:itfsd/app/core/common/dialog/material_dialogs.dart';
+import 'package:itfsd/app/core/shared/dialog/types.dart';
+import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_controller.dart';
+import 'package:itfsd/presentation/controllers/users/users_controller.dart';
+import 'package:lottie/lottie.dart';
+import 'account.dart';
 
 class AccountView extends BaseView<AccountController> {
-  const AccountView({Key? key}) : super(key: key);
+  AccountView({Key? key, this.userId}) : super(key: key);
+  String? userId;
   @override
   Widget buildView(BuildContext context) {
+    LoginController loginController = Get.put(LoginController());
     return CommonScaffold(
       backgroundColor: ColorConstant.background_color,
       body: SingleChildScrollView(
@@ -45,14 +38,16 @@ class AccountView extends BaseView<AccountController> {
                 ),
               ),
               const SizedBox(height: 20),
-              Obx(
-                () => controller.isLoading.value
-                    ? const CommonLoadingPageProgressIndicator()
-                    : SizedBox(
-                        width: double.infinity,
-                        child: InkWell(
+              SizedBox(
+                width: double.infinity,
+                child: Obx(
+                  () => controller.isLoading.value
+                      ? CommonLoadingPageProgressIndicator()
+                      : InkWell(
                           onTap: () {
-                            Get.toNamed(Routes.EDIT_PROFILE);
+                            // print('selectedUser: ${controller.loginModel.value}');
+
+                            controller.showData(controller.loginModel.value!);
                           },
                           child: Row(
                             children: [
@@ -107,7 +102,7 @@ class AccountView extends BaseView<AccountController> {
                             ],
                           ),
                         ),
-                      ),
+                ),
               ),
               const SizedBox(height: 40),
               const Text(
@@ -188,7 +183,38 @@ class AccountView extends BaseView<AccountController> {
                 bgColor: Colors.red.shade100,
                 iconColor: Colors.red,
                 onTap: () {
-                  controller.logout();
+                  Dialogs.materialDialog(
+                      msg: 'Bạn có chắc chắn muốn thoát chứ',
+                      title: "Đăng xuất tài khoản",
+                      color: Colors.white,
+                      context: context,
+                      lottieBuilder: Lottie.asset(
+                        'assets/animations/loy_out.json',
+                        fit: BoxFit.contain,
+                      ),
+                      actions: [
+                        DiaLogIconsButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          text: 'Trở lại',
+                          iconData: Icons.cancel_outlined,
+                          color: Colors.white,
+                          textStyle: TextStyle(color: Colors.grey),
+                          iconColor: Colors.grey,
+                        ),
+                        DiaLogIconsButton(
+                          onPressed: () {
+                            controller.logout();
+                          },
+                          text: 'Đồng ý',
+                          iconData: Ionicons.log_out,
+                          color: Colors.green,
+                          textStyle: TextStyle(color: Colors.white),
+                          iconColor: Colors.white,
+                        ),
+                      ]);
+                  // controller.logout();
                 },
               ),
             ],

@@ -1,3 +1,5 @@
+import 'package:itfsd/app/routes/app_pages.dart';
+
 import 'user.dart';
 
 class UsersView extends BaseView<UsersController> {
@@ -13,7 +15,9 @@ class UsersView extends BaseView<UsersController> {
         centerTitle: true,
         titleTextStyle: AppTextStyle.textTitleAppBar,
         leadingIcon: IconsUtils.back,
-        onLeadingPressed: () => Get.back(),
+        onLeadingPressed: () => {
+          Get.offNamed(Routes.MAIN_TABVIEW),
+        },
         actions: [
           if (controller
               .hasAdminOrFarmerRole) // Kiểm tra quyền admin hoặc chủ hội

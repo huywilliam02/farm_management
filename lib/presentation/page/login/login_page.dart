@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'login.dart';
+import 'package:itfsd/app/util/string_extention.dart';
 
 class LoginPage extends BaseView<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
@@ -74,6 +75,7 @@ class LoginPage extends BaseView<LoginController> {
       titleType: AppBarTitle.text,
       leadingIcon: const Icon(Icons.arrow_back_ios_new),
       onLeadingPressed: () {
+        controller.onBackLoginPage();
         Get.to(() => LoginChoosePage());
       },
     );
