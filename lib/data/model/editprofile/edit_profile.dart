@@ -20,7 +20,7 @@ class EditProfile {
   String? role;
   String jobTitle;
   String description;
-  String avatar;
+  String? avatar;
   String homeTown;
   String address;
   String? email;
@@ -30,14 +30,14 @@ class EditProfile {
     this.createdAt,
     this.updatedAt,
     this.id,
-    required this.fullName ,
+    required this.fullName,
     this.username,
     this.password,
     this.isLocked,
     this.role,
     required this.jobTitle,
     required this.description,
-    required this.avatar,
+    this.avatar,
     required this.homeTown,
     required this.address,
     this.email,
@@ -45,16 +45,12 @@ class EditProfile {
   });
 
   factory EditProfile.fromJson(Map<String, dynamic> json) => EditProfile(
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
         id: json["id"],
         fullName: json["fullName"],
-        username: json["username"] ?? "",
-        password: json["password"] ?? "",
+        username: json["username"],
+        password: json["password"],
         isLocked: json["isLocked"],
         role: json["role"],
         jobTitle: json["jobTitle"],
@@ -67,8 +63,8 @@ class EditProfile {
       );
 
   Map<String, dynamic> toJson() => {
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
         "id": id,
         "fullName": fullName,
         "username": username,

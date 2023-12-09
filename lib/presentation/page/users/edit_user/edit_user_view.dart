@@ -1,3 +1,4 @@
+import 'package:ionicons/ionicons.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
 import 'dart:io';
 
@@ -15,7 +16,7 @@ class EditUserView extends BaseView<EditUserController> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // _buildImageSection(context),
+              _buildImageSection(context),
               _buildTextFieldItem(
                 title: "Họ và tên",
                 obligatory: "*",
@@ -28,6 +29,14 @@ class EditUserView extends BaseView<EditUserController> {
                 obligatory: "*",
                 controller: controller.usernameController,
                 setValueFunc: controller.setValueUserName,
+                inputType: TextInputType.text,
+              ),
+              _buildTextFieldItem(
+                title: "Mật khẩu",
+                obligatory: "*",
+                controller: controller.passwordController,
+                setValueFunc: controller.setValuePassword,
+                // errorText: controller.validateErrPassword.value,
                 inputType: TextInputType.text,
               ),
               _buildTextFieldItem(
@@ -66,22 +75,24 @@ class EditUserView extends BaseView<EditUserController> {
                 inputType: TextInputType.text,
                 setValueFunc: (p0) {},
               ),
-              _buildDropdownItem(
-                title: "Chọn quyền",
-                listValues: controller.listRoleDropdown,
-                selectedValue: controller.dropdownRoleValue.value,
-                onSelected: (String? value) {
-                  controller.dropdownRoleValue.value = value!;
-                },
+              Obx(
+                () => _buildCommonDropdown(
+                  title: "Chọn quyền",
+                  listValues: controller.listRoleDropdown,
+                  selectedValue: controller.dropdownRoleValue.value,
+                  onSelected: (String? value) {
+                    controller.dropdownRoleValue.value = value!;
+                  },
+                ),
               ),
-              _buildDropdownItem(
-                title: "Hoạt động",
-                listValues: controller.listIsLockedDropdown,
-                selectedValue: controller.dropdownIsLockedValue.value,
-                onSelected: (String? value) {
-                  controller.dropdownIsLockedValue.value = value!;
-                },
-              ),
+              Obx(() => _buildCommonDropdown(
+                    title: "Kích hoạt",
+                    listValues: controller.listIsLockedDropdown,
+                    selectedValue: controller.dropdownIsLockedValue.value,
+                    onSelected: (String? value) {
+                      controller.dropdownIsLockedValue.value = value!;
+                    },
+                  )),
               const SizedBox(height: 20),
               _buildConstrainBoxButton("Lưu thay đổi"),
             ],
@@ -93,14 +104,25 @@ class EditUserView extends BaseView<EditUserController> {
 
   PreferredSizeWidget _buildAppBar() {
     return CommonAppBar(
-        title: "Chỉnh sửa thành viên",
-        titleType: AppBarTitle.text,
-        centerTitle: true,
-        titleTextStyle: AppTextStyle.textTitleAppBar,
-        leadingIcon: IconsUtils.back,
-        onLeadingPressed: () {
-          Get.toNamed(Routes.USERS);
-        });
+      title: "Chỉnh sửa thành viên",
+      titleType: AppBarTitle.text,
+      centerTitle: true,
+      titleTextStyle: AppTextStyle.textTitleAppBar,
+      leadingIcon: IconsUtils.back,
+      onLeadingPressed: () {
+        Get.toNamed(Routes.USERS);
+      },
+      actions: [
+        IconButton(
+          onPressed: () {
+            controller.deleteData(userId!);
+          },
+          icon: const Icon(
+            IconsUtils.delete,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildTextFieldItem({
@@ -121,28 +143,18 @@ class EditUserView extends BaseView<EditUserController> {
     );
   }
 
-  Widget _buildDropdownItem({
+  Widget _buildCommonDropdown({
     required String title,
     required List<String> listValues,
     required String selectedValue,
-    void Function(String?)? onSelected,
+    required void Function(String?)? onSelected,
   }) {
-    return CommonCreateEditItem(
+    return CommonDropdown(
       title: title,
-      widget: DropdownMenu<String>(
-        initialSelection: selectedValue,
-        onSelected: onSelected,
-        dropdownMenuEntries:
-            listValues.map<DropdownMenuEntry<String>>((String value) {
-          return DropdownMenuEntry<String>(
-            value: value,
-            label: controller.roleLabels[value] ?? value,
-            style: MenuItemButton.styleFrom(
-              minimumSize: const Size(310, 50),
-            ),
-          );
-        }).toList(),
-      ),
+      listValues: listValues,
+      selectedValue: selectedValue,
+      onSelected: onSelected,
+      dropdownLabels: controller.roleLabels,
     );
   }
 
@@ -175,7 +187,7 @@ class EditUserView extends BaseView<EditUserController> {
         GestureDetector(
           onTap: () {
             // Handle tap on the single image
-            controller.onImagePick();
+            // controller.onImagePick();
           },
           child: Container(
             width: double.infinity,
@@ -183,20 +195,6 @@ class EditUserView extends BaseView<EditUserController> {
             child: _getImageWidget(),
           ),
         ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: CircleAvatar(
-            radius: 20,
-            backgroundColor: Colors.white,
-            child: IconButton(
-              onPressed: () {
-                // Handle delete for the single image
-                controller.avatar.value = ""; // Clear the image path
-              },
-              icon: const Icon(Icons.close),
-            ),
-          ),
-        )
       ],
     );
   }
@@ -208,7 +206,7 @@ class EditUserView extends BaseView<EditUserController> {
       child: Center(
         child: IconButton(
           onPressed: () {
-            controller.onImagePick();
+            // controller.onImagePick();
           },
           icon: Image.asset(
             "assets/icons/gallery.png",
@@ -251,7 +249,7 @@ class EditUserView extends BaseView<EditUserController> {
     return CommonConstrainBoxButton(
       text: text,
       onPressed: () {
-        controller.updateUser(userId);
+        controller.updateUserAdmin(userId);
       },
     );
   }

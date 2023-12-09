@@ -214,7 +214,7 @@ class MaterialView extends BaseView<MaterialController> {
                                       Text(
                                         NumberFormatUtils.formatDong(controller
                                             .listMaterial[index].price
-                                            .toDouble()),
+                                            .toString()),
                                         style: AppTextStyle.textPriceData,
                                       ),
                                       const SizedBox(

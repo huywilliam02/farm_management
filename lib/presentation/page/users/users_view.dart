@@ -1,5 +1,3 @@
-import 'package:itfsd/app/routes/app_pages.dart';
-
 import 'user.dart';
 
 class UsersView extends BaseView<UsersController> {
@@ -16,6 +14,7 @@ class UsersView extends BaseView<UsersController> {
         titleTextStyle: AppTextStyle.textTitleAppBar,
         leadingIcon: IconsUtils.back,
         onLeadingPressed: () => {
+          controller.refreshData(),
           Get.offNamed(Routes.MAIN_TABVIEW),
         },
         actions: [
@@ -109,7 +108,7 @@ class UsersView extends BaseView<UsersController> {
     return Obx(
       () {
         if (controller.isLoading.value && controller.listUsers.value.isEmpty) {
-          return const ListViewLoader();
+          return const CommonLoadingPageProgressIndicator();
         } else if (controller.listUsers.isEmpty) {
           return const CommonNoItemsFoundIndicator();
         } else {

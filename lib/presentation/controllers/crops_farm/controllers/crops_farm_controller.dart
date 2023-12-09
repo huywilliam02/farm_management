@@ -1,15 +1,16 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:itfsd/base/base_controller.dart';
-import 'package:itfsd/data/network/api/crops_farm/crops_farm_api.dart';
-import 'package:itfsd/presentation/page/crops_farm/more_tree.dart';
 import 'package:itfsd/data/model/category/product.dart';
-import 'package:itfsd/data/model/crops_farm/cropsfarm.dart';
-import 'package:itfsd/data/model/crops_farm/cropsfarmdetail.dart';
+import 'package:itfsd/data/model/crops/crop_model.dart';
+import 'package:itfsd/data/model/crops/crops_detail.dart';
+import 'package:itfsd/data/network/api/crops_farm/crops_farm_api.dart';
+import 'package:itfsd/data/network/api/crops_farm/get_data_all_crops_request.dart';
+import 'package:itfsd/presentation/page/crops_farm/edit_crop/create_crop_view.dart';
+
 
 class CropsFarmController extends BaseController {
   //TODO: Implement CropsFarmController
@@ -34,13 +35,13 @@ class CropsFarmController extends BaseController {
 
   RxList<String> listImage = <String>[].obs;
 
-  RxList<CropsFarmDetail> listCropsFarm = <CropsFarmDetail>[].obs;
-  RxList<CropsFarmDetail> listToView = <CropsFarmDetail>[].obs;
+  RxList<CropsDetail> listCropsFarm = <CropsDetail>[].obs;
+  RxList<CropsDetail> listToView = <CropsDetail>[].obs;
 
   RxBool isLoading = true.obs;
   RxBool lazyLoading = false.obs;
   RxBool noMoreRecord = false.obs;
-  int indexPage = 1;
+  int currentPage = 1;
   ScrollController cropsscrollController = ScrollController();
   TextEditingController searchController = TextEditingController(text: '');
   final count = 0.obs;
@@ -48,7 +49,7 @@ class CropsFarmController extends BaseController {
   Future<void> onInit() async {
     try {
       isLoading(true);
-      await refeshData();
+      await refreshData();
       await getAllGroupCrop();
       isLoading(false);
     } catch (e) {
@@ -62,7 +63,6 @@ class CropsFarmController extends BaseController {
 
   @override
   void onClose() {
-
     cropsscrollController.dispose();
     super.onClose();
   }
@@ -84,37 +84,70 @@ class CropsFarmController extends BaseController {
     }
   }
 
-  refeshData() async {
+  bool isFetching = false;
+  DateTime? lastFetchTime;
+  Future<void> fetchMoreDataThrottled() async {
+    if (isFetching) return;
+
+    final currentTime = DateTime.now();
+    if (lastFetchTime != null &&
+        currentTime.difference(lastFetchTime!) < const Duration(seconds: 2)) {
+      return; // Throttle requests to every 2 seconds
+    }
     try {
-      isLoading(true);
-      indexPage = 1;
-      noMoreRecord(false);
-      listCropsFarm.value = await CropsFarmApi.getAllCropsFarm(indexPage);
-      showAll();
-      isLoading(false);
-    } catch (e) {
-      log('err$e');
+      isFetching = true;
+      await fetchMoreData();
+    } finally {
+      isFetching = false;
+      lastFetchTime = DateTime.now();
     }
   }
 
-  fetchMoreData() async {
+  Future<void> refreshData() async {
     try {
-      if (noMoreRecord.value || lazyLoading.value) {
-      } else {
-        indexPage += 1;
-        lazyLoading(true);
-        await Future.delayed(const Duration(seconds: 1));
-        List<CropsFarmDetail> listTmp =
-            await CropsFarmApi.getAllCropsFarm(indexPage);
-        if (listTmp.isEmpty) {
-          // Get.snackbar("Thông báo", "Hết dữ liệu");
-          noMoreRecord(true);
-        } else {
-          listCropsFarm.value.addAll(listTmp);
-        }
-        lazyLoading(false);
+      isLoading(true);
+      currentPage = 1;
+      noMoreRecord(false);
+
+      var requestData = GetAllDataCropsRequest(currentPage);
+
+      List<CropsDetail> cropList = await requestData.request();
+
+      listCropsFarm.assignAll(cropList);
+
+      await Future.delayed(const Duration(milliseconds: 500));
+      showAll();
+    } catch (e) {
+      log('Error refreshing data: $e');
+    } finally {
+      isLoading(false);
+    }
+  }
+
+  Future<void> fetchMoreData() async {
+    try {
+      if (noMoreRecord.value || lazyLoading.value) return;
+
+      currentPage += 1;
+      lazyLoading(true);
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      var requestData = GetAllDataCropsRequest(currentPage);
+
+      // Fetch data using the request
+      List<CropsDetail> cropList = await requestData.request();
+
+      if (cropList.isEmpty) {
+        noMoreRecord(true);
       }
-    } catch (e) {}
+      // Update the state with the fetched data
+      listCropsFarm.addAll(cropList);
+    } catch (e) {
+      log('Error fetching more data: $e');
+    } finally {
+      lazyLoading(false);
+    }
   }
 
   setValueName(String value) {
@@ -195,18 +228,18 @@ class CropsFarmController extends BaseController {
     }
   }
 
-  showData(CropsFarmDetail schedule) {
+  showData(CropsDetail schedule) {
     refeshForm();
-    nameController.text = schedule.name;
-    diseaseController.text = schedule.disease;
-    growthController.text = schedule.growth;
-    userController.text = schedule.use;
-    harvestController.text = schedule.harvest;
-    priceController.text = schedule.price;
-    groupCropController.text = schedule.groupCrop.name;
+    nameController.text = schedule.name!;
+    diseaseController.text = schedule.disease!;
+    growthController.text = schedule.growth!;
+    userController.text = schedule.use!;
+    harvestController.text = schedule.harvest!;
+    priceController.text = schedule.price!;
+    groupCropController.text = schedule.groupCrop!.name;
     listImage(schedule.images);
     Get.to(
-      () => MoretreeView(
+      () => CreateCropView(
         idtree: schedule.id,
       ),
     );
@@ -245,7 +278,7 @@ class CropsFarmController extends BaseController {
       noMoreRecord(true);
       listCropsFarm.value = await CropsFarmApi.searchlistCropsFarm(value);
     } else {
-      refeshData();
+      refreshData();
     }
   }
 

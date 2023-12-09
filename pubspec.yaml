@@ -49,6 +49,7 @@ dependencies:
   json_annotation: ^4.8.1
   awesome_notifications: any
   lottie: ^2.7.0
+  http_parser: ^4.0.2
 
 
 

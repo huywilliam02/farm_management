@@ -19,6 +19,7 @@ class UserDetailsModel {
   String description;
   String avatar;
   String username;
+  String password;
   String email;
   String phoneNumber;
   String role;
@@ -36,6 +37,7 @@ class UserDetailsModel {
     required this.avatar,
     required this.username,
     required this.email,
+    required this.password,
     required this.phoneNumber,
     required this.role,
     required this.isLocked,
@@ -53,6 +55,7 @@ class UserDetailsModel {
         description: json["description"] ?? "",
         avatar: json["avatar"] ?? "",
         username: json["username"] ?? "",
+        password: json["password"] ?? "",
         email: json["email"] ?? "",
         phoneNumber: json["phoneNumber"] ?? "",
         role: json["role"] ?? "",

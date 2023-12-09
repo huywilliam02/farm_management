@@ -7,7 +7,6 @@ import 'package:itfsd/presentation/page/account/account.dart';
 import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
 
 class AccountController extends BaseController {
-  //TODO: Implement AccountController
   bool isDarkMode = false;
   Rx<bool> isLoading = false.obs;
   Rx<LoginModel?> loginModel = Rx<LoginModel?>(null);
@@ -30,20 +29,14 @@ class AccountController extends BaseController {
   Rx<String> homeTown = "".obs;
   Rx<String> address = "".obs;
 
-  TextEditingController fullNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController jobTitleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController homeTownController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-
   @override
   Future<void> onInit() async {
     try {
-      // Wait until the LoginController is initialized
       getEditUser();
-      // Now you can safely access loginModel.value
+      if (loginModel.value != null) {
+        userName.value = loginModel.value!.username ?? "";
+        fullname.value = loginModel.value!.fullName ?? "";
+      }
     } catch (e) {
       print("Error during initialization: $e");
     }
@@ -55,6 +48,8 @@ class AccountController extends BaseController {
     try {
       loginModel.value = await EditProfilelApi.getDataUser(accessToken);
       if (loginModel.value != null) {
+        userName.value = loginModel.value!.username ?? "";
+        fullName.value = loginModel.value!.fullName ?? "";
         updateUserData(loginModel.value!);
       } else {
         print("Error: loginModel.value is null");
@@ -66,42 +61,8 @@ class AccountController extends BaseController {
     }
   }
 
-  void showData(LoginModel model) {
-    loginModel.value = model;
-    // print('showData is called with userId: $model');
-    //
-    // // Rest of the code...
-    //
-    // print('fullnameController: ${fullNameController.text}');
-    // print('avatar: ${avatar.value}');
-    //
-    // // Reset the form fields
-    // // refreshForm();
-    //
-    // // Populate form fields with data from the selected user
-    // fullNameController.text = model.fullName ?? "";
-    // phoneNumberController.text = model.phoneNumber ?? "";
-    // jobTitleController.text = model.jobTitle ?? "";
-    // descriptionController.text = model.description ?? "";
-    // avatar.value = HttpNetWorkUrlApi.baseURL + model.avatar ?? "";
-    Get.to(
-      () => EditProfileView(
-        userId: model.id,
-      ),
-    );
-  }
-
-  refreshForm() {
-    fullNameController.text = '';
-    emailController.text = "";
-    phoneNumberController.text = "";
-    jobTitleController.text = "";
-    descriptionController.text = "";
-    avatar.value = "";
-  }
-
   void updateUserData(LoginModel user) {
-    id.value = user.id!;
+    id.value = user.id ?? "";
     userName.value = user.username ?? "";
     fullName.value = user.fullName ?? "";
     role.value = user.role ?? "";

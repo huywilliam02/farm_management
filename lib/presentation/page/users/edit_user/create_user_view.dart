@@ -258,7 +258,8 @@ class CreateUsersView extends BaseView<UsersController> {
         controller.avatar.value.isNotEmpty &&
         controller.avatar.value.startsWith('http')) {
       return CachedNetworkImage(
-        imageUrl: HttpNetWorkUrlApi.baseURL + controller.avatar.value,
+        // imageUrl: HttpNetWorkUrlApi.baseURL + controller.avatar.value,
+        imageUrl: controller.avatar.value,
         errorWidget: (context, url, error) {
           // Handle the error, e.g., show a placeholder image
           return Image.asset("assets/placeholder_image.png");

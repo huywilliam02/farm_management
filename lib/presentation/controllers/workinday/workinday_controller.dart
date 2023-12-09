@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
-import 'package:itfsd/data/model/crops/crop.dart';
+import 'package:itfsd/data/model/crops/crops_detail.dart';
 import 'package:itfsd/data/model/land/land.dart';
 import 'package:itfsd/data/model/workinday/workindayDetail.dart';
 import 'package:itfsd/data/model/workinday/workinday_model.dart';

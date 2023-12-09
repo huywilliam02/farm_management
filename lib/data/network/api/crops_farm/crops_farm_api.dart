@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:itfsd/data/model/crops/crop_model.dart';
+import 'package:itfsd/data/model/crops/crops_detail.dart';
 import 'package:itfsd/presentation/controllers/start_app/start_app_controller.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:http_parser/http_parser.dart';
 import 'package:itfsd/data/model/category/product.dart';
-import 'package:itfsd/data/model/crops_farm/cropsfarm.dart';
-import 'package:itfsd/data/model/crops_farm/cropsfarmdetail.dart';
+
 
 class CropsFarmApi {
   static Future<List<Product>> getAllDataByTypeCategory(String type) async {
@@ -35,7 +36,7 @@ class CropsFarmApi {
     }
   }
 
-  static Future<List<CropsFarmDetail>> getAllCropsFarm(int indexPage) async {
+  static Future<List<CropsDetail>> getAllCropsFarm(int indexPage) async {
     var url = Uri.parse(
         'http://116.118.49.43:8878/api/crops?order=ASC&page=$indexPage&take=10');
     final response = await http.get(
@@ -49,16 +50,16 @@ class CropsFarmApi {
     log('getAllCropsFarm: ${response.statusCode} ${response.body}');
 
     if (response.statusCode.toString() == '200') {
-      List<CropsFarmDetail> listCropsFarm = [];
+      List<CropsDetail> listCropsFarm = [];
       final mapData =
           jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
-      listCropsFarm = mapData.map<CropsFarmDetail>((json) {
-        return CropsFarmDetail.fromJson(json);
+      listCropsFarm = mapData.map<CropsDetail>((json) {
+        return CropsDetail.fromJson(json);
       }).toList();
 
       return listCropsFarm;
     } else {
-      return Future<List<CropsFarmDetail>>.value([]);
+      return Future<List<CropsDetail>>.value([]);
     }
   }
 
@@ -101,10 +102,8 @@ class CropsFarmApi {
     }
   }
 
-
-    static Future<bool> deleteTree(String idTree) async {
-    var url = Uri.parse(
-        'url$idTree');
+  static Future<bool> deleteTree(String idTree) async {
+    var url = Uri.parse('url$idTree');
     final response = await http.delete(
       url,
       headers: <String, String>{
@@ -122,7 +121,8 @@ class CropsFarmApi {
     }
   }
 
-  static Future<List<CropsFarmDetail>> searchlistCropsFarm(String searchData) async {
+  static Future<List<CropsDetail>> searchlistCropsFarm(
+      String searchData) async {
     var url = Uri.parse(
         'http://116.118.49.43:8878/api/crops?order=ASC&page=1&take=10&search=$searchData');
     final response = await http.get(
@@ -135,15 +135,15 @@ class CropsFarmApi {
     );
     log('searchAllDatacropsFarm: ${response.statusCode} ${response.body}');
     if (response.statusCode.toString() == '200') {
-      List<CropsFarmDetail> listCropsFarmDetail = [];
+      List<CropsDetail> listCropsFarmDetail = [];
       final mapData =
-      jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
-      listCropsFarmDetail = mapData.map<CropsFarmDetail>((json) {
-        return CropsFarmDetail.fromJson(json);
+          jsonDecode(response.body)["data"].cast<Map<String, dynamic>>();
+      listCropsFarmDetail = mapData.map<CropsDetail>((json) {
+        return CropsDetail.fromJson(json);
       }).toList();
       return listCropsFarmDetail;
     } else {
-      return Future<List<CropsFarmDetail>>.value([]);
+      return Future<List<CropsDetail>>.value([]);
     }
   }
 }

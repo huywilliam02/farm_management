@@ -21,4 +21,7 @@ class IconsUtils {
   static const IconData description = Ionicons.newspaper_outline;
   static const IconData homeTown = Ionicons.globe_outline;
   static const IconData role = Ionicons.key_outline;
+  static const IconData ellipsis = Ionicons.ellipsis_vertical_outline;
+  static const IconData delete = Ionicons.trash_outline;
+
 }

@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/presentation/controllers/crops_farm/crops_farm_controller.dart';
+import 'package:itfsd/presentation/controllers/crops_farm/controllers/crops_farm_controller.dart';
 import 'package:itfsd/app/core/common/input/form_field_widget.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:quickalert/quickalert.dart';
 
-class MoretreeView extends BaseView<CropsFarmController> {
-  MoretreeView({Key? key, this.idtree}) : super(key: key);
+class CreateCropView extends BaseView<CropsFarmController> {
+  CreateCropView({Key? key, this.idtree}) : super(key: key);
   String? idtree;
   @override
   Widget buildView(BuildContext context) {

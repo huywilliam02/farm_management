@@ -54,6 +54,7 @@ abstract class Routes {
   static const NEWS = _Paths.NEWS;
   static const USERS = _Paths.USERS;
   static const EDIT_USER = _Paths.EDIT_USER;
+  static const EDIT_CROP = _Paths.EDIT_CROP;
 }
 
 abstract class _Paths {
@@ -109,4 +110,5 @@ abstract class _Paths {
   static const NEWS = '/news';
   static const USERS = '/users';
   static const EDIT_USER = '/edit-user';
+  static const EDIT_CROP = '/edit-crop';
 }

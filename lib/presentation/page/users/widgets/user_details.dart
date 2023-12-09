@@ -1,3 +1,4 @@
+import 'package:itfsd/app/core/common/dialog/dia_logs.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
 
 class UserDetailsView extends BaseView<EditUserController> {

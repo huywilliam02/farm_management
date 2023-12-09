@@ -3,9 +3,9 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:itfsd/data/model/crops/crops_detail.dart';
 import 'package:itfsd/data/model/land/land.dart';
 import 'package:itfsd/presentation/controllers/start_app/start_app_controller.dart';
-import 'package:itfsd/data/model/crops/crop.dart';
 import 'package:itfsd/data/model/workinday/workindayDetail.dart';
 import 'package:itfsd/data/model/workinday/workinday_model.dart';
 

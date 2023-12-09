@@ -1,14 +1,21 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:itfsd/app/core/shared/role/role_user_constants.dart';
-import 'package:itfsd/app/routes/app_pages.dart';
-import 'package:itfsd/data/network/api/users/delete_user_request.dart';
-import 'package:itfsd/data/network/api/users/get_all_data_users_request.dart';
-import 'package:itfsd/data/network/api/users/update_user_admin_request.dart';
-import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
-import 'package:itfsd/presentation/page/users/user.dart';
 
-class EditUserController extends BaseController {
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:itfsd/app/core/constants/api_endpoint.dart';
+import 'package:itfsd/app/routes/app_pages.dart';
+import 'package:itfsd/app/util/view_utils.dart';
+import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/crops/crops_detail.dart';
+import 'package:itfsd/data/network/api/crops_farm/get_data_all_crops_request.dart';
+import 'package:itfsd/data/network/api/users/delete_user_request.dart';
+import 'package:itfsd/presentation/page/crops_farm/edit_crop/edit_crop_view.dart';
+import 'package:itfsd/presentation/page/crops_farm/widgets/crop_details.dart';
+
+import '../../agricultural_products/agricultural_products_constant.dart';
+
+class EditCropController extends BaseController {
   Rx<String> username = "".obs;
   Rx<String> password = "".obs;
   Rx<String> fullname = "".obs;
@@ -32,23 +39,14 @@ class EditUserController extends BaseController {
   TextEditingController homeTownController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
-  List<String> listIsLockedDropdown = RoleUserConstants.listIsLockedDropdown;
-
-  List<String> listRoleDropdown = RoleUserConstants.listRoleDropdown;
-  Map<String, String> roleLabels = RoleUserConstants.roleLabels;
-  RoleConstants roleConstants = RoleConstants();
-
-  Rx<String> dropdownRoleValue = "".obs;
-  Rx<String> dropdownIsLockedValue = "".obs;
-
   RxBool isLoading = true.obs;
   RxBool lazyLoading = false.obs;
   RxBool noMoreRecord = false.obs;
   Rx<int> itemCount = 0.obs;
 
-  RxList<UserDetailsModel> listUsers = <UserDetailsModel>[].obs;
-  RxList<UserDetailsModel> listToView = <UserDetailsModel>[].obs;
-  Rx<UserDetailsModel?> selectedUser = Rx<UserDetailsModel?>(null);
+  RxList<CropsDetail> listCrop = <CropsDetail>[].obs;
+  RxList<CropsDetail> listToView = <CropsDetail>[].obs;
+  Rx<CropsDetail?> selectedCrop = Rx<CropsDetail?>(null);
 
   int currentPage = 1;
   // bool isFetching = false;
@@ -56,8 +54,6 @@ class EditUserController extends BaseController {
 
   @override
   Future<void> onInit() async {
-    dropdownRoleValue.value = listRoleDropdown.first;
-    dropdownIsLockedValue.value = listIsLockedDropdown.first;
     try {
       isLoading(true);
       refreshData();
@@ -92,7 +88,7 @@ class EditUserController extends BaseController {
 
   void showAll() {
     listToView.clear();
-    listToView.addAll(listUsers);
+    listToView.addAll(listCrop);
   }
 
   Future<void> refreshData() async {
@@ -103,13 +99,13 @@ class EditUserController extends BaseController {
       noMoreRecord(false);
       // listUsers.value = await UserApi.getAllDataUsers(currentPage);
 
-      var requestData = GetAllDataUsersRequest(currentPage);
+      var requestData = GetAllDataCropsRequest(currentPage);
 
       // Fetch data using the request
-      var userList = await requestData.request();
+      var cropList = await requestData.request();
 
       // Update the state with the fetched data
-      listUsers.assignAll(userList);
+      listCrop.assignAll(cropList);
       // Introduce a short delay (optional)
 
       await Future.delayed(const Duration(milliseconds: 500));
@@ -135,65 +131,19 @@ class EditUserController extends BaseController {
       // List<UserDetailsModel> listTmp =
       //     await UserApi.getAllDataUsers(currentPage);
 
-      var requestData = GetAllDataUsersRequest(currentPage);
+      var requestData = GetAllDataCropsRequest(currentPage);
 
       // Fetch data using the request
-      List<UserDetailsModel> userList = await requestData.request();
-      if (userList.isEmpty) {
+      List<CropsDetail> cropList = await requestData.request();
+      if (cropList.isEmpty) {
         noMoreRecord(true);
       }
 
-      listUsers.addAll(userList);
+      listCrop.addAll(cropList);
     } catch (e) {
       log('Error fetching more data: $e');
     } finally {
       lazyLoading(false);
-    }
-  }
-
-  Future<void> updateUserAdmin(String? userId) async {
-    try {
-      log(fullNameController.text);
-      log(usernameController.text);
-      log(emailController.text);
-      log(phoneNumberController.text);
-      log(jobTitleController.text);
-      log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
-      log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
-      UserModel formData = UserModel(
-        fullName: fullNameController.text,
-        username: usernameController.text,
-        password: passwordController.text,
-        jobTitle: jobTitleController.text,
-        address: addressController.text,
-        homeTown: homeTownController.text,
-        description: descriptionController.text,
-        email: emailController.text,
-        phoneNumber: phoneNumberController.text,
-        role: dropdownRoleValue.value ?? listRoleDropdown.first,
-        isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
-            ? false
-            : true,
-      );
-
-      // Create an instance of the API request
-      var updateUserAdminRequest =
-          UpdateUserAdminRequest(idUser: userId, formEdit: formData);
-
-      // Call the API to update the user directly
-      bool check = await updateUserAdminRequest.execute();
-
-      if (check) {
-        Get.back();
-        refreshData();
-        ViewUtils.showSnackbarMessage("Chỉnh sửa thành công", check);
-      } else {
-        ViewUtils.showSnackbarMessage("Chỉnh sửa không thành công", check);
-      }
-    } catch (e) {
-      // Handle exceptions
-      print('Error updating user: $e');
-      ViewUtils.showSnackbarMessage("Lỗi khi cập nhật người dùng", false);
     }
   }
 
@@ -208,15 +158,15 @@ class EditUserController extends BaseController {
     avatar.value = "";
   }
 
-  void showUserDetails(UserDetailsModel model) {
-    selectedUser.value = model;
-    Get.to(() => UserDetailsView(
-          idUser: model.id,
+  void showCropDetails(CropsDetail model) {
+    selectedCrop.value = model;
+    Get.to(() => CropDetailsView(
+          cropId: model.id,
         ));
   }
 
-  void showData(UserDetailsModel userDetails) {
-    print('showData is called with userId: $userDetails');
+  void showData(CropsDetail model) {
+    print('showData is called with userId: $model');
     // Rest of the code...
 
     print('usernameController: ${usernameController.text}');
@@ -225,19 +175,10 @@ class EditUserController extends BaseController {
     // Reset the form fields
     refreshForm();
     // Populate form fields with data from the selected user
-    usernameController.text = userDetails.username ?? "";
-    fullNameController.text = userDetails.fullName ?? "";
-    emailController.text = userDetails.email ?? "";
-    phoneNumberController.text = userDetails.phoneNumber ?? "";
-    jobTitleController.text = userDetails.jobTitle ?? "";
-    descriptionController.text = userDetails.description ?? "";
-    avatar.value = HttpNetWorkUrlApi.baseURL + userDetails.avatar ?? "";
-    dropdownRoleValue.value = userDetails.role ?? "";
-    dropdownIsLockedValue.value =
-        userDetails.isLocked ? "Không kích hoạt" : "Kích hoạt";
+
     Get.to(
-      () => EditUserView(
-        userId: userDetails.id,
+      () => EditCropView(
+        cropId: model.id,
       ),
     );
   }

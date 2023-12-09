@@ -1,5 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:itfsd/data/network/api/users/create_user_request.dart';
+import 'package:itfsd/data/network/api/users/get_all_data_users_request.dart';
+import 'package:itfsd/data/network/api/users/search_user_request.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
 
 class UsersController extends BaseController {
@@ -52,8 +55,6 @@ class UsersController extends BaseController {
   RxList<UserDetailsModel> listToView = <UserDetailsModel>[].obs;
   Rx<UserDetailsModel?> selectedUser = Rx<UserDetailsModel?>(null);
 
-  ScrollController userScrollController = ScrollController();
-
   int currentPage = 1;
 
   @override
@@ -69,7 +70,6 @@ class UsersController extends BaseController {
     } finally {
       isLoading(false);
     }
-    userScrollController = ScrollController()..addListener(scrollListener);
     super.onInit();
   }
 
@@ -93,10 +93,6 @@ class UsersController extends BaseController {
   Rx<String> validateErrFullName = "".obs;
   Rx<String> validateErrPassword = "".obs;
   Rx<String> validateErrPhone = "".obs;
-
-  // void validateUserName(String value) {
-  //   validateErrUserName(value.isEmpty ? "Vui lòng nhập tài khoản" : "");
-  // }
 
   void validateUserName(String? value) {
     if (value == null || value.isEmpty) {
@@ -151,16 +147,6 @@ class UsersController extends BaseController {
     listToView.addAll(listUsers);
   }
 
-  void scrollListener() {
-    final position = userScrollController.position;
-    if (position.haveDimensions && position.maxScrollExtent > 0) {
-      final isScrollAtEnd = position.pixels == position.maxScrollExtent;
-      if (isScrollAtEnd) {
-        fetchMoreData();
-      }
-    }
-  }
-
   bool get hasAdminOrFarmerRole {
     final userRole = dropdownRoleAdminValue.value;
     print("AdminRole: ${dropdownRoleAdminValue.value}");
@@ -193,7 +179,15 @@ class UsersController extends BaseController {
       isLoading(true);
       currentPage = 1;
       noMoreRecord(false);
-      listUsers.value = await UserApi.getAllDataUsers(currentPage);
+      // listUsers.value = await UserApi.getAllDataUsers(currentPage);
+
+      var requestData = GetAllDataUsersRequest(currentPage);
+
+      // Fetch data using the request
+      var userList = await requestData.request();
+
+      // Update the state with the fetched data
+      listUsers.assignAll(userList);
       // Introduce a short delay (optional)
       await Future.delayed(const Duration(milliseconds: 500));
       showAll();
@@ -207,30 +201,6 @@ class UsersController extends BaseController {
     }
   }
 
-  // Future<void> fetchMoreData() async {
-  //   try {
-  //     if (noMoreRecord.value || lazyLoading.value) return;
-  //     lazyLoading(true);
-  //     await Future.delayed(const Duration(seconds: 1));
-  //
-  //     int nextPage = currentPage + 1;
-  //     List<UserDetailsModel> listTmp = await UserApi.getAllDataUsers(nextPage);
-  //     if (listTmp.isEmpty) {
-  //       noMoreRecord(true);
-  //     }
-  //     listUsers.addAll(listTmp);
-  //     currentPage = nextPage;
-  //     // Append data to the paging controller
-  //     pagingController?.appendLoadMoreOutput(
-  //       LoadMoreOutput(data: listTmp, isLastPage: listTmp.isEmpty),
-  //     );
-  //   } catch (e) {
-  //     log('Error fetching more data: $e');
-  //   } finally {
-  //     lazyLoading(false);
-  //   }
-  // }
-
   Future<void> fetchMoreData() async {
     try {
       if (noMoreRecord.value || lazyLoading.value) return;
@@ -240,14 +210,16 @@ class UsersController extends BaseController {
 
       await Future.delayed(const Duration(seconds: 1));
 
-      List<UserDetailsModel> listTmp =
-          await UserApi.getAllDataUsers(currentPage);
+      var requestData = GetAllDataUsersRequest(currentPage);
 
-      if (listTmp.isEmpty) {
+      // Fetch data using the request
+      List<UserDetailsModel> userList = await requestData.request();
+
+      if (userList.isEmpty) {
         noMoreRecord(true);
       }
-
-      listUsers.addAll(listTmp);
+      // Update the state with the fetched data
+      listUsers.addAll(userList);
     } catch (e) {
       log('Error fetching more data: $e');
     } finally {
@@ -256,16 +228,7 @@ class UsersController extends BaseController {
   }
 
   Future<void> createUser(String? userId) async {
-    log(fullNameController.text);
-    log(usernameController.text);
-    log(passwordController.text);
-    log(emailController.text);
-    log(phoneNumberController.text);
-    log(jobTitleController.text);
-    log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
-    log(avatar.toString());
     try {
-      // Validate user input
       validateUserName(username.value);
       validateFullName(fullname.value);
       validatePassword(password.value);
@@ -278,7 +241,6 @@ class UsersController extends BaseController {
           validateErrFullName.value.isNotEmpty) {
         return;
       }
-
       // Create UserModel object
       UserModel formData = UserModel(
         fullName: fullNameController.text,
@@ -291,16 +253,19 @@ class UsersController extends BaseController {
         email: emailController.text,
         phoneNumber: phoneNumberController.text,
         role: dropdownRoleValue.value ?? listRoleDropdown.first,
-        avatar: avatar.isNotEmpty ? avatar.value : "",
+        avatar: avatar?.isNotEmpty == true ? avatar.value : "",
       );
 
+      // Create an instance of the API request
+      var createUserRequest =
+          CreateUserRequest(model: formData, avatarPath: avatar?.value);
       // Call the API to create a new user
-      bool check = await UserApi.createNewUser(formData, avatar.value);
+      bool check = await createUserRequest.execute();
 
       if (check) {
         Get.back();
-        ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
         refreshData();
+        ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
       } else {
         ViewUtils.showSnackbarMessage("Tạo thành viên không thành công", check);
       }
@@ -308,68 +273,13 @@ class UsersController extends BaseController {
       // Handle exceptions
       Get.snackbar(
         "Thông báo",
-        "Lỗi có vấn đề",
+        "Lỗi có vấn đề: $e",
         backgroundColor: ColorConstant.white,
       );
     } finally {
       isLoading(false);
     }
   }
-
-  // Future<void> createUser(String? userId) async {
-  //   log(fullNameController.text);
-  //   log(usernameController.text);
-  //   log(passwordController.text);
-  //   log(emailController.text);
-  //   log(phoneNumberController.text);
-  //   log(jobTitleController.text);
-  //   log("${dropdownRoleValue.value ?? listRoleDropdown.first}");
-  //   // log("${dropdownIsLockedValue.value == listIsLockedDropdown.first ? true : false}");
-  //   log(avatar.toString());
-  //   isLoading(true);
-  //   try {
-  //     validateUserName(username.value);
-  //     validateFullName(fullname.value);
-  //     validatePassword(password.value);
-  //     validatePhone(phoneNumber.value);
-  //     if (validateErrUserName.value.isEmpty &&
-  //         validateErrPassword.value.isEmpty &&
-  //         validateErrPhone.value.isEmpty &&
-  //         validateErrFullName.value.isEmpty) {
-  //       UserModel formData = UserModel(
-  //         fullName: fullNameController.text,
-  //         username: usernameController.text,
-  //         password: passwordController.text,
-  //         jobTitle: jobTitleController.text,
-  //         address: addressController.text,
-  //         homeTown: homeTownController.text,
-  //         description: descriptionController.text,
-  //         email: emailController.text,
-  //         phoneNumber: phoneNumberController.text,
-  //         role: dropdownRoleValue.value ?? listRoleDropdown.first,
-  //         // isLocked: dropdownIsLockedValue.value == listIsLockedDropdown.first
-  //         //     ? true
-  //         //     : false,
-  //         avatar: avatar.isNotEmpty ? avatar.value : "",
-  //       );
-  //       bool check = await UserApi.createNewUser(formData, avatar.value);
-  //
-  //       if (check) {
-  //         Get.back();
-  //         ViewUtils.showSnackbarMessage("Tạo thành viên thành công", check);
-  //         refreshData(); // Corrected function name
-  //       } else {}
-  //     }
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       "Thông báo",
-  //       "Tạo thành viên không thành công",
-  //       backgroundColor: ColorConstant.white,
-  //     );
-  //   } finally {
-  //     isLoading(false);
-  //   }
-  // }
 
   refreshForm() {
     usernameController.text = "";
@@ -385,16 +295,25 @@ class UsersController extends BaseController {
   Future<void> onTypingSearch(String value) async {
     if (value.isNotEmpty) {
       noMoreRecord(true);
-      List<UserDetailsModel> searchResults =
-          await UserApi.searchListUserDetails(value);
+      // Show a loading indicator here
 
-      if (searchResults.isEmpty) {
-        // Clear existing data when there are no search results
-        listUsers.clear();
-      } else {
+      try {
+        // Create an instance of the API request
+        var searchUserDetailsRequest =
+            SearchUserDetailsRequest(searchData: value);
+
+        // Call the API to search for user details directly
+        List<UserDetailsModel> searchResults =
+            await searchUserDetailsRequest.execute();
+
         // Update the list with search results
         listUsers.assignAll(searchResults);
+      } catch (e) {
+        // Handle exceptions
+        print('Error searching user details: $e');
       }
+
+      // Hide the loading indicator here
     } else {
       // Clear existing data when the search query is empty
       refreshData();

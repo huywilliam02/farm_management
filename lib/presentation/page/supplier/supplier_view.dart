@@ -161,7 +161,7 @@ class SupplierView extends BaseView<SupplierController> {
                             Text(
                               NumberFormatUtils.formatDong(controller
                                   .listSupplier[index].debt
-                                  .toDouble()),
+                                  .toString()),
                               style: AppTextStyle.textPriceData,
                             ),
                             const SizedBox(

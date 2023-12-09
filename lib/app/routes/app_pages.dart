@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_binding.dart';
-import 'package:itfsd/presentation/page/users/edit_user/edit_user_view.dart';
 
 import '../../presentation/controllers/account/bindings/account_binding.dart';
 import '../../presentation/controllers/agricultural_products/agricultural_products_binding.dart';
@@ -14,7 +12,7 @@ import '../../presentation/controllers/chat_ai/chat_ai_binding.dart';
 import '../../presentation/controllers/choose_language/choose_language_binding.dart';
 import '../../presentation/controllers/client_farm/client_farm_binding.dart';
 import '../../presentation/controllers/contract/contact_binding.dart';
-import '../../presentation/controllers/crops_farm/crops_farm_binding.dart';
+import '../../presentation/controllers/crops_farm/bindings/crops_farm_binding.dart';
 import '../../presentation/controllers/cropseason/cropseason_binding.dart';
 import '../../presentation/controllers/customer/customer_binding.dart';
 import '../../presentation/controllers/document/document_binding.dart';
@@ -39,6 +37,7 @@ import '../../presentation/controllers/sign_up/sign_up_binding.dart';
 import '../../presentation/controllers/start_app/start_app_binding.dart';
 import '../../presentation/controllers/supplier/supplier_binding.dart';
 import '../../presentation/controllers/unitfarm/unitfarm_binding.dart';
+import '../../presentation/controllers/users/edit_user/edit_user_binding.dart';
 import '../../presentation/controllers/users/users_binding.dart';
 import '../../presentation/controllers/view_landfull/view_landfull_binding.dart';
 import '../../presentation/controllers/viewfull/view_full_binding.dart';
@@ -85,6 +84,7 @@ import '../../presentation/page/sign_up/sign_up_view.dart';
 import '../../presentation/page/start_app/start_app_view.dart';
 import '../../presentation/page/supplier/supplier_view.dart';
 import '../../presentation/page/unitfarm/unitfarm_view.dart';
+import '../../presentation/page/users/edit_user/edit_user_view.dart';
 import '../../presentation/page/users/users_view.dart';
 import '../../presentation/page/viewfull/view_full_view.dart';
 import '../../presentation/page/viewlandfull/more_landdivision/land_division_view.dart';
@@ -95,7 +95,8 @@ import '../../presentation/page/wage/workersalaryviews/workersalary_view.dart';
 import '../../presentation/page/warehouse/pages/warehouse_view.dart';
 import '../../presentation/page/warehouse/storewarehouse/views/storewarehouse_view.dart';
 import '../../presentation/page/workinday/workinday_view.dart';
-
+import '../../presentation/controllers/crops_farm/bindings/edit_crop_binding.dart';
+import '../../presentation/page/crops_farm/edit_crop/edit_crop_view.dart';
 
 part 'app_routes.dart';
 
@@ -127,7 +128,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.EDIT_PROFILE,
-      page: () =>  EditProfileView(),
+      page: () => EditProfileView(),
       binding: EditProfileBinding(),
     ),
     GetPage(
@@ -327,7 +328,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ACCOUNT,
-      page: () =>  AccountView(),
+      page: () => AccountView(),
       binding: AccountBinding(),
     ),
     GetPage(
@@ -354,6 +355,11 @@ class AppPages {
       name: _Paths.EDIT_USER,
       page: () => EditUserView(),
       binding: EditUserBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_CROP,
+      page: () => const EditCropView(),
+      binding: EditCropBinding(),
     ),
   ];
 }

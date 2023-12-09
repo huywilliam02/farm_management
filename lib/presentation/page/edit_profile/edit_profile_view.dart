@@ -1,29 +1,5 @@
-import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
+import 'edit_profile.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:itfsd/app/core/common/input/common_drop_down.dart';
-import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
-import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
-import 'package:itfsd/app/core/common/menu/common_constrain_box_button.dart';
-import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
-import 'package:itfsd/app/core/common/input/form_field_widget.dart';
-import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
-import 'package:itfsd/app/core/constants/api_endpoint.dart';
-import 'package:itfsd/app/resources/theme/app_text_style.dart';
-import 'package:itfsd/app/routes/app_pages.dart';
-import 'package:itfsd/app/util/icon_utils.dart';
-import 'package:itfsd/base/base_view.dart';
-import 'package:flutter/material.dart';
-
-import 'package:itfsd/app/core/constants/color_constants.dart';
-import 'package:itfsd/app/util/reponsive_utils.dart';
-import 'package:itfsd/app/core/common/input/common_create_edit_item.dart';
-import 'package:itfsd/presentation/controllers/account/controllers/account_controller.dart';
-import 'package:itfsd/presentation/controllers/login/login_controller.dart';
-import '../../controllers/edit_profile/edit_profile_controller.dart';
-import '../../controllers/users/users_controller.dart';
 
 class EditProfileView extends BaseView<EditProfileController> {
   const EditProfileView({Key? key, this.userId}) : super(key: key);
@@ -49,32 +25,16 @@ class EditProfileView extends BaseView<EditProfileController> {
                   inputType: TextInputType.text,
                 ),
               ),
-              Obx(
-                () => _buildTextFieldItem(
-                  title: "Tài khoản",
-                  obligatory: "*",
-                  controller: controller.usernameController,
-                  setValueFunc: controller.setValueUserName,
-                  errorText: controller.validateErrUserName.value,
-                  inputType: TextInputType.text,
-                ),
-              ),
-              Obx(
-                () => _buildTextFieldItem(
-                  title: "Mật khẩu",
-                  obligatory: "*",
-                  controller: controller.passwordController,
-                  setValueFunc: controller.setValuePassword,
-                  errorText: controller.validateErrPassword.value,
-                  inputType: TextInputType.text,
-                ),
-              ),
-              _buildTextFieldItem(
-                title: "Email",
-                controller: controller.emailController,
-                inputType: TextInputType.emailAddress,
-                setValueFunc: (p0) {},
-              ),
+              // Obx(
+              //   () => _buildTextFieldItem(
+              //     title: "Email",
+              //     obligatory: "*",
+              //     controller: controller.emailController,
+              //     setValueFunc: controller.setValueEmail,
+              //     errorText: controller.validateErrEmail.value,
+              //     inputType: TextInputType.emailAddress,
+              //   ),
+              // ),
               Obx(
                 () => _buildTextFieldItem(
                   title: "Số điện thoại",
@@ -128,7 +88,7 @@ class EditProfileView extends BaseView<EditProfileController> {
       titleTextStyle: AppTextStyle.textTitleAppBar,
       leadingIcon: IconsUtils.back,
       onLeadingPressed: () {
-        Get.toNamed(Routes.USERS);
+        Get.offNamed(Routes.MAIN_TABVIEW);
       },
     );
   }
@@ -141,7 +101,8 @@ class EditProfileView extends BaseView<EditProfileController> {
     TextInputType? inputType,
     String? errorText,
   }) {
-    final UsersController usersController = Get.put(UsersController());
+    final EditProfileController editController =
+        Get.put(EditProfileController());
     return CommonCreateEditItem(
       title: title,
       obligatory: obligatory!,
@@ -151,38 +112,17 @@ class EditProfileView extends BaseView<EditProfileController> {
         setValueFunc: setValueFunc,
         errorText: errorText != "" ? errorText : null,
         onEditingComplete: () {
-          if (setValueFunc == usersController.setValueUserName) {
-            usersController
-                .validateUserName(usersController.usernameController.text);
-          } else if (setValueFunc == usersController.setValueFullName) {
-            usersController
-                .validateFullName(usersController.fullNameController.text);
-          } else if (setValueFunc == usersController.setValuePassword) {
-            usersController
-                .validatePassword(usersController.passwordController.text);
-          } else if (setValueFunc == usersController.setValuePhone) {
-            usersController
-                .validatePhone(usersController.phoneNumberController.text);
+          if (setValueFunc == editController.setValueFullName) {
+            editController
+                .validateErrFullName(editController.fullNameController.text);
+          } else if (setValueFunc == editController.setValuePhone) {
+            editController
+                .validateErrPhone(editController.phoneNumberController.text);
           }
         },
       ),
     );
   }
-
-  // Widget _buildCommonDropdown({
-  //   required String title,
-  //   required List<String> listValues,
-  //   required String selectedValue,
-  //   required void Function(String?)? onSelected,
-  // }) {
-  //   return CommonDropdown(
-  //     title: title,
-  //     listValues: listValues,
-  //     selectedValue: selectedValue,
-  //     onSelected: onSelected,
-  //     dropdownLabels: controller.roleLabels,
-  //   );
-  // }
 
   Widget _buildImageSection(BuildContext context) {
     return CommonCreateEditItem(
@@ -263,7 +203,7 @@ class EditProfileView extends BaseView<EditProfileController> {
         controller.avatar.value.isNotEmpty &&
         controller.avatar.value.startsWith('http')) {
       return CachedNetworkImage(
-        imageUrl: HttpNetWorkUrlApi.baseURL + controller.avatar.value,
+        imageUrl: controller.avatar.value,
         errorWidget: (context, url, error) {
           // Handle the error, e.g., show a placeholder image
           return Image.asset("assets/placeholder_image.png");
@@ -292,7 +232,7 @@ class EditProfileView extends BaseView<EditProfileController> {
     return CommonConstrainBoxButton(
       text: text,
       onPressed: () {
-        // controller.createUser(userId);
+        controller.updateUser(userId);
       },
     );
   }

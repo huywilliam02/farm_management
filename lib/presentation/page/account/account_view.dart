@@ -3,17 +3,19 @@ import 'package:itfsd/app/core/common/dialog/dialog_icon_button.dart';
 import 'package:itfsd/app/core/common/dialog/icon_outline_button.dart';
 import 'package:itfsd/app/core/common/dialog/material_dialogs.dart';
 import 'package:itfsd/app/core/shared/dialog/types.dart';
+import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
 import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_controller.dart';
 import 'package:itfsd/presentation/controllers/users/users_controller.dart';
 import 'package:lottie/lottie.dart';
 import 'account.dart';
 
 class AccountView extends BaseView<AccountController> {
-  AccountView({Key? key, this.userId}) : super(key: key);
-  String? userId;
+  const AccountView({Key? key, this.userId}) : super(key: key);
+  final String? userId;
   @override
   Widget buildView(BuildContext context) {
-    LoginController loginController = Get.put(LoginController());
+    EditProfileController editProfileController =
+        Get.put(EditProfileController());
     return CommonScaffold(
       backgroundColor: ColorConstant.background_color,
       body: SingleChildScrollView(
@@ -47,7 +49,14 @@ class AccountView extends BaseView<AccountController> {
                           onTap: () {
                             // print('selectedUser: ${controller.loginModel.value}');
 
-                            controller.showData(controller.loginModel.value!);
+                            if (editProfileController.loginModel.value !=
+                                null) {
+                              editProfileController.showData(
+                                  editProfileController.loginModel.value!);
+                            } else {
+                              // Handle the case where selectedUser is null
+                              print("selectedUser is null");
+                            }
                           },
                           child: Row(
                             children: [
@@ -139,7 +148,9 @@ class AccountView extends BaseView<AccountController> {
                 icon: Ionicons.desktop_outline,
                 bgColor: Colors.indigo,
                 iconColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.EDIT_PROFILE);
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(

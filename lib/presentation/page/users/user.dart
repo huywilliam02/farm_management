@@ -29,7 +29,7 @@ export 'package:itfsd/app/core/common/page_view/controller/common_paging_control
 export 'package:itfsd/app/core/shared/role/role_constants.dart';
 export 'package:itfsd/app/util/view_utils.dart';
 export 'package:itfsd/data/model/users/user.dart';
-export 'package:itfsd/data/network/api/users/user.dart';
+
 export 'package:itfsd/domain/usecases/base/load_more_output.dart';
 export 'package:itfsd/presentation/page/users/widgets/user_details.dart';
 export '../../controllers/users/users_controller.dart';
