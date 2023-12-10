@@ -92,7 +92,7 @@ class CropsFarmController extends BaseController {
 
     final currentTime = DateTime.now();
     if (lastFetchTime != null &&
-        currentTime.difference(lastFetchTime!) < const Duration(seconds: 2)) {
+        currentTime.difference(lastFetchTime!) < const Duration(seconds: 1)) {
       return; // Throttle requests to every 2 seconds
     }
     try {
@@ -114,7 +114,7 @@ class CropsFarmController extends BaseController {
 
       List<CropsDetail> cropList = await requestData.request();
 
-      listCropsFarm.assignAll(cropList);
+      listCropsFarm.addAll(cropList);
 
       await Future.delayed(const Duration(milliseconds: 500));
       showAll();
@@ -176,7 +176,7 @@ class CropsFarmController extends BaseController {
     harvest.value = value;
   }
 
-  onTabDeleteIamge(int index) {
+  onTabDeleteImage(int index) {
     listImage.removeAt(index);
   }
 
@@ -223,7 +223,7 @@ class CropsFarmController extends BaseController {
 
     if (check) {
       Get.back();
-      // refeshData();
+      refreshData();
       Get.snackbar('Thông báo', 'Tạo cây trồng thành công',
           backgroundColor: Colors.green.withOpacity(0.7),
           colorText: Colors.white);
@@ -233,23 +233,6 @@ class CropsFarmController extends BaseController {
           colorText: Colors.white);
     }
   }
-
-  // showData(CropsDetail schedule) {
-  //   refeshForm();
-  //   nameController.text = schedule.name!;
-  //   diseaseController.text = schedule.disease!;
-  //   growthController.text = schedule.growth!;
-  //   userController.text = schedule.use!;
-  //   harvestController.text = schedule.harvest!;
-  //   priceController.text = schedule.price!;
-  //   groupCropController.text = schedule.groupCrop!.name;
-  //   listImage(schedule.images);
-  //   Get.to(
-  //     () => CreateCropView(
-  //       idtree: schedule.id,
-  //     ),
-  //   );
-  // }
 
   refreshForm() {
     nameController.text = "";
@@ -262,20 +245,6 @@ class CropsFarmController extends BaseController {
     groupCrop("");
     groupCropController.text = "";
     listImage([]);
-  }
-
-  deleteData(String idTree) async {
-    try {
-      bool check = await CropsFarmApi.deleteTree(idTree);
-      if (check) {
-        //thông báo true
-      } else {
-        //thông báo fail
-      }
-    } catch (e) {
-      Get.back();
-      Get.snackbar("title", "Có gì đó không đúng");
-    }
   }
 
   Future<void> onTypingSearch(String value) async {

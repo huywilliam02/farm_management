@@ -112,6 +112,7 @@ class Assets {
   static const String cropsFarmDeleteCropRequest = 'lib/data/network/api/crops_farm/delete_crop_request.dart';
   static const String cropsFarmGetDataAllCropsRequest = 'lib/data/network/api/crops_farm/get_data_all_crops_request.dart';
   static const String cropsFarmSreachCropRequest = 'lib/data/network/api/crops_farm/sreach_crop_request.dart';
+  static const String cropsFarmUpdateCropRequest = 'lib/data/network/api/crops_farm/update_crop_request.dart';
   static const String cropseasonCropseasonBinding = 'lib/presentation/controllers/cropseason/cropseason_binding.dart';
   static const String cropseasonCropseasonController = 'lib/presentation/controllers/cropseason/cropseason_controller.dart';
   static const String cropseasonCropseasonView = 'lib/presentation/page/cropseason/cropseason_view.dart';

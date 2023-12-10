@@ -16,7 +16,7 @@ class CropsFarmModel {
   String use;
   String harvest;
   int price;
-  List<String> images;
+  List<String>? images;
   String groupCrop;
 
   String? id;
@@ -28,7 +28,7 @@ class CropsFarmModel {
     required this.use,
     required this.harvest,
     required this.price,
-    required this.images,
+    this.images,
     required this.groupCrop,
     this.id,
   });
@@ -52,7 +52,7 @@ class CropsFarmModel {
         "use": use,
         "harvest": harvest,
         "price": price,
-        "images": List<dynamic>.from(images.map((x) => x)),
+        "images": List<dynamic>.from(images!.map((x) => x)),
         "groupCrop": groupCrop,
         "id": id,
       };

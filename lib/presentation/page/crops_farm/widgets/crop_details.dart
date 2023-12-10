@@ -34,7 +34,10 @@ class CropDetailsView extends BaseView<EditCropController> {
       centerTitle: true,
       titleTextStyle: AppTextStyle.textTitleAppBar,
       leadingIcon: IconsUtils.back,
-      onLeadingPressed: () => Get.back(),
+      onLeadingPressed: () {
+        controller.refreshData();
+        Get.back();
+      },
       actions: [
         Obx(() {
           if (controller.selectedCrop.value != null) {

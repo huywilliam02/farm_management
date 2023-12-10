@@ -11,7 +11,7 @@ class DeleteCropRequest implements APIRequestRepresentable {
 
   @override
   String get url =>
-      'http://116.118.49.43:8878/api/users?id=$cropId'; // Update with your API endpoint
+      'http://116.118.49.43:8878/api/crops?cropId=$cropId'; // Update with your API endpoint
 
   @override
   String get endpoint => '/api/users'; // Adjust accordingly

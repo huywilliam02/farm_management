@@ -7,7 +7,7 @@ class CropsDetail {
   String? growth;
   String? use;
   String? harvest;
-  String? price;
+  String price;
   List<String>? images;
   GroupCrop? groupCrop;
 
@@ -20,7 +20,7 @@ class CropsDetail {
     this.growth,
     this.use,
     this.harvest,
-    this.price,
+    this.price = "",
     this.images,
     this.groupCrop,
   });

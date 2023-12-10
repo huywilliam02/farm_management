@@ -100,6 +100,37 @@ class CropsFarmApi {
   //     return false;
   //   }
   // }
+  static Future<bool> updateCrop(CropsFarmModel model, String? cropId) async {
+    var dioRequest = dio.Dio();
+
+    dioRequest.options.headers = {
+      'accept': '*/*',
+      'Authorization': 'Bearer ${Get.find<StartAppController>().accessToken}',
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+    var formData = dio.FormData.fromMap({
+      "name": model.name,
+      "disease": model.disease,
+      "growth": model.growth,
+      "use": model.use,
+      "harvest": model.harvest,
+      "price": model.price,
+      "groupCrop": model.groupCrop,
+    });
+
+    var response = await dioRequest.put(
+      'http://116.118.49.43:8878/api/crops?cropId=$cropId',
+      data: formData,
+    );
+
+    log('UpdateCrop- status code : ${response.statusCode}');
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   static Future<bool> deleteTree(String idTree) async {
     var url = Uri.parse('url$idTree');

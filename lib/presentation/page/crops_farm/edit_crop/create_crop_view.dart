@@ -96,6 +96,7 @@ class CreateCropView extends BaseView<CropsFarmController> {
       leadingIcon: IconsUtils.back,
       onLeadingPressed: () {
         controller.refreshForm();
+        controller.refreshData();
         Get.back();
       },
     );

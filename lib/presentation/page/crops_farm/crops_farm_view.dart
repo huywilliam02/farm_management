@@ -9,30 +9,37 @@ class CropsFarmView extends BaseView<CropsFarmController> {
 
   @override
   Widget buildView(BuildContext context) {
-    return CommonScaffold(
-      backgroundColor: ColorConstant.background_color,
-      appBar: buildAppBar(),
-      body: NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (!controller.lazyLoading.value &&
-              scrollInfo.metrics.pixels == scrollInfo.metrics.maxScrollExtent) {
-            controller.fetchMoreDataThrottled();
-          }
-          return true;
-        },
-        child: RefreshIndicator(
-          onRefresh: () async => await controller.refreshData(),
-          child: Column(
-            children: [
-              const CommonDivider(),
-              buildSearchTextField(),
-              const CommonDivider(),
-              buildItemCountRow(),
-              Expanded(
-                flex: 9,
-                child: buildCropList(),
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+        await Get.find<CropsFarmController>().refreshData();
+        return true;
+      },
+      child: CommonScaffold(
+        backgroundColor: ColorConstant.background_color,
+        appBar: buildAppBar(),
+        body: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification scrollInfo) {
+            if (!controller.lazyLoading.value &&
+                scrollInfo.metrics.pixels ==
+                    scrollInfo.metrics.maxScrollExtent) {
+              controller.fetchMoreDataThrottled();
+            }
+            return true;
+          },
+          child: RefreshIndicator(
+            onRefresh: () async => await controller.refreshData(),
+            child: Column(
+              children: [
+                const CommonDivider(),
+                buildSearchTextField(),
+                const CommonDivider(),
+                buildItemCountRow(),
+                Expanded(
+                  flex: 9,
+                  child: buildCropList(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

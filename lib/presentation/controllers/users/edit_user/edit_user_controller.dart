@@ -216,15 +216,6 @@ class EditUserController extends BaseController {
   }
 
   void showData(UserDetailsModel userDetails) {
-    print('showData is called with userId: $userDetails');
-    // Rest of the code...
-
-    print('usernameController: ${usernameController.text}');
-    print('fullnameController: ${fullNameController.text}');
-    print('avatar: ${avatar.value}');
-    // Reset the form fields
-    refreshForm();
-    // Populate form fields with data from the selected user
     usernameController.text = userDetails.username ?? "";
     fullNameController.text = userDetails.fullName ?? "";
     emailController.text = userDetails.email ?? "";
