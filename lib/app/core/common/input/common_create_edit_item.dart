@@ -20,6 +20,7 @@ class CommonCreateEditItem extends StatelessWidget {
         children: [
           Row(
             children: [
+              const SizedBox(width: 5),
               Text(title, style: AppTextStyle.textTitleForm),
               const SizedBox(width: 5),
               Text(obligatory, style: AppTextStyle.textTitleFormobligatory),

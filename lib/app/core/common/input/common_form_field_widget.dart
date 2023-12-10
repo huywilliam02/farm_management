@@ -14,7 +14,7 @@ class CommonFormFieldWidget extends StatelessWidget {
       this.isObscureText = false,
       this.isEnabled = true,
       this.initValue,
-      this.padding = 10,
+      this.padding = 0,
       this.suffixIcon,
       this.enableInteractiveSelection = true,
       this.styleInput = TextStyleConstant.black16Roboto,
@@ -40,42 +40,47 @@ class CommonFormFieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: TextFormField(
-        style: styleInput,
-        enableInteractiveSelection: enableInteractiveSelection,
-        initialValue: initValue,
-        enabled: isEnabled,
-        obscureText: isObscureText,
-        focusNode: focusNode,
-        onEditingComplete: onEditingComplete,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: Color(0xFFFFFFFF),
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
-          errorText: errorText != "" ? errorText : null,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(
-              color: ColorConstant.redStop,
+      width: double.infinity,
+      height: 78,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: TextFormField(
+          style: styleInput,
+          enableInteractiveSelection: enableInteractiveSelection,
+          initialValue: initValue,
+          enabled: isEnabled,
+          obscureText: isObscureText,
+          focusNode: focusNode,
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Color(0xFFFFFFFF),
+            // contentPadding:
+            //     EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
+            errorText: errorText != "" ? errorText : null,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(
+                color: ColorConstant.redStop,
+              ),
             ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.green),
+            ),
+            hintText: labelText,
+            hintTextDirection: TextDirection.ltr,
+            hintMaxLines: 3,
+            prefixIcon: icon,
+            suffixIcon: suffixIcon,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.green),
-          ),
-          hintText: labelText,
-          hintTextDirection: TextDirection.ltr,
-          hintMaxLines: 3,
-          prefixIcon: icon,
-          suffixIcon: suffixIcon,
+          textAlign: TextAlign.justify,
+          maxLines: 2,
+          keyboardType: textInputType,
+          controller: controllerEditting,
+          onChanged: (value) {
+            setValueFunc(value);
+          },
         ),
-        keyboardType: textInputType,
-        controller: controllerEditting,
-        onChanged: (value) {
-          setValueFunc(value);
-        },
       ),
     );
   }

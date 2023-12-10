@@ -194,6 +194,7 @@ class EditProfileController extends BaseController {
       bool check = await updateUserRequest.execute();
       if (check) {
         ViewUtils.showSnackbarMessage("Chỉnh sửa thành công", check);
+        getEditUser();
         Get.toNamed(Routes.MAIN_TABVIEW);
       } else {
         ViewUtils.showSnackbarMessage("Chỉnh sửa không thành công", check);

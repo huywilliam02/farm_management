@@ -1,3 +1,6 @@
+import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -11,13 +14,15 @@ class LibraryImageView extends BaseView<LibraryImageController> {
   const LibraryImageView({Key? key}) : super(key: key);
   @override
   Widget buildView(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: ColorConstant.primary,
-        title: const Text('LibraryImageView'),
-        centerTitle: true,
-        actions: const [Icon(Icons.add)],
+      appBar: CommonAppBar(
+        title: '',
+        titleType: AppBarTitle.text,
+        leadingIcon: IconsUtils.back,
+        onLeadingPressed: () {
+          Get.back();
+        },
       ),
       body: SafeArea(
           child: Column(
@@ -27,8 +32,7 @@ class LibraryImageView extends BaseView<LibraryImageController> {
             child: Center(
                 child: Obx(
               () => CachedNetworkImage(
-                imageUrl:
-                    "http://116.118.49.43:8878${controller.images.value[controller.indexChoose.value]}",
+                imageUrl: controller.images.value[controller.indexChoose.value],
                 errorWidget: (context, url, error) => const Icon(Icons.info),
                 progressIndicatorBuilder: (context, url, progress) =>
                     const CircularProgressIndicator(),
@@ -55,8 +59,7 @@ class LibraryImageView extends BaseView<LibraryImageController> {
                 child: Stack(
                   children: [
                     CachedNetworkImage(
-                      imageUrl:
-                          "http://116.118.49.43:8878${controller.images.value[index]}",
+                      imageUrl: controller.images.value[index],
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.info),
                       progressIndicatorBuilder: (context, url, progress) =>

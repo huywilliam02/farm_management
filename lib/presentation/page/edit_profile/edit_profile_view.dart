@@ -1,3 +1,5 @@
+import 'package:itfsd/app/core/common/input/form_field_widget.dart';
+
 import 'edit_profile.dart';
 import 'package:get/get.dart';
 
@@ -63,13 +65,17 @@ class EditProfileView extends BaseView<EditProfileController> {
                 inputType: TextInputType.text,
                 setValueFunc: (p0) {},
               ),
-              _buildTextFieldItem(
+              CommonCreateEditItem(
                 title: "Thông tin chung",
-                controller: controller.descriptionController,
-                inputType: TextInputType.text,
-                setValueFunc: (p0) {},
+                widget: SizedBox(
+                  height: 120,
+                  child: CommonFormFieldWidget(
+                    controllerEditting: controller.descriptionController,
+                    textInputType: TextInputType.text,
+                    setValueFunc: () {},
+                  ),
+                ),
               ),
-              const SizedBox(height: 20),
               _buildConstrainBoxButton(
                 "Lưu",
               ),

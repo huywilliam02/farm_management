@@ -27,24 +27,20 @@ class CropDetailsView extends BaseView<EditCropController> {
     );
   }
 
-  // build appbar
   PreferredSizeWidget _buildAppBar() {
     return CommonAppBar(
-      title: "Chi tiết thành viên",
+      title: "Chi tiết cây trồng",
       titleType: AppBarTitle.text,
       centerTitle: true,
       titleTextStyle: AppTextStyle.textTitleAppBar,
       leadingIcon: IconsUtils.back,
-      onLeadingPressed: () {
-        Get.back();
-      },
+      onLeadingPressed: () => Get.back(),
       actions: [
         Obx(() {
           if (controller.selectedCrop.value != null) {
             return IconButton(
-              onPressed: () {
-                controller.showData(controller.selectedCrop.value!);
-              },
+              onPressed: () =>
+                  controller.showData(controller.selectedCrop.value!),
               icon: const Icon(IconsUtils.edit),
             );
           } else {
@@ -55,7 +51,6 @@ class CropDetailsView extends BaseView<EditCropController> {
     );
   }
 
-  // build data
   Widget _buildCropDetails(CropsDetail crop) {
     return Column(
       children: [
@@ -74,45 +69,40 @@ class CropDetailsView extends BaseView<EditCropController> {
     );
   }
 
-  // build image get data
   Widget _buildImageList(List<String>? imageUrls) {
     if (imageUrls == null || imageUrls.isEmpty) {
-      // Handle the case when 'imageUrls' is null or empty
       return Container(); // or any other fallback widget
     }
 
-    return Container(
+    return SizedBox(
       height: 300,
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) =>
+            SizedBox(width: UtilsReponsive.width(context, 10)),
         scrollDirection: Axis.horizontal,
         itemCount: imageUrls.length,
-        itemBuilder: (context, index) {
-          var imageUrl = imageUrls[index];
-          if (imageUrl != null) {
-            return _buildCropImage(imageUrl);
-          } else {
-            // Handle the case when imageUrl is null
-            return SizedBox.shrink(); // or any other fallback widget
-          }
-        },
+        itemBuilder: (context, index) =>
+            _buildCropImage(imageUrls[index], context),
       ),
     );
   }
 
-  Widget _buildCropImage(String avatarUrl) {
-    return Container(
-      width: double.infinity,
-      height: 300,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(HttpNetWorkUrlApi.baseURL + avatarUrl),
+  Widget _buildCropImage(String imageUrl, BuildContext context) {
+    return SizedBox(
+      height: UtilsReponsive.height(context, 350),
+      width: UtilsReponsive.width(context, 390),
+      child: Center(
+        child: CachedNetworkImage(
+          imageUrl: "http://116.118.49.43:8878$imageUrl",
+          errorWidget: (context, url, error) => const Icon(Icons.info),
+          progressIndicatorBuilder: (context, url, progress) =>
+              const CircularProgressIndicator(),
+          fit: BoxFit.contain,
         ),
       ),
     );
   }
 
-  // build commonshowdata
   Widget buildCommonShowData(IconData iconData, String title, String label) {
     return CommonShowData(
       iconData: iconData,

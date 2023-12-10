@@ -1,4 +1,5 @@
 import 'package:itfsd/presentation/controllers/crops_farm/controllers/edit_crop_controller.dart';
+import 'package:itfsd/presentation/page/crops_farm/edit_crop/create_crop_view.dart';
 
 import 'crop.dart';
 import 'package:get/get.dart';
@@ -49,13 +50,21 @@ class CropsFarmView extends BaseView<CropsFarmController> {
         controller.refreshData(),
         Get.back(),
       },
+      actions: [
+        IconButton(
+          onPressed: () {
+            Get.to(() => const CreateCropView());
+          },
+          icon: const Icon(IconsUtils.add),
+        ),
+      ],
     );
   }
 
   Widget buildSearchTextField() {
     return TextField(
       onChanged: (value) async {
-        await controller.onTypingSearchCropsFarm(value);
+        await controller.onTypingSearch(value);
       },
       decoration: const InputDecoration(
         hintText: "Tìm kiếm",

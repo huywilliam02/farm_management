@@ -7,10 +7,11 @@ import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/model/category/product.dart';
 import 'package:itfsd/data/model/crops/crop_model.dart';
 import 'package:itfsd/data/model/crops/crops_detail.dart';
+import 'package:itfsd/data/network/api/crops_farm/create_crop_request.dart';
 import 'package:itfsd/data/network/api/crops_farm/crops_farm_api.dart';
 import 'package:itfsd/data/network/api/crops_farm/get_data_all_crops_request.dart';
+import 'package:itfsd/data/network/api/crops_farm/sreach_crop_request.dart';
 import 'package:itfsd/presentation/page/crops_farm/edit_crop/create_crop_view.dart';
-
 
 class CropsFarmController extends BaseController {
   //TODO: Implement CropsFarmController
@@ -195,7 +196,7 @@ class CropsFarmController extends BaseController {
     groupCropController.text = product.name!;
   }
 
-  createCropsfarm(String? idcrops) async {
+  createCropsfarm() async {
     log(nameController.text);
     log(diseaseController.text);
     log(growthController.text);
@@ -214,7 +215,12 @@ class CropsFarmController extends BaseController {
       groupCrop: groupCrop.value,
       images: [],
     );
-    bool check = await CropsFarmApi.createNewCrops(formData, listImage);
+    // Create an instance of the API request
+    var createUserRequest =
+        CreateCropRequest(model: formData, listimagesPath: listImage);
+    // Call the API to create a new user
+    bool check = await createUserRequest.execute();
+
     if (check) {
       Get.back();
       // refeshData();
@@ -228,24 +234,24 @@ class CropsFarmController extends BaseController {
     }
   }
 
-  showData(CropsDetail schedule) {
-    refeshForm();
-    nameController.text = schedule.name!;
-    diseaseController.text = schedule.disease!;
-    growthController.text = schedule.growth!;
-    userController.text = schedule.use!;
-    harvestController.text = schedule.harvest!;
-    priceController.text = schedule.price!;
-    groupCropController.text = schedule.groupCrop!.name;
-    listImage(schedule.images);
-    Get.to(
-      () => CreateCropView(
-        idtree: schedule.id,
-      ),
-    );
-  }
+  // showData(CropsDetail schedule) {
+  //   refeshForm();
+  //   nameController.text = schedule.name!;
+  //   diseaseController.text = schedule.disease!;
+  //   growthController.text = schedule.growth!;
+  //   userController.text = schedule.use!;
+  //   harvestController.text = schedule.harvest!;
+  //   priceController.text = schedule.price!;
+  //   groupCropController.text = schedule.groupCrop!.name;
+  //   listImage(schedule.images);
+  //   Get.to(
+  //     () => CreateCropView(
+  //       idtree: schedule.id,
+  //     ),
+  //   );
+  // }
 
-  refeshForm() {
+  refreshForm() {
     nameController.text = "";
     diseaseController.text = '';
     growthController.text = '';
@@ -272,12 +278,30 @@ class CropsFarmController extends BaseController {
     }
   }
 
-  onTypingSearchCropsFarm(String value) async {
+  Future<void> onTypingSearch(String value) async {
     if (value.isNotEmpty) {
-//search
       noMoreRecord(true);
-      listCropsFarm.value = await CropsFarmApi.searchlistCropsFarm(value);
+      // Show a loading indicator here
+
+      try {
+        // Create an instance of the API request
+        var searchCropDetailsRequest =
+            SearchCropDetailsRequest(searchData: value);
+
+        // Call the API to search for user details directly
+        List<CropsDetail> searchResults =
+            await searchCropDetailsRequest.execute();
+
+        // Update the list with search results
+        listCropsFarm.assignAll(searchResults);
+      } catch (e) {
+        // Handle exceptions
+        print('Error searching crop details: $e');
+      }
+
+      // Hide the loading indicator here
     } else {
+      // Clear existing data when the search query is empty
       refreshData();
     }
   }

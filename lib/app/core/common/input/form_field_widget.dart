@@ -42,12 +42,7 @@ class FormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 62,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(10),
-      ),
+      height: 90,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: TextFormField(
@@ -58,16 +53,29 @@ class FormFieldWidget extends StatelessWidget {
           obscureText: isObscureText,
           focusNode: focusNode,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: Color(0xFFFFFFFF),
+            // contentPadding:
+            //     EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
             errorText: errorText != "" ? errorText : null,
-            border: InputBorder.none,
-            fillColor: Colors.white70,
-            // labelText: labelText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(
+                color: ColorConstant.redStop,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.green),
+            ),
             hintText: labelText,
             hintTextDirection: TextDirection.ltr,
             hintMaxLines: 3,
             prefixIcon: icon,
             suffixIcon: suffixIcon,
           ),
+          textAlign: TextAlign.justify,
+          maxLines: 2,
           keyboardType: textInputType,
           controller: controllerEditting,
           onChanged: (value) {

@@ -105,10 +105,13 @@ class Assets {
   static const String corePramUsecase = 'lib/app/core/pram_usecase.dart';
   static const String cropsCropModel = 'lib/data/model/crops/crop_model.dart';
   static const String cropsCropsDetail = 'lib/data/model/crops/crops_detail.dart';
+  static const String cropsFarmCreateCropRequest = 'lib/data/network/api/crops_farm/create_crop_request.dart';
   static const String cropsFarmCrop = 'lib/data/network/api/crops_farm/crop.dart';
   static const String cropsFarmCropsFarmApi = 'lib/data/network/api/crops_farm/crops_farm_api.dart';
   static const String cropsFarmCropsFarmView = 'lib/presentation/page/crops_farm/crops_farm_view.dart';
+  static const String cropsFarmDeleteCropRequest = 'lib/data/network/api/crops_farm/delete_crop_request.dart';
   static const String cropsFarmGetDataAllCropsRequest = 'lib/data/network/api/crops_farm/get_data_all_crops_request.dart';
+  static const String cropsFarmSreachCropRequest = 'lib/data/network/api/crops_farm/sreach_crop_request.dart';
   static const String cropseasonCropseasonBinding = 'lib/presentation/controllers/cropseason/cropseason_binding.dart';
   static const String cropseasonCropseasonController = 'lib/presentation/controllers/cropseason/cropseason_controller.dart';
   static const String cropseasonCropseasonView = 'lib/presentation/page/cropseason/cropseason_view.dart';
