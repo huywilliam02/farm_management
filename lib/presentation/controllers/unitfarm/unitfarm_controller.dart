@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/farm/farm_detail.dart';
 import 'package:itfsd/data/network/api/farm/farm.dart';
 import 'package:itfsd/data/network/api/farming_calendar/farmingcalendar_api.dart';
 
@@ -25,7 +26,7 @@ class UnitfarmController extends BaseController {
     super.onInit();
   }
 
-  RxList<Farm> listFarm = <Farm>[].obs;
+  RxList<FarmDetail> listFarm = <FarmDetail>[].obs;
 
 
   setValueName(String value) {

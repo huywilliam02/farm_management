@@ -5,6 +5,7 @@ import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
+import 'package:itfsd/presentation/page/cropseason/crop_season_detail_view.dart';
 
 class ListIcondirayView extends StatefulWidget {
   const ListIcondirayView({super.key});
@@ -66,7 +67,7 @@ class _ListIcondirayViewState extends State<ListIcondirayView>
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.toNamed(Routes.HARVESTDIARY);
+                            Get.to(() => HarvestSeasonListScreen());
                           },
                           icon: Image.asset(
                             "assets/icons/harvester.png",

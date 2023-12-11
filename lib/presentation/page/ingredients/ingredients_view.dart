@@ -59,28 +59,30 @@ class IngredientsView extends BaseView<IngredientsController> {
                 ),
               ),
               const CommonDivider(),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Hiện thị :  2",
-                      style: AppTextStyle.textShowData,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            height: 30,
-                            image: AssetImage("assets/icons/filter.png"),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Hiện thị: ${controller.listIngredients.length}",
+                        style: AppTextStyle.textShowData,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 30,
+                              image: AssetImage("assets/icons/filter.png"),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(

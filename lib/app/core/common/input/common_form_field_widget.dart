@@ -41,7 +41,7 @@ class CommonFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 78,
+      height: 76,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: TextFormField(

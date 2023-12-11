@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:itfsd/app/core/common/page_view/controller/common_paging_controller.dart';
-import 'package:itfsd/app/core/shared/stream/dispose_bag.dart';
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/farm/farm_detail.dart';
 import 'package:itfsd/data/network/api/farm/farm.dart';
 import 'package:itfsd/data/model/category/product.dart';
-import 'package:itfsd/data/model/farm/farm.dart';
 import 'package:itfsd/presentation/page/farm/farm_details_view.dart';
 
 class FarmController extends BaseController {
   //TODO: Implement FarmController
-  RxList<Farm> listFarm = <Farm>[].obs;
+  RxList<FarmDetail> listFarm = <FarmDetail>[].obs;
 
-  Rx<Farm?> selectedFarm = Rx<Farm?>(null);
+  Rx<FarmDetail?> selectedFarm = Rx<FarmDetail?>(null);
 
   TextEditingController namefarmController = TextEditingController(text: '');
   TextEditingController businessModelController =
@@ -106,7 +104,7 @@ class FarmController extends BaseController {
     }
   }
 
-  void showFarmDetails(Farm farm) {
+  void showFarmDetails(FarmDetail farm) {
     selectedFarm.value = farm;
     Get.to(() => FarmDetailsView(
           idFarm: farm.id,

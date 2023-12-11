@@ -55,30 +55,32 @@ class RequestformViewAll extends BaseView<RequestformController> {
                 ),
               ),
               const CommonDivider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Yêu cầu ${controller.itemCount}",
-                      style: AppTextStyle.textShowData,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            height: 30,
-                            image: AssetImage(
-                              "assets/icons/filter.png",
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Hiện thị: ${controller.listRequestForm.length}",
+                        style: AppTextStyle.textShowData,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 30,
+                              image: AssetImage(
+                                "assets/icons/filter.png",
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(

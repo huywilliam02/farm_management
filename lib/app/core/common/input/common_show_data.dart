@@ -6,15 +6,15 @@ class CommonShowData extends StatelessWidget {
   final String title;
   final String label;
   final Widget? widget;
-  final IconData? iconData; // Thêm dòng này để chứa IconData
+  final IconData? iconData;
 
   const CommonShowData({
-    Key? key, // Sửa dòng này để chứa key
+    Key? key,
     required this.title,
     this.widget,
-    this.iconData, // Thêm dòng này
+    this.iconData,
     required this.label,
-  }) : super(key: key); // Sửa dòng này
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,19 +25,27 @@ class CommonShowData extends StatelessWidget {
         children: [
           Row(
             children: [
-              if (iconData != null) // Hiển thị biểu tượng nếu có
-                Icon(iconData,
-                    color: Colors.grey,
-                    size: 30), // Thay đổi màu và kích thước theo ý muốn
+              if (iconData != null)
+                Icon(iconData!, color: Colors.grey, size: 30),
               SizedBox(
                 width: 10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: AppTextStyle.textRowTitle),
-                  Text(label, style: AppTextStyle.textRowLabel),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: AppTextStyle.textRowTitle,
+                      softWrap: true, // Tự động xuống dòng
+                    ),
+                    Text(
+                      label,
+                      style: AppTextStyle.textRowLabel,
+                      softWrap: true, // Tự động xuống dòng
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,28 +1,135 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:itfsd/base/base_view.dart';
-import '../../controllers/planttracking/planttracking_controller.dart';
+import 'dart:async';
+import 'dart:math';
 
-class PlanttrackingView extends BaseView<PlanttrackingController> {
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:itfsd/presentation/page/login/login.dart';
+
+class PlanttrackingView extends StatefulWidget {
   const PlanttrackingView({Key? key}) : super(key: key);
+
   @override
-  Widget buildView(BuildContext context) {
+  _PlanttrackingViewState createState() => _PlanttrackingViewState();
+}
+
+class _PlanttrackingViewState extends State<PlanttrackingView> {
+  late List<Map<String, dynamic>> plantData;
+
+  @override
+  void initState() {
+    super.initState();
+    plantData = generatePlantData();
+    startDataSimulation();
+  }
+
+  List<Map<String, dynamic>> generatePlantData() {
+    final Random random = Random();
+    final List<Map<String, dynamic>> data = [];
+
+    for (int i = 0; i < 10; i++) {
+      data.add({
+        'temperature': random.nextInt(21) + 10,
+        'humidity': (random.nextDouble() * 100).toStringAsFixed(2),
+        'brightness': random.nextInt(101),
+        'co2': random.nextInt(1001),
+        'nh3': random.nextInt(101),
+        'soil_moisture': (random.nextDouble() * 100).toStringAsFixed(2),
+        'ec': random.nextInt(2001),
+        'soil_temperature': random.nextInt(31) + 10,
+        'conductivity': (random.nextDouble() * 10).toStringAsFixed(2),
+        'ph': (random.nextDouble() * 14).toStringAsFixed(1),
+        'water_ec': random.nextInt(2001),
+        'water_ph': (random.nextDouble() * 14).toStringAsFixed(1),
+        'water_temperature': random.nextInt(31) + 10,
+        'salinity': (random.nextDouble() * 10).toStringAsFixed(1),
+        'timestamp': DateTime.now().subtract(Duration(minutes: i * 5)),
+      });
+    }
+
+    return data;
+  }
+
+  void startDataSimulation() {
+    const Duration interval = Duration(minutes: 5);
+    Timer.periodic(interval, (timer) {
+      setState(() {
+        plantData = updatePlantData();
+      });
+    });
+  }
+
+  List<Map<String, dynamic>> updatePlantData() {
+    final Random random = Random();
+    final List<Map<String, dynamic>> updatedData = [];
+
+    for (int i = 0; i < plantData.length; i++) {
+      updatedData.add({
+        'temperature': random.nextInt(21) + 10,
+        'humidity': (random.nextDouble() * 100).toStringAsFixed(2),
+        'brightness': random.nextInt(101),
+        'co2': random.nextInt(1001),
+        'nh3': random.nextInt(101),
+        'soil_moisture': (random.nextDouble() * 100).toStringAsFixed(2),
+        'ec': random.nextInt(2001),
+        'soil_temperature': random.nextInt(31) + 10,
+        'conductivity': (random.nextDouble() * 10).toStringAsFixed(2),
+        'ph': (random.nextDouble() * 14).toStringAsFixed(1),
+        'water_ec': random.nextInt(2001),
+        'water_ph': (random.nextDouble() * 14).toStringAsFixed(1),
+        'water_temperature': random.nextInt(31) + 10,
+        'salinity': (random.nextDouble() * 10).toStringAsFixed(1),
+        'timestamp': DateTime.now(),
+      });
+    }
+
+    return updatedData;
+  }
+
+  String formatTimestamp(DateTime timestamp) {
+    return DateFormat('yyyy-MM-dd HH:mm:ss').format(timestamp);
+  }
+
+  Widget buildMetricCard(String title, String value) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          title,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          value,
+          style: TextStyle(
+              color: Colors.grey, fontSize: 14, fontWeight: FontWeight.w700),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new),
+                  icon: Icon(Icons.arrow_back_ios_new),
                   onPressed: () {
-                    Get.back();
+                    Navigator.pop(context);
                   },
                 ),
-                const Expanded(
+                Expanded(
                   flex: 18,
                   child: Center(
                     child: Text(
@@ -32,29 +139,29 @@ class PlanttrackingView extends BaseView<PlanttrackingController> {
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 30,
                 ),
-                const Expanded(child: SizedBox())
+                Expanded(child: SizedBox())
               ],
             ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     Image.network(
                         "https://baotayninh.vn/image/fckeditor/upload/2019/20191027/images/v2.jpg"),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "2023-16-11 8:48:11",
+                          formatTimestamp(plantData[0]['timestamp']),
                           style: TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w700),
                         ),
@@ -63,371 +170,86 @@ class PlanttrackingView extends BaseView<PlanttrackingController> {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
-                    const Text(
+                    Text(
                       "Không khí",
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Container(
                       height: 90,
                       color: Colors.white,
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Nhiệt độ",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "27.65",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Độ ẩm",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "88.84",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Độ sáng",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "CO2",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "NH3",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
+                          buildMetricCard(
+                              "Nhiệt độ", "${plantData[0]['temperature']} °C"),
+                          buildMetricCard(
+                              "Độ ẩm", "${plantData[0]['humidity']} %"),
+                          buildMetricCard(
+                              "Độ sáng", "${plantData[0]['brightness']} lux"),
+                          buildMetricCard("CO2", "${plantData[0]['co2']} ppm"),
+                          buildMetricCard("NH3", "${plantData[0]['nh3']} ppm"),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
-                    const Text(
+                    Text(
                       "Đất",
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Container(
                       height: 90,
                       color: Colors.white,
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Độ ẩm",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "EC (ppm)",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Nhiệt độ",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Dẫn điện",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "pH",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
+                          buildMetricCard("Độ ẩm đất",
+                              "${plantData[0]['soil_moisture']} %"),
+                          buildMetricCard("EC (ppm)", "${plantData[0]['ec']}"),
+                          buildMetricCard("Nhiệt độ đất",
+                              "${plantData[0]['soil_temperature']} °C"),
+                          buildMetricCard("Dẫn điện",
+                              "${plantData[0]['conductivity']} dS/m"),
+                          buildMetricCard("pH", "${plantData[0]['ph']}"),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
-                    const Text(
+                    Text(
                       "Nước",
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Container(
                       height: 90,
                       color: Colors.white,
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Dẫn điện",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "pH",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Nhiệt độ",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                "Độ mặn",
-                                style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "0",
-                                style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
+                          buildMetricCard(
+                              "Dẫn điện", "${plantData[0]['water_ec']} dS/m"),
+                          buildMetricCard("pH", "${plantData[0]['water_ph']}"),
+                          buildMetricCard("Nhiệt độ nước",
+                              "${plantData[0]['water_temperature']} °C"),
+                          buildMetricCard(
+                              "Độ mặn", "${plantData[0]['salinity']} ppt"),
                         ],
                       ),
                     ),

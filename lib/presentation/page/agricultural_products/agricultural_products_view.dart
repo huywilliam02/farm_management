@@ -10,7 +10,6 @@ import 'package:itfsd/app/core/constants/api_endpoint.dart';
 import 'package:itfsd/presentation/controllers/agricultural_products/agricultural_products_controller.dart';
 import 'package:itfsd/presentation/page/agricultural_products/create_AgriculralProduct_view.dart';
 
-
 class AgriculturalProductsView
     extends BaseView<AgriculturalProductsController> {
   const AgriculturalProductsView({Key? key}) : super(key: key);
@@ -138,18 +137,18 @@ class AgriculturalProductsView
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Image.network(
-                                                          HttpNetWorkUrlApi
-                                                                  .baseURL +
-                                                              controller
-                                                                  .listAgriculturalProduct[
-                                                                      index]
-                                                                  .images
-                                                                  .first,
-                                                          fit: BoxFit.cover,
-                                                          height: 50,
-                                                          width: 50,
-                                                        ),
+                                                        // Image.network(
+                                                        //   HttpNetWorkUrlApi
+                                                        //           .baseURL +
+                                                        //       controller
+                                                        //           .listAgriculturalProduct[
+                                                        //               index]
+                                                        //           .images
+                                                        //           .first,
+                                                        //   fit: BoxFit.cover,
+                                                        //   height: 50,
+                                                        //   width: 50,
+                                                        // ),
                                                         SizedBox(
                                                           width: UtilsReponsive
                                                               .width(
@@ -198,7 +197,7 @@ class AgriculturalProductsView
                                                                           Text(
                                                                             DateFormat("dd/MM/yyyy").format(DateTime.parse(controller.listAgriculturalProduct[index].time)),
                                                                             style:
-                                                                            AppTextStyle.textDateTimeData,
+                                                                                AppTextStyle.textDateTimeData,
                                                                           ),
                                                                         ],
                                                                       ),

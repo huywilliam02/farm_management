@@ -5,6 +5,7 @@ import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
+import 'package:itfsd/presentation/page/cropseason/crop_season_detail_view.dart';
 
 class TabCropView extends StatefulWidget {
   const TabCropView({super.key});
@@ -66,7 +67,8 @@ class _TabCropViewState extends State<TabCropView>
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.toNamed(Routes.CROPSEASON);
+                            Get.to(() => HarvestSeasonListScreen());
+                            // Get.toNamed(Routes.CROPSEASON);
                           },
                           icon: Image.asset(
                             "assets/icons/seeds.png",

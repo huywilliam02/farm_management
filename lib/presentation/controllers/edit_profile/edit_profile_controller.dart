@@ -259,4 +259,8 @@ class EditProfileController extends BaseController {
     // Xoá phần tử ở vị trí
     avatar.value = "";
   }
+  logout() async {
+    await DatabaseLocal.instance.removeJwtToken();
+    Get.offAllNamed(Routes.LOGIN);
+  }
 }

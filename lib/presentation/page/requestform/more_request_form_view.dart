@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/app/components/custom_gesture_detector.dart';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/requestform/request_form_controller.dart';
@@ -73,7 +74,7 @@ class RequestformView extends BaseView<RequestformController> {
                           SizedBox(
                             height: UtilsReponsive.height(context, 10),
                           ),
-                          FormFieldWidget(
+                          CommonFormFieldWidget(
                             textInputType: TextInputType.text,
                             controllerEditting: controller.nameController,
                             setValueFunc: controller.setValueName,
@@ -125,7 +126,7 @@ class RequestformView extends BaseView<RequestformController> {
                           SizedBox(
                             height: UtilsReponsive.height(context, 10),
                           ),
-                          FormFieldWidget(
+                          CommonFormFieldWidget(
                               initValue: controller.quantity.toString(),
                               textInputType: TextInputType.number,
                               setValueFunc: (value) {
@@ -142,7 +143,7 @@ class RequestformView extends BaseView<RequestformController> {
                           SizedBox(
                             height: UtilsReponsive.height(context, 10),
                           ),
-                          FormFieldWidget(
+                          CommonFormFieldWidget(
                             textInputType: TextInputType.text,
                             controllerEditting:
                                 controller.descriptionController,
@@ -278,7 +279,7 @@ class RequestformView extends BaseView<RequestformController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.idmaterialChooseController,
@@ -336,7 +337,7 @@ class RequestformView extends BaseView<RequestformController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.idproviderChooseController,

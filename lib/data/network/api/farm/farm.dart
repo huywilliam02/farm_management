@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:itfsd/data/model/farm/farm_detail.dart';
 import 'package:itfsd/presentation/controllers/start_app/start_app_controller.dart';
 import 'package:itfsd/data/model/category/product.dart';
 import 'package:itfsd/data/model/farm/farm.dart';
 
 class FarmApi {
-  static Future<List<Farm>> getAllFarm() async {
+  static Future<List<FarmDetail>> getAllFarm() async {
     var response = await http.get(
       Uri.parse('http://116.118.49.43:8878/api/farm/all'),
       headers: {
@@ -19,10 +20,10 @@ class FarmApi {
     log('getAllFarm - status code : ${response.statusCode}');
     log('getAllFarm - body code : ${response.body}');
     if (response.statusCode == 200) {
-      List<Farm> listFarm = [];
+      List<FarmDetail> listFarm = [];
       final mapData = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      listFarm = mapData.map<Farm>((json) {
-        return Farm.fromJson(json);
+      listFarm = mapData.map<FarmDetail>((json) {
+        return FarmDetail.fromJson(json);
       }).toList();
       return listFarm;
     } else {
@@ -54,5 +55,4 @@ class FarmApi {
       return Future<List<Product>>.value([]);
     }
   }
-
 }

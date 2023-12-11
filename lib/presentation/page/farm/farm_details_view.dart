@@ -1,14 +1,17 @@
-import 'package:itfsd/app/core/constants/data_constant.dart';
-import 'package:itfsd/base/base_view.dart';
-import 'package:itfsd/app/core/constants/api_endpoint.dart';
-import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
-import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itfsd/base/base_view.dart';
+import 'package:itfsd/app/core/constants/api_endpoint.dart';
+import 'package:itfsd/app/core/constants/data_constant.dart';
+
+import 'package:itfsd/app/resources/theme/app_text_style.dart';
+import 'package:itfsd/presentation/controllers/farm/farm_controller.dart';
 
 class FarmDetailsView extends BaseView<FarmController> {
-  FarmDetailsView({Key? key, this.idFarm}) : super(key: key);
-  String? idFarm;
+  final String idFarm;
+
+  FarmDetailsView({required this.idFarm});
+
   @override
   Widget buildView(BuildContext context) {
     return Scaffold(
@@ -22,17 +25,16 @@ class FarmDetailsView extends BaseView<FarmController> {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios_new),
-                    onPressed: () async {
-                      Get.toNamed(Routes.MAIN_TABVIEW);
+                    onPressed: () {
+                      Get.back();
                     },
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 6,
                     child: Center(
                       child: Text(
                         'Chi tiết nông trại',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w800, fontSize: 18),
+                        style: AppTextStyle.textTitleAppBar,
                       ),
                     ),
                   ),
@@ -45,6 +47,7 @@ class FarmDetailsView extends BaseView<FarmController> {
               child: Obx(
                 () {
                   var selectedFarm = controller.selectedFarm.value;
+
                   return selectedFarm != null
                       ? Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -72,20 +75,24 @@ class FarmDetailsView extends BaseView<FarmController> {
                                 style: AppTextStyle.textAddressFarm,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '${selectedFarm.businessModel}',
+                                    'Mô hình kinh doanh: ${selectedFarm.businessModel}',
                                     style: AppTextStyle.textBusinessFarm,
                                   ),
                                   Text(
-                                    '${selectedFarm.businessType}',
+                                    'Loại hình doanh nghiệp: ${selectedFarm.businessType}',
                                     style: AppTextStyle.textBusinessFarm,
                                   ),
                                 ],
                               ),
-                              Text('${selectedFarm.district}'),
-                              Text('${selectedFarm.province}'),
+                              Text('Tỉnh: ${selectedFarm.province}'),
+                              Text('Huyện: ${selectedFarm.district}'),
+                              Text('Xã: ${selectedFarm.wards}'),
+                              // Text(
+                              //     'Vị trí: (${selectedFarm.location['latitude']}, ${selectedFarm.location['longitude']})'),
                             ],
                           ),
                         )

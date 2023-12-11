@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/common/dialog/dia_logs.dart';
+import 'package:itfsd/app/core/common/dialog/dialog_icon_button.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/shoppings/shoppings_controller.dart';
 import 'package:itfsd/presentation/page/shoppings/harvest_bill_view.dart';
@@ -33,7 +35,24 @@ class ShowBottomShop extends BaseView<ShoppingsController> {
           const Divider(),
           ListTile(
             onTap: () {
-              Get.to(() => const HarvestBillView());
+              Dialogs.materialDialog(
+                  msg:
+                      'Chỉ có chủ hội và thư ký hoặc người có quyền mới sử dụng được tính năng này.',
+                  title: "Bạn không có quyền truy cập",
+                  color: Colors.white,
+                  context: context,
+                  actions: [
+                    DiaLogIconsButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      text: 'Trở lại',
+                      iconData: Icons.cancel_outlined,
+                      color: Colors.white,
+                      textStyle: TextStyle(color: Colors.grey),
+                      iconColor: Colors.grey,
+                    ),
+                  ]);
             },
             leading: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -44,7 +63,24 @@ class ShowBottomShop extends BaseView<ShoppingsController> {
           const Divider(),
           ListTile(
             onTap: () {
-              // controller.logout();
+              Dialogs.materialDialog(
+                  msg:
+                      'Chỉ có chủ hội và thư ký hoặc người có quyền mới sử dụng được tính năng này.',
+                  title: "Bạn không có quyền truy cập",
+                  color: Colors.white,
+                  context: context,
+                  actions: [
+                    DiaLogIconsButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      text: 'Trở lại',
+                      iconData: Icons.cancel_outlined,
+                      color: Colors.white,
+                      textStyle: TextStyle(color: Colors.grey),
+                      iconColor: Colors.grey,
+                    ),
+                  ]);
             },
             leading: Padding(
               padding: const EdgeInsets.all(8.0),

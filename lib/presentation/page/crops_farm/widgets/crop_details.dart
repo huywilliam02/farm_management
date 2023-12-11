@@ -1,4 +1,5 @@
 import 'package:itfsd/app/core/common/dialog/dia_logs.dart';
+import 'package:itfsd/app/util/number_format_utils.dart';
 import 'package:itfsd/data/model/crops/crops_detail.dart';
 import 'package:itfsd/presentation/controllers/crops_farm/controllers/edit_crop_controller.dart';
 import 'package:itfsd/presentation/page/users/user.dart';
@@ -59,12 +60,21 @@ class CropDetailsView extends BaseView<EditCropController> {
       children: [
         _buildImageList(crop.images!),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildCommonShowData(IconsUtils.username, "Họ và tên", crop.name!),
+              buildCommonShowData("Tên cây trồng", crop.name!),
+              buildCommonShowData(
+                "Giá tiền",
+                NumberFormatUtils.formatDong(crop.price.toString()),
+              ),
+              buildCommonShowData("Thời gian thu hoạch", crop.harvest!),
+              buildCommonShowData("Thuộc nhóm", crop.groupCrop!.name!),
+              buildCommonShowData("Loại bệnh thường gặp", crop.disease!),
+              buildCommonShowData("Đặc tính sinh trưởng", crop.growth!),
+              buildCommonShowData("Đặc tính sử dụng", crop.use!),
             ],
           ),
         ),
@@ -106,9 +116,8 @@ class CropDetailsView extends BaseView<EditCropController> {
     );
   }
 
-  Widget buildCommonShowData(IconData iconData, String title, String label) {
+  Widget buildCommonShowData(String title, String label) {
     return CommonShowData(
-      iconData: iconData,
       title: title,
       label: label,
     );

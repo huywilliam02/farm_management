@@ -38,6 +38,7 @@ class Assets {
   static const String bindingsCropsFarmBinding = 'lib/presentation/controllers/crops_farm/bindings/crops_farm_binding.dart';
   static const String bindingsEditCropBinding = 'lib/presentation/controllers/crops_farm/bindings/edit_crop_binding.dart';
   static const String buttonsButtonTabView = 'lib/app/components/buttons/button_tab_view.dart';
+  static const String buttonsIncomeOther = 'lib/app/components/buttons/income_other.dart';
   static const String buttonsListButtonStatistics = 'lib/app/components/buttons/list_button_statistics.dart';
   static const String buttonsListIconPhoneNumber = 'lib/app/components/buttons/list_icon_phone_number.dart';
   static const String buttonsListIconViewPet = 'lib/app/components/buttons/list_icon_view_pet.dart';
@@ -46,6 +47,7 @@ class Assets {
   static const String buttonsListIconWareHouse = 'lib/app/components/buttons/list_icon_ware_house.dart';
   static const String buttonsTabCropView = 'lib/app/components/buttons/tab_crop_view.dart';
   static const String buttonsTabViewDiary = 'lib/app/components/buttons/tab_view_diary.dart';
+  static const String buttonsWareHouseTab = 'lib/app/components/buttons/ware_house_tab.dart';
   static const String categoryProduct = 'lib/data/model/category/product.dart';
   static const String categorySoilTypeModel = 'lib/data/model/category/soilTypeModel.dart';
   static const String categoryTableTree = 'lib/data/model/category/table_tree.dart';
@@ -83,6 +85,8 @@ class Assets {
   static const String componentsCustomGestureDetector = 'lib/app/components/custom_gesture_detector.dart';
   static const String componentsDialogWidget = 'lib/app/components/dialog_widget.dart';
   static const String componentsShowNotData = 'lib/app/components/show_not_data.dart';
+  static const String componentsSupportView = 'lib/app/components/support_view.dart';
+  static const String componentsTermAndPrivaceView = 'lib/app/components/term_and_privace_view.dart';
   static const String componentsTextButton = 'lib/app/components/text_button.dart';
   static const String configLogConfig = 'lib/app/config/log_config.dart';
   static const String constantsApiEndpoint = 'lib/app/core/constants/api_endpoint.dart';
@@ -113,6 +117,7 @@ class Assets {
   static const String cropsFarmGetDataAllCropsRequest = 'lib/data/network/api/crops_farm/get_data_all_crops_request.dart';
   static const String cropsFarmSreachCropRequest = 'lib/data/network/api/crops_farm/sreach_crop_request.dart';
   static const String cropsFarmUpdateCropRequest = 'lib/data/network/api/crops_farm/update_crop_request.dart';
+  static const String cropseasonCropSeasonDetailView = 'lib/presentation/page/cropseason/crop_season_detail_view.dart';
   static const String cropseasonCropseasonBinding = 'lib/presentation/controllers/cropseason/cropseason_binding.dart';
   static const String cropseasonCropseasonController = 'lib/presentation/controllers/cropseason/cropseason_controller.dart';
   static const String cropseasonCropseasonView = 'lib/presentation/page/cropseason/cropseason_view.dart';
@@ -133,9 +138,11 @@ class Assets {
   static const String dimensAppDimen = 'lib/app/resources/dimens/app_dimen.dart';
   static const String dimensDimes = 'lib/app/resources/dimens/dimes.dart';
   static const String dividerCommon.divider = 'lib/app/core/common/divider/common.divider.dart';
+  static const String documentAgriculturalGuide = 'lib/presentation/page/document/agricultural_guide.dart';
   static const String documentDocumentBinding = 'lib/presentation/controllers/document/document_binding.dart';
   static const String documentDocumentController = 'lib/presentation/controllers/document/document_controller.dart';
   static const String documentDocumentView = 'lib/presentation/page/document/document_view.dart';
+  static const String documentGuideDetailView = 'lib/presentation/page/document/guide_detail_view.dart';
   static const String editCropCreateCropView = 'lib/presentation/page/crops_farm/edit_crop/create_crop_view.dart';
   static const String editCropEditCropView = 'lib/presentation/page/crops_farm/edit_crop/edit_crop_view.dart';
   static const String editProfileEditProfile = 'lib/presentation/page/edit_profile/edit_profile.dart';
@@ -157,6 +164,7 @@ class Assets {
   static const String farmFarm = 'lib/data/model/farm/farm.dart';
   static const String farmFarmBinding = 'lib/presentation/controllers/farm/farm_binding.dart';
   static const String farmFarmController = 'lib/presentation/controllers/farm/farm_controller.dart';
+  static const String farmFarmDetail = 'lib/data/model/farm/farm_detail.dart';
   static const String farmFarmDetailsView = 'lib/presentation/page/farm/farm_details_view.dart';
   static const String farmFarmView = 'lib/presentation/page/farm/farm_view.dart';
   static const String farmMoreFarm = 'lib/presentation/page/farm/more_farm.dart';
@@ -187,12 +195,14 @@ class Assets {
   static const String fundnumberFundnumberBinding = 'lib/presentation/controllers/fundnumber/fundnumber_binding.dart';
   static const String fundnumberFundnumberController = 'lib/presentation/controllers/fundnumber/fundnumber_controller.dart';
   static const String fundnumberFundnumberView = 'lib/presentation/page/fundnumber/fundnumber_view.dart';
+  static const String fundnumberInvestment = 'lib/presentation/page/fundnumber/investment.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String harvestdiaryDiaryView = 'lib/presentation/page/harvestdiary/diary_view.dart';
   static const String harvestdiaryHarvestdiaryBinding = 'lib/presentation/controllers/harvestdiary/harvestdiary_binding.dart';
   static const String harvestdiaryHarvestdiaryController = 'lib/presentation/controllers/harvestdiary/harvestdiary_controller.dart';
   static const String harvestdiaryHarvestdiaryView = 'lib/presentation/page/harvestdiary/harvestdiary_view.dart';
   static const String helperStreamDisposable = 'lib/app/helper/stream/disposable.dart';
+  static const String homeHarvestedCropListView = 'lib/presentation/page/home/harvested_crop_list_view.dart';
   static const String homeHomeBinding = 'lib/presentation/controllers/home/home_binding.dart';
   static const String homeHomeController = 'lib/presentation/controllers/home/home_controller.dart';
   static const String homeHomeView = 'lib/presentation/page/home/home_view.dart';
@@ -292,7 +302,10 @@ class Assets {
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBackroutwo = 'assets/images/backroutwo.jpg';
   static const String imagesBackru = 'assets/images/backru.jpg';
+  static const String imagesIot = 'assets/images/iot.jpg';
+  static const String imagesNotification = 'assets/images/notification.png';
   static const String imagesStart = 'assets/images/start.png';
+  static const String imagesWeather = 'assets/images/weather.jpg';
   static const String ingredientsCreateIngredientsView = 'lib/presentation/page/ingredients/create_ingredients_view.dart';
   static const String ingredientsIngredientsApi = 'lib/data/network/api/ingredients/ingredients_api.dart';
   static const String ingredientsIngredientsBinding = 'lib/presentation/controllers/ingredients/ingredients_binding.dart';
@@ -348,6 +361,9 @@ class Assets {
   static const String newsRemoteService = 'lib/data/network/api/news/remote_service.dart';
   static const String noItemsFoundViewCommonNoItemsFoundIndicator = 'lib/app/core/common/page_view/no_items_found_view/common_no_items_found_indicator.dart';
   static const String noMoreItemsViewCommonNoMoreItemsIndicator = 'lib/app/core/common/page_view/no_more_items_view/common_no_more_items_indicator.dart';
+  static const String notificationListNotification = 'lib/presentation/page/home/notification/list_notification.dart';
+  static const String notificationNotificationDetail = 'lib/presentation/page/home/notification/notification_detail.dart';
+  static const String notificationNotificationItem = 'lib/presentation/page/home/notification/notification_Item.dart';
   static const String otherobjectApiOtherobjectApi = 'lib/data/network/api/otherobjectApi/otherobjectApi.dart';
   static const String otherobjectMoreOtherObjectView = 'lib/presentation/page/otherobject/more_OtherObject_view.dart';
   static const String otherobjectOtherObjectDetail = 'lib/data/model/otherobject/otherObject_detail.dart';
@@ -422,6 +438,7 @@ class Assets {
   static const String supplierSupplierModel = 'lib/data/model/supplier/supplier_model.dart';
   static const String supplierSupplierView = 'lib/presentation/page/supplier/supplier_view.dart';
   static const String tabMorelandDivisionLandDivisionController = 'lib/presentation/controllers/view_landfull/tab_moreland_division/land_division_controller.dart';
+  static const String tabViewlandLandsDetail = 'lib/presentation/page/viewlandfull/tab_viewland/lands_detail.dart';
   static const String tabViewlandViewLandView = 'lib/presentation/page/viewlandfull/tab_viewland/view_land_view.dart';
   static const String tabViewlandfullViewLandfullController = 'lib/presentation/controllers/view_landfull/tab_viewlandfull/view_landfull_controller.dart';
   static const String tabViewlandfullViewLandfullView = 'lib/presentation/page/viewlandfull/tab_viewlandfull/view_landfull_view.dart';
@@ -478,6 +495,7 @@ class Assets {
   static const String widgetsDrawer = 'lib/presentation/page/chat_ai/widgets/drawer.dart';
   static const String widgetsEditStoreware = 'lib/presentation/page/warehouse/storewarehouse/widgets/edit_storeware.dart';
   static const String widgetsForwardButton = 'lib/presentation/page/account/widgets/forward_button.dart';
+  static const String widgetsInformationProfile.view = 'lib/presentation/page/edit_profile/widgets/information_profile.view.dart';
   static const String widgetsLoginChoosePage = 'lib/presentation/page/login/widgets/login_choose_page.dart';
   static const String widgetsNewsCard = 'lib/presentation/page/news/widgets/newsCard.dart';
   static const String widgetsPopMenu = 'lib/presentation/page/chat_ai/widgets/pop_menu.dart';

@@ -21,8 +21,8 @@ Future<void> main() async {
   Hive.registerAdapter<LoginModel>(LoginModelAdapter());
   Locale language = await DatabaseLocal.instance.getLocale();
   tz.initializeTimeZones();
-  var detroit = tz.getLocation('Asia/Bangkok');
-  tz.setLocalLocation(detroit);
+  var vietnam = tz.getLocation('Asia/Ho_Chi_Minh');
+  tz.setLocalLocation(vietnam);
   runApp(
     ChangeNotifierProvider(
       create: (_) => ConversationProvider(),

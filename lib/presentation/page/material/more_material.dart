@@ -1,3 +1,4 @@
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/util/number_format_utils.dart';
@@ -72,7 +73,7 @@ class MoreMaterialView extends BaseView<MaterialController> {
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    FormFieldWidget(
+                    CommonFormFieldWidget(
                       controllerEditting: controller.namematerialController,
                       textInputType: TextInputType.text,
                       setValueFunc: controller.setValueNameMaterial,
@@ -87,7 +88,7 @@ class MoreMaterialView extends BaseView<MaterialController> {
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    FormFieldWidget(
+                    CommonFormFieldWidget(
                         textInputType: TextInputType.number,
                         // suffixIcon: const Icon(Icons.arrow_drop_down),
                         initValue: controller.quantity.toString(),
@@ -104,7 +105,7 @@ class MoreMaterialView extends BaseView<MaterialController> {
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    FormFieldWidget(
+                    CommonFormFieldWidget(
                       textInputType: TextInputType.text,
                       controllerEditting: controller.descriptionController,
                       // suffixIcon: const Icon(Icons.arrow_drop_down),
@@ -120,7 +121,7 @@ class MoreMaterialView extends BaseView<MaterialController> {
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    FormFieldWidget(
+                    CommonFormFieldWidget(
                         textInputType: TextInputType.number,
                         // suffixIcon: const Icon(Icons.arrow_drop_down),
                         // initValue: controller.price.toString(),
@@ -366,7 +367,7 @@ class MoreMaterialView extends BaseView<MaterialController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.materialGroupIdController,

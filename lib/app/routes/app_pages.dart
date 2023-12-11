@@ -198,7 +198,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.FUNDNUMBER,
-      page: () => const FundnumberView(),
+      page: () => FundNumberView(),
       binding: FundnumberBinding(),
     ),
     GetPage(

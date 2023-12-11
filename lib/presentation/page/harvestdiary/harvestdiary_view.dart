@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/presentation/page/harvestdiary/diary_view.dart';
 
 import '../../controllers/harvestdiary/harvestdiary_controller.dart';
@@ -10,6 +11,7 @@ class HarvestdiaryView extends GetView<HarvestdiaryController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           children: [

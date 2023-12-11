@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:itfsd/app/components/support_view.dart';
+import 'package:itfsd/app/components/term_and_privace_view.dart';
 import 'package:itfsd/app/core/common/dialog/dialog_icon_button.dart';
 import 'package:itfsd/app/core/common/dialog/icon_outline_button.dart';
 import 'package:itfsd/app/core/common/dialog/material_dialogs.dart';
@@ -6,6 +8,8 @@ import 'package:itfsd/app/core/shared/dialog/types.dart';
 import 'package:itfsd/presentation/controllers/edit_profile/edit_profile_controller.dart';
 import 'package:itfsd/presentation/controllers/users/edit_user/edit_user_controller.dart';
 import 'package:itfsd/presentation/controllers/users/users_controller.dart';
+import 'package:itfsd/presentation/page/edit_profile/widgets/information_profile.view.dart';
+import 'package:itfsd/presentation/page/planttracking/planttracking_view.dart';
 import 'package:lottie/lottie.dart';
 import 'account.dart';
 
@@ -42,23 +46,22 @@ class AccountView extends BaseView<AccountController> {
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
-                child: Obx(
-                  () => controller.isLoading.value
-                      ? CommonLoadingPageProgressIndicator()
-                      : InkWell(
-                          onTap: () {
-                            // print('selectedUser: ${controller.loginModel.value}');
-
-                            if (editProfileController.loginModel.value !=
-                                null) {
-                              editProfileController.showData(
-                                  editProfileController.loginModel.value!);
-                            } else {
-                              // Handle the case where selectedUser is null
-                              print("selectedUser is null");
-                            }
-                          },
-                          child: Row(
+                child: InkWell(
+                  onTap: () {
+                    // print('selectedUser: ${controller.loginModel.value}');
+                    Get.to(() => InformationPage());
+                    // if (editProfileController.loginModel.value != null) {
+                    //   editProfileController
+                    //       .showData(editProfileController.loginModel.value!);
+                    // } else {
+                    //   // Handle the case where selectedUser is null
+                    //   print("selectedUser is null");
+                    // }
+                  },
+                  child: Obx(
+                    () => controller.isLoading.value
+                        ? const CommonLoadingPageProgressIndicator()
+                        : Row(
                             children: [
                               Container(
                                 clipBehavior: Clip.hardEdge,
@@ -110,7 +113,7 @@ class AccountView extends BaseView<AccountController> {
                               ),
                             ],
                           ),
-                        ),
+                  ),
                 ),
               ),
               const SizedBox(height: 40),
@@ -149,7 +152,7 @@ class AccountView extends BaseView<AccountController> {
                 bgColor: Colors.indigo,
                 iconColor: Colors.white,
                 onTap: () {
-                  Get.toNamed(Routes.EDIT_PROFILE);
+                  Get.to(() => const PlanttrackingView());
                 },
               ),
               const SizedBox(height: 20),
@@ -177,7 +180,9 @@ class AccountView extends BaseView<AccountController> {
                 icon: Ionicons.person,
                 bgColor: Colors.green,
                 iconColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => SupportCenterPage());
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(
@@ -185,7 +190,9 @@ class AccountView extends BaseView<AccountController> {
                 icon: Ionicons.book_outline,
                 bgColor: Colors.grey,
                 iconColor: Colors.white,
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => TermsAndPrivacyPage());
+                },
               ),
               const SizedBox(height: 20),
               SettingItem(

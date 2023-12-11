@@ -59,7 +59,8 @@ class ViewFullView extends BaseView<ViewFullController> {
                               IconButton(
                                 icon: Image.asset(
                                   "assets/icons/product.png",
-                                  width: 100,
+                                  height: 50,
+                                  width: 50,
                                 ),
                                 onPressed: () {
                                   showModalBottomSheet(
