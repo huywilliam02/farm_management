@@ -307,6 +307,7 @@ class Assets {
   static const String imagesStart = 'assets/images/start.png';
   static const String imagesWeather = 'assets/images/weather.jpg';
   static const String ingredientsCreateIngredientsView = 'lib/presentation/page/ingredients/create_ingredients_view.dart';
+  static const String ingredientsIngredients.details = 'lib/presentation/page/ingredients/ingredients.details.dart';
   static const String ingredientsIngredientsApi = 'lib/data/network/api/ingredients/ingredients_api.dart';
   static const String ingredientsIngredientsBinding = 'lib/presentation/controllers/ingredients/ingredients_binding.dart';
   static const String ingredientsIngredientsController = 'lib/presentation/controllers/ingredients/ingredients_controller.dart';

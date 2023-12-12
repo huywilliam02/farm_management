@@ -188,7 +188,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.WAGE,
-      page: () => const WageView(),
+      page: () =>  WageView(),
       binding: WageBinding(),
     ),
     GetPage(

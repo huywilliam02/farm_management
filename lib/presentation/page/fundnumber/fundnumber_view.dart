@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itfsd/app/core/common/dialog/dia_logs.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
@@ -7,6 +8,7 @@ import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/fundnumber/fundnumber_controller.dart';
 
+import '../../../app/core/common/dialog/dialog_icon_button.dart';
 import '../../controllers/agricultural_products/agricultural_products_constant.dart';
 
 class FundDetailPage extends StatelessWidget {
@@ -206,6 +208,7 @@ class FundNumberView extends BaseView<FundnumberController> {
   @override
   Widget buildView(BuildContext context) {
     return CommonScaffold(
+      backgroundColor: ColorConstant.background_color,
       appBar: CommonAppBar(
         title: "Danh sách số quỹ ",
         titleType: AppBarTitle.text,
@@ -247,9 +250,27 @@ class FundNumberView extends BaseView<FundnumberController> {
                                       "assets/icons/filtration.png"))),
                           IconButton(
                               onPressed: () {
-                                // TODO: Add functionality to add new fund
+                                Dialogs.materialDialog(
+                                    msg:
+                                        'Chỉ có chủ hội và chuyên gia hoặc người có quyền mới sử dụng được tính năng này.',
+                                    title: "Bạn không có quyền truy cập",
+                                    color: Colors.white,
+                                    context: context,
+                                    actions: [
+                                      DiaLogIconsButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        text: 'Trở lại',
+                                        iconData: Icons.cancel_outlined,
+                                        color: Colors.white,
+                                        textStyle:
+                                            TextStyle(color: Colors.grey),
+                                        iconColor: Colors.grey,
+                                      ),
+                                    ]);
                               },
-                              icon: const Icon(Icons.add)),
+                              icon: Icon(IconsUtils.add))
                         ],
                       ),
                     ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/common/dialog/dia_logs.dart';
+import 'package:itfsd/app/core/common/dialog/dialog_icon_button.dart';
 import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
@@ -296,6 +298,30 @@ Như vậy, có thể thấy ở nước ta có nhiều loại đất trồng v�
         onLeadingPressed: () {
           Get.back();
         },
+        actions: [
+          IconButton(
+              onPressed: () {
+                Dialogs.materialDialog(
+                    msg:
+                    'Chỉ có chủ hội và chuyên gia hoặc người có quyền mới sử dụng được tính năng này.',
+                    title: "Bạn không có quyền truy cập",
+                    color: Colors.white,
+                    context: context,
+                    actions: [
+                      DiaLogIconsButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        text: 'Trở lại',
+                        iconData: Icons.cancel_outlined,
+                        color: Colors.white,
+                        textStyle: TextStyle(color: Colors.grey),
+                        iconColor: Colors.grey,
+                      ),
+                    ]);
+              },
+              icon: Icon(IconsUtils.add))
+        ],
       ),
       body: ListView.separated(
         separatorBuilder: (context, index) => const CommonDivider(),

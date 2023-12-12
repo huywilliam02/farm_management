@@ -13,6 +13,7 @@ import 'package:itfsd/app/util/reponsive_utils.dart';
 import 'package:itfsd/data/model/igredients/ingredientsDetail.dart';
 import 'package:itfsd/data/model/igredients/ingredientsModel.dart';
 import 'package:itfsd/presentation/page/ingredients/create_ingredients_view.dart';
+import 'package:itfsd/presentation/page/ingredients/ingredients.details.dart';
 import 'package:itfsd/presentation/page/ingredients/ingredients_view.dart';
 
 class IngredientsController extends BaseController {
@@ -50,6 +51,9 @@ class IngredientsController extends BaseController {
 
   List<String> listStatusDropdown = <String>['Hàng tồn kho', 'Hàng xuất kho'];
   Rx<String> dropdownValue = "".obs;
+
+  Rx<IngredientsDetail> currentIngredient = IngredientsDetail().obs;
+
   final count = 0.obs;
   @override
   Future<void> onInit() async {
@@ -94,8 +98,6 @@ class IngredientsController extends BaseController {
       lazyLoading(false);
     }
   }
-
-
 
   refeshDataIngredient() async {
     try {
@@ -146,14 +148,21 @@ class IngredientsController extends BaseController {
     }
   }
 
+  showDetails(IngredientsDetail model) {
+    currentIngredient.value = model;
+    Get.to(() => IngredientsDetailsView(
+          id: model.id!,
+        ));
+  }
+
   showDataIngredients(IngredientsDetail model) {
     refeshFormIngredients();
-    nameingredientsController.text = model.name;
+    nameingredientsController.text = model.name!;
     moneyingredients(model.money);
-    quantityingredientsController.text = model.quantity;
-    weightingredientsController.text = model.weight;
-    informationingredientsController.text = model.information;
-    timetController.text = model.time;
+    quantityingredientsController.text = model.quantity!;
+    weightingredientsController.text = model.weight!;
+    informationingredientsController.text = model.information!;
+    timetController.text = model.time!;
     listImage(model.images);
     dropdownValue.value =
         model.status == 1 ? listStatusDropdown.first : listStatusDropdown.last;
@@ -250,7 +259,8 @@ class IngredientsController extends BaseController {
       images: [],
     );
     bool check = idIngredietns != null
-        ? await IngredientApi.updataIngredietns(formData, listImage, idIngredietns)
+        ? await IngredientApi.updataIngredietns(
+            formData, listImage, idIngredietns)
         : await IngredientApi.createIngredients(formData, listImage);
     if (check) {
       Get.back();

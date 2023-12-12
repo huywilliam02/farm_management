@@ -327,50 +327,50 @@ class HarvestSeasonListScreen extends StatelessWidget {
             Expanded(
               flex: 9,
               child: ListView.separated(
-                separatorBuilder: (context, index) => CommonDivider(),
+                separatorBuilder: (context, index) => const CommonDivider(),
                 itemCount: harvestSeasons.length,
                 itemBuilder: (context, index) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(14.0),
-                                child: Text(
-                                  harvestSeasons[index].crop.name,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700),
+                  return InkWell(
+                    onTap: () {
+                      MaterialPageRoute(
+                        builder: (context) => HarvestSeasonDetailScreen(
+                          harvestSeason: harvestSeasons[index],
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.all(14.0),
+                                  child: Text(
+                                    harvestSeasons[index].crop.name,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700),
+                                  ),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Image.asset("assets/icons/pen.png",
-                                  width: 20),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: Image.asset("assets/icons/add.png",
-                                  width: 20),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        height: 90,
-                        color: Colors.white,
-                        child: InkWell(
-                          onTap: () {
-                            MaterialPageRoute(
-                              builder: (context) => HarvestSeasonDetailScreen(
-                                harvestSeason: harvestSeasons[index],
+                              IconButton(
+                                onPressed: () {},
+                                icon: Image.asset("assets/icons/pen.png",
+                                    width: 20),
                               ),
-                            );
-                          },
+                              IconButton(
+                                onPressed: () {},
+                                icon: Image.asset("assets/icons/add.png",
+                                    width: 20),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 90,
+                          color: Colors.white,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -383,17 +383,11 @@ class HarvestSeasonListScreen extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        height: 10,
-                                      ),
                                       Text(
                                         harvestSeasons[index].name,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w700),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
                                       ),
                                       Text(
                                         harvestSeasons[index].marketConditions,
@@ -401,9 +395,6 @@ class HarvestSeasonListScreen extends StatelessWidget {
                                             fontSize: 14,
                                             color: Colors.grey,
                                             fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
                                       ),
                                     ],
                                   ),
@@ -445,8 +436,8 @@ class HarvestSeasonListScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 },
               ),

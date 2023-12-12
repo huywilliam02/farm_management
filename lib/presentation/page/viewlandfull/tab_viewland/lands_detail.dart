@@ -218,7 +218,7 @@ class _LandAreaDetailScreenState extends State<LandAreaDetailScreen> {
                             ),
                             builder: (context) => GestureDetector(
                               onTap: () {
-                                _launchDirections(
+                                openMap(
                                   widget.landArea.locations.first.latitude,
                                   widget.landArea.locations.first.longitude,
                                 );
@@ -246,13 +246,12 @@ class _LandAreaDetailScreenState extends State<LandAreaDetailScreen> {
   }
 
   // Hàm để mở ứng dụng chỉ đường
-  Future<void> _launchDirections(double latitude, double longitude) async {
-    final url = 'google.navigation:q=${latitude},${longitude}';
-    // 'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
-    if (await canLaunch(url)) {
-      await launch(url);
+  Future<void> openMap(double latitude, double longitude, {LaunchMode linkLaunchMode = LaunchMode.externalApplication}) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunchUrl(Uri.parse(googleUrl))) {
+      await launchUrl(Uri.parse(googleUrl), mode: linkLaunchMode);
     } else {
-      throw 'Không thể mở ứng dụng chỉ đường';
+      throw 'Could not open the map.';
     }
   }
 }

@@ -14,7 +14,7 @@ class CommonFormFieldWidget extends StatelessWidget {
       this.isObscureText = false,
       this.isEnabled = true,
       this.initValue,
-      this.padding = 0,
+      this.padding = 10,
       this.suffixIcon,
       this.enableInteractiveSelection = true,
       this.styleInput = TextStyleConstant.black16Roboto,
@@ -52,13 +52,13 @@ class CommonFormFieldWidget extends StatelessWidget {
           obscureText: isObscureText,
           focusNode: focusNode,
           decoration: InputDecoration(
-            filled: true,
+            // filled: true,
             fillColor: Color(0xFFFFFFFF),
-            // contentPadding:
-            //     EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: padding!, vertical: 20),
             errorText: errorText != "" ? errorText : null,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(
                 color: ColorConstant.redStop,
               ),
@@ -74,7 +74,7 @@ class CommonFormFieldWidget extends StatelessWidget {
             suffixIcon: suffixIcon,
           ),
           textAlign: TextAlign.justify,
-          maxLines: 2,
+          maxLines: 1,
           keyboardType: textInputType,
           controller: controllerEditting,
           onChanged: (value) {

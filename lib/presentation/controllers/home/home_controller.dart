@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/model/editprofile/edit_profile.dart';
@@ -239,11 +240,33 @@ class HomeController extends BaseController {
           "https://i.ex-cdn.com/nongnghiep.vn/files/content/2023/11/19/anh-3-153516_651-144347.jpg",
     ),
   ].obs;
-
+  var currentPosition = Position(
+    latitude: 0,
+    longitude: 0,
+    accuracy: 0,
+    altitude: 0,
+    heading: 0,
+    speed: 0,
+    speedAccuracy: 0,
+    timestamp: DateTime.now(),
+    altitudeAccuracy: 0,
+    headingAccuracy: double.infinity,
+  ).obs;
   @override
   Future<void> onInit() async {
     getEditUser();
+    getLocation();
     super.onInit();
+  }
+
+  Future<void> getLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      currentPosition.value = position;
+    } catch (e) {
+      print("Error getting location: $e");
+    }
   }
 
   Future<void> getEditUser() async {

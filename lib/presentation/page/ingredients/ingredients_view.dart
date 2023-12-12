@@ -6,6 +6,7 @@ import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
+import 'package:itfsd/app/util/number_format_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
@@ -100,9 +101,9 @@ class IngredientsView extends BaseView<IngredientsController> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () {
-                                      controller.showDataIngredients(
-                                        controller.listIngredients.value[index],
-                                      );
+                                      controller.showDetails(controller
+                                          .currentIngredient(controller
+                                              .currentIngredient.value));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(12.0),
@@ -121,7 +122,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                                               controller
                                                                   .listIngredients[
                                                                       index]
-                                                                  .images
+                                                                  .images!
                                                                   .first,
                                                           fit: BoxFit.cover,
                                                           height: 50,
@@ -141,7 +142,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                                                     controller
                                                                         .listIngredients[
                                                                             index]
-                                                                        .name,
+                                                                        .name!,
                                                                     style: AppTextStyle
                                                                         .textNameData,
                                                                   ),
@@ -162,7 +163,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                                                       Row(
                                                                         children: [
                                                                           Text(
-                                                                            "${controller.listIngredients[index].money.toInt()}đ",
+                                                                            NumberFormatUtils.formatDong(controller.listIngredients[index].money.toString()),
                                                                             style:
                                                                                 AppTextStyle.textPriceData,
                                                                           ),
@@ -176,7 +177,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                                                       Row(
                                                                         children: [
                                                                           Text(
-                                                                            DateFormat("dd/MM/yyyy").format(DateTime.parse(controller.listIngredients[index].time)),
+                                                                            DateFormat("dd/MM/yyyy").format(DateTime.parse(controller.listIngredients[index].time!)),
                                                                             style:
                                                                                 AppTextStyle.textDateTimeData,
                                                                           ),

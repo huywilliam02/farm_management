@@ -45,12 +45,12 @@ class GuideDetailPage extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Text(
-                "Author: ${guide.author}",
+                " ${guide.author}",
                 style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
               ),
               SizedBox(height: 8),
               Text(
-                "Published on: ${guide.publishDate.toLocal()}",
+                "${guide.publishDate.toLocal()}",
                 style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
               ),
               SizedBox(height: 16),

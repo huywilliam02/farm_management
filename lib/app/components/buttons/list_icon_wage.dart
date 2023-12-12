@@ -97,7 +97,7 @@ class _ListIconwageViewState extends State<ListIconwageView>
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.to(() => const WageView());
+                            Get.to(() =>  WageView());
                           },
                           icon: Image.asset(
                             "assets/icons/calendar.png",
