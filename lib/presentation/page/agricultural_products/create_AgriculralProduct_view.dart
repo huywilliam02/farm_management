@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/constants/data_constant.dart';
 import 'package:itfsd/presentation/controllers/agricultural_products/agricultural_products_controller.dart';
 import 'package:itfsd/presentation/page/agricultural_products/agricultural_products_view.dart';
@@ -20,6 +21,7 @@ class CreateAgriculralProductView
   @override
   Widget buildView(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       body: Column(
         children: [
           SizedBox(
@@ -90,15 +92,11 @@ class CreateAgriculralProductView
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    SizedBox(
-                      height: UtilsReponsive.height(context, 70),
-                      child: FormFieldWidget(
-                        controllerEditting:
-                            controller.nameAgriculturalProductController,
-                        textInputType: TextInputType.text,
-                        setValueFunc:
-                            controller.setValueNameAgriculturalProduct,
-                      ),
+                    CommonFormFieldWidget(
+                      controllerEditting:
+                          controller.nameAgriculturalProductController,
+                      textInputType: TextInputType.text,
+                      setValueFunc: controller.setValueNameAgriculturalProduct,
                     ),
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
@@ -110,18 +108,15 @@ class CreateAgriculralProductView
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    SizedBox(
-                      height: UtilsReponsive.height(context, 70),
-                      child: FormFieldWidget(
-                          textInputType: TextInputType.number,
-                          // suffixIcon: const Icon(Icons.arrow_drop_down),
-                          initValue:
-                              controller.moneyAgriculturalProduct.toString(),
-                          setValueFunc: (value) {
-                            controller.moneyAgriculturalProduct.value =
-                                int.tryParse(value) ?? 0;
-                          }),
-                    ),
+                    CommonFormFieldWidget(
+                        textInputType: TextInputType.number,
+                        // suffixIcon: const Icon(Icons.arrow_drop_down),
+                        initValue:
+                            controller.moneyAgriculturalProduct.toString(),
+                        setValueFunc: (value) {
+                          controller.moneyAgriculturalProduct.value =
+                              int.tryParse(value) ?? 0;
+                        }),
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
@@ -141,15 +136,12 @@ class CreateAgriculralProductView
                               SizedBox(
                                 height: UtilsReponsive.height(context, 10),
                               ),
-                              SizedBox(
-                                height: 70,
-                                child: FormFieldWidget(
-                                    textInputType: TextInputType.text,
-                                    controllerEditting: controller
-                                        .quantityAgriculturalProductController,
-                                    setValueFunc: controller
-                                        .setValueQuantityAgriculturalProduct),
-                              )
+                              CommonFormFieldWidget(
+                                  textInputType: TextInputType.text,
+                                  controllerEditting: controller
+                                      .quantityAgriculturalProductController,
+                                  setValueFunc: controller
+                                      .setValueQuantityAgriculturalProduct)
                             ],
                           ),
                         ),
@@ -170,15 +162,12 @@ class CreateAgriculralProductView
                             SizedBox(
                               height: UtilsReponsive.height(context, 10),
                             ),
-                            SizedBox(
-                              height: 70,
-                              child: FormFieldWidget(
-                                textInputType: TextInputType.text,
-                                controllerEditting: controller
-                                    .weightAgriculturalProductController,
-                                setValueFunc: controller
-                                    .setValueWeightAgriculturalProduct,
-                              ),
+                            CommonFormFieldWidget(
+                              textInputType: TextInputType.text,
+                              controllerEditting: controller
+                                  .weightAgriculturalProductController,
+                              setValueFunc:
+                                  controller.setValueWeightAgriculturalProduct,
                             )
                           ],
                         )),
@@ -208,15 +197,12 @@ class CreateAgriculralProductView
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    SizedBox(
-                      height: UtilsReponsive.height(context, 70),
-                      child: FormFieldWidget(
-                        textInputType: TextInputType.text,
-                        controllerEditting:
-                            controller.informationAgriculturalProductController,
-                        setValueFunc:
-                            controller.setValueInformationAgriculturalProduct,
-                      ),
+                    CommonFormFieldWidget(
+                      textInputType: TextInputType.text,
+                      controllerEditting:
+                          controller.informationAgriculturalProductController,
+                      setValueFunc:
+                          controller.setValueInformationAgriculturalProduct,
                     ),
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
@@ -228,19 +214,16 @@ class CreateAgriculralProductView
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    SizedBox(
-                      height: 70,
-                      child: GestureDetector(
-                        onTap: () async {
-                          await controller.chooseDate(true);
-                        },
-                        child: FormFieldWidget(
-                            isEnabled: false,
-                            suffixIcon: const Icon(Icons.calendar_month),
-                            controllerEditting:
-                                controller.timetAgriculturalProductController,
-                            setValueFunc: () {}),
-                      ),
+                    GestureDetector(
+                      onTap: () async {
+                        await controller.chooseDate(true);
+                      },
+                      child: CommonFormFieldWidget(
+                          isEnabled: false,
+                          suffixIcon: const Icon(Icons.calendar_month),
+                          controllerEditting:
+                              controller.timetAgriculturalProductController,
+                          setValueFunc: () {}),
                     ),
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
@@ -591,7 +574,7 @@ class CreateAgriculralProductView
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.farmcontroller,

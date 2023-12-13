@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http_parser/http_parser.dart';
 import 'package:itfsd/data/model/land/land.dart';
+import 'package:itfsd/data/model/land/land_detail.dart';
 import 'package:itfsd/presentation/controllers/start_app/start_app_controller.dart';
 import 'package:get/get.dart';
 import 'package:dio/dio.dart' as dio;
@@ -105,7 +106,7 @@ class LanddivisionApi {
     }
   }
 
-  static Future<List<LandDivision>> getAllLand() async {
+  static Future<List<LandDetail>> getAllLand() async {
     var response = await http.get(
       Uri.parse('http://116.118.49.43:8878/api/land/all'),
       headers: {
@@ -117,10 +118,10 @@ class LanddivisionApi {
     log('getAllLand - status code : ${response.statusCode}');
     log('getAllLand - body code : ${response.body}');
     if (response.statusCode == 200) {
-      List<LandDivision> listLandType = [];
+      List<LandDetail> listLandType = [];
       final mapData = jsonDecode(response.body).cast<Map<String, dynamic>>();
-      listLandType = mapData.map<LandDivision>((json) {
-        return LandDivision.fromJson(json);
+      listLandType = mapData.map<LandDetail>((json) {
+        return LandDetail.fromJson(json);
       }).toList();
       return listLandType;
     } else {

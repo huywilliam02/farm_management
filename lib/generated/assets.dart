@@ -168,6 +168,7 @@ class Assets {
   static const String farmFarmDetailsView = 'lib/presentation/page/farm/farm_details_view.dart';
   static const String farmFarmView = 'lib/presentation/page/farm/farm_view.dart';
   static const String farmMoreFarm = 'lib/presentation/page/farm/more_farm.dart';
+  static const String farmingCalendarFarmCalendarDetail = 'lib/presentation/page/farming_calendar/farm_calendar_detail.dart';
   static const String farmingCalendarFarmingCalendarBinding = 'lib/presentation/controllers/farming_calendar/farming_calendar_binding.dart';
   static const String farmingCalendarFarmingCalendarController = 'lib/presentation/controllers/farming_calendar/farming_calendar_controller.dart';
   static const String farmingCalendarFarmingCalendarView = 'lib/presentation/page/farming_calendar/farming_calendar_view.dart';
@@ -318,6 +319,7 @@ class Assets {
   static const String inputCommonShowData = 'lib/app/core/common/input/common_show_data.dart';
   static const String inputFormFieldWidget = 'lib/app/core/common/input/form_field_widget.dart';
   static const String landLand = 'lib/data/model/land/land.dart';
+  static const String landLandDetail = 'lib/data/model/land/land_detail.dart';
   static const String libMain = 'lib/main.dart';
   static const String libraryImageLibraryImageBinding = 'lib/presentation/controllers/library_image/library_image_binding.dart';
   static const String libraryImageLibraryImageController = 'lib/presentation/controllers/library_image/library_image_controller.dart';
@@ -338,6 +340,7 @@ class Assets {
   static const String mainTabviewMainTabviewBinding = 'lib/presentation/controllers/main_tabview/main_tabview_binding.dart';
   static const String mainTabviewMainTabviewController = 'lib/presentation/controllers/main_tabview/main_tabview_controller.dart';
   static const String mainTabviewMainTabviewView = 'lib/presentation/page/main_tabview/main_tabview_view.dart';
+  static const String materialMaterDetail = 'lib/presentation/page/material/mater_detail.dart';
   static const String materialMaterialApi = 'lib/data/network/api/material/material_api.dart';
   static const String materialMaterialBinding = 'lib/presentation/controllers/material/material_binding.dart';
   static const String materialMaterialController = 'lib/presentation/controllers/material/material_controller.dart';

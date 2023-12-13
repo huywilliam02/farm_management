@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:itfsd/base/base_controller.dart';
 import 'package:itfsd/data/network/api/material/material_api.dart';
+import 'package:itfsd/presentation/page/material/material_detail.dart';
 import 'package:itfsd/presentation/page/material/material_view.dart';
 import 'package:itfsd/presentation/page/material/more_material.dart';
 import 'package:itfsd/data/model/category/product.dart';
@@ -20,6 +21,8 @@ class MaterialController extends BaseController {
   Rx<int> price = 0.obs;
   RxList<String> listImage = <String>[].obs;
   Rx<String> materialGroupId = "".obs;
+
+  Rx<MaterialDetail?> selectedMaterial = Rx<MaterialDetail?>(null);
 
   TextEditingController namematerialController =
       TextEditingController(text: '');
@@ -131,6 +134,13 @@ class MaterialController extends BaseController {
   showAll() {
     listToView.clear();
     listToView.addAll(listMaterial);
+  }
+
+  void showMaterialDetails(MaterialDetail model) {
+    selectedMaterial.value = model;
+    Get.to(() => MaterialDetailsView(
+      idMaterial: model.id,
+    ));
   }
 
   showData(MaterialDetail model) {

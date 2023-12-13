@@ -15,7 +15,7 @@ class ChartResourcesView extends BaseView<ChartResourcesController> {
 
   @override
   Widget buildView(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

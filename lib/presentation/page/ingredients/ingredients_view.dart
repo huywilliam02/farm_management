@@ -34,7 +34,7 @@ class IngredientsView extends BaseView<IngredientsController> {
           centerTitle: true,
           leadingIcon: const Icon(Icons.arrow_back_ios_new),
           onLeadingPressed: () {
-            Get.offAllNamed(Routes.MAIN_TABVIEW);
+            Get.back();
           },
           actions: [
             IconButton(
@@ -101,9 +101,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () {
-                                      controller.showDetails(controller
-                                          .currentIngredient(controller
-                                              .currentIngredient.value));
+                                      controller.showDetails(controller.listIngredients[index]);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(12.0),
@@ -191,7 +189,7 @@ class IngredientsView extends BaseView<IngredientsController> {
                                                                 children: [
                                                                   Container(
                                                                     height: 35,
-                                                                    width: 125,
+                                                                    width: 135,
                                                                     color: controller.listIngredients[index].status ==
                                                                             1
                                                                         ? Colors

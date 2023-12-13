@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/land/land_detail.dart';
 import 'package:itfsd/data/network/api/view_landfull/land_division.dart';
 import 'package:itfsd/data/network/api/view_area/more_land.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
@@ -25,7 +26,7 @@ class ViewFullController extends BaseController {
   RxList<Marker> listMarker = <Marker>[].obs;
 
   RxList<MorelandModel> listArea = <MorelandModel>[].obs;
-  RxList<LandDivision> listLand = <LandDivision>[].obs;
+  RxList<LandDetail> listLand = <LandDetail>[].obs;
   RxList<Farm> listFarm = <Farm>[].obs;
   RxList<Product> listProduct = <Product>[].obs;
   @override

@@ -174,7 +174,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                           },
                         );
                       },
-                      child: FormFieldWidget(
+                      child: CommonFormFieldWidget(
                         controllerEditting: controller.farmcontroller,
                         isEnabled: false,
                         setValueFunc: () {},
@@ -239,7 +239,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                       height: UtilsReponsive.height(context, 10),
                     ),
                     Obx(
-                      () => FormFieldWidget(
+                      () => CommonFormFieldWidget(
                         controllerEditting: controller.acreagecontroller,
                         textInputType: TextInputType.number,
                         errorText: controller.validateErracreage.value,
@@ -300,7 +300,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                               //   ),
                               // ),
                               Expanded(
-                                  child: FormFieldWidget(
+                                  child: CommonFormFieldWidget(
                                 textInputType: TextInputType.number,
                                 setValueFunc: (value) {
                                   controller.latInput(double.parse(value));
@@ -324,7 +324,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                               //   ),
                               // ),
                               Expanded(
-                                  child: FormFieldWidget(
+                                  child: CommonFormFieldWidget(
                                 textInputType: TextInputType.number,
                                 setValueFunc: (value) {
                                   controller.lngInput(double.parse(value));
@@ -406,7 +406,7 @@ class MoreLandView extends BaseView<MoreLandController> {
                     SizedBox(
                       height: UtilsReponsive.height(context, 10),
                     ),
-                    FormFieldWidget(
+                    CommonFormFieldWidget(
                       textInputType: TextInputType.text,
                       setValueFunc: controller.setValuedescription,
                       controllerEditting: controller.descriptioncontroller,

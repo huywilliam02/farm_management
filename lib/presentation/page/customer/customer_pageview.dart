@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/controllers/customer/customer_controller.dart';
 import 'package:itfsd/presentation/page/customer/customer_view.dart';
@@ -90,13 +91,10 @@ class MoreCustomerView extends BaseView<CustomerController> {
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
                       ),
-                      SizedBox(
-                        height: 70,
-                        child: FormFieldWidget(
-                          controllerEditting: controller.nameController,
-                          textInputType: TextInputType.text,
-                          setValueFunc: controller.setValueName,
-                        ),
+                      CommonFormFieldWidget(
+                        controllerEditting: controller.nameController,
+                        textInputType: TextInputType.text,
+                        setValueFunc: controller.setValueName,
                       ),
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
@@ -114,16 +112,12 @@ class MoreCustomerView extends BaseView<CustomerController> {
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
                       ),
-                      SizedBox(
-                        height: 70,
-                        child: FormFieldWidget(
-                          textInputType: TextInputType.text,
-                          initValue: controller.quantity.toString(),
-                          setValueFunc: (value) {
-                            controller.quantity.value =
-                                int.tryParse(value) ?? 0;
-                          },
-                        ),
+                      CommonFormFieldWidget(
+                        textInputType: TextInputType.text,
+                        initValue: controller.quantity.toString(),
+                        setValueFunc: (value) {
+                          controller.quantity.value = int.tryParse(value) ?? 0;
+                        },
                       ),
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
@@ -141,19 +135,16 @@ class MoreCustomerView extends BaseView<CustomerController> {
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
                       ),
-                      SizedBox(
-                        height: 70,
-                        child: GestureDetector(
-                          onTap: () async {
-                            await controller.chooseDate(true);
-                          },
-                          child: FormFieldWidget(
-                              isEnabled: false,
-                              suffixIcon: const Icon(Icons.calendar_month),
-                              controllerEditting:
-                                  controller.receptionDayController,
-                              setValueFunc: () {}),
-                        ),
+                      GestureDetector(
+                        onTap: () async {
+                          await controller.chooseDate(true);
+                        },
+                        child: CommonFormFieldWidget(
+                            isEnabled: false,
+                            suffixIcon: const Icon(Icons.calendar_month),
+                            controllerEditting:
+                                controller.receptionDayController,
+                            setValueFunc: () {}),
                       ),
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
@@ -171,13 +162,10 @@ class MoreCustomerView extends BaseView<CustomerController> {
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),
                       ),
-                      SizedBox(
-                        height: 70,
-                        child: FormFieldWidget(
-                          textInputType: TextInputType.text,
-                          controllerEditting: controller.descriptionController,
-                          setValueFunc: controller.setValuedescription,
-                        ),
+                      CommonFormFieldWidget(
+                        textInputType: TextInputType.text,
+                        controllerEditting: controller.descriptionController,
+                        setValueFunc: controller.setValuedescription,
                       ),
                       SizedBox(
                         height: UtilsReponsive.height(context, 10),

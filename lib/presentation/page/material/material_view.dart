@@ -92,11 +92,10 @@ class MaterialView extends BaseView<MaterialController> {
                         controller: controller.materialscrollController,
                         primary: false,
                         itemBuilder: (context, index) {
+                          var product = controller.listMaterial[index];
                           return InkWell(
                             onTap: () {
-                              controller.showData(
-                                controller.listMaterial.value[index],
-                              );
+                              controller.showMaterialDetails(product);
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

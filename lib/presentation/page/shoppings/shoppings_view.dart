@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/presentation/page/main_tabview/main_tabview_view.dart';
 import 'package:itfsd/presentation/page/shoppings/harvest_bill_view.dart';
@@ -26,9 +28,9 @@ class ShoppingsView extends BaseView<ShoppingsController> {
         'khu vực': 'Đồng bằng sông Mekong',
         'ngày thu hoạch': '23/9/2023',
         'tình trạng cây trồng': 'Trạng thái khá',
-        'địa chỉ công ty': '987 Đường MNO, Thành phố XYZ',
-        'người liên hệ': 'Lê Thị D',
-        'email': 'lethid@example.com',
+        'địa chỉ công ty': '987 Đường PNL, Thành phố HCM',
+        'người liên hệ': 'Lê Thị Duyên',
+        'email': 'lethid@gmail.com',
         'số điện thoại': '0123 789 456',
         'loại hình doanh nghiệp': 'Công ty TNHH',
         'thành lập': '2015',
@@ -57,13 +59,13 @@ class ShoppingsView extends BaseView<ShoppingsController> {
             'mã giao dịch': 'GD0007',
             'số tiền': '1,800,000 đ',
             'ngày': '24/9/2023',
-            'sản phẩm': 'Sản phẩm G'
+            'sản phẩm': 'Sản phẩm dưa lưới'
           },
           {
             'mã giao dịch': 'GD0008',
             'số tiền': '2,200,000 đ',
             'ngày': '26/9/2023',
-            'sản phẩm': 'Sản phẩm I'
+            'sản phẩm': 'Sản phẩm táo'
           },
         ],
         'lịch sử mua hàng': [
@@ -71,7 +73,7 @@ class ShoppingsView extends BaseView<ShoppingsController> {
             'mã hóa đơn': 'HD0007',
             'số tiền': '3,000,000 đ',
             'ngày': '21/9/2023',
-            'sản phẩm': ['Sản phẩm G', 'Sản phẩm H']
+            'sản phẩm': ['Sản phẩm dưa lưới', 'Sản phẩm táo']
           },
           {
             'mã hóa đơn': 'HD0008',
@@ -96,7 +98,7 @@ class ShoppingsView extends BaseView<ShoppingsController> {
         'tình trạng cây trồng': 'Trạng thái tốt',
         'địa chỉ công ty': '567 Đường PQR, Thành phố DEF',
         'người liên hệ': 'Trương Văn E',
-        'email': 'truongvane@example.com',
+        'email': 'truongvane@gmail.com',
         'số điện thoại': '0987 456 123',
         'loại hình doanh nghiệp': 'Công ty TNHH',
         'thành lập': '2018',
@@ -125,13 +127,13 @@ class ShoppingsView extends BaseView<ShoppingsController> {
             'mã giao dịch': 'GD0009',
             'số tiền': '1,200,000 đ',
             'ngày': '27/9/2023',
-            'sản phẩm': 'Sản phẩm J'
+            'sản phẩm': 'Sản phẩm dưa hấu'
           },
           {
             'mã giao dịch': 'GD0010',
             'số tiền': '1,700,000 đ',
             'ngày': '29/9/2023',
-            'sản phẩm': 'Sản phẩm K'
+            'sản phẩm': 'Sản phẩm cà phê'
           },
         ],
         'lịch sử mua hàng': [
@@ -139,13 +141,13 @@ class ShoppingsView extends BaseView<ShoppingsController> {
             'mã hóa đơn': 'HD0009',
             'số tiền': '2,000,000 đ',
             'ngày': '24/9/2023',
-            'sản phẩm': ['Sản phẩm J', 'Sản phẩm L']
+            'sản phẩm': ['Sản phẩm dưa hấu', 'Sản phẩm cà phê']
           },
           {
             'mã hóa đơn': 'HD0010',
             'số tiền': '1,800,000 đ',
             'ngày': '25/9/2023',
-            'sản phẩm': 'Sản phẩm K'
+            'sản phẩm': 'Sản phẩm dưa hấu'
           },
         ],
         'hình ảnh công ty': 'https://example.com/images/company_pqr_logo.jpg',
@@ -173,7 +175,7 @@ class ShoppingsView extends BaseView<ShoppingsController> {
         'danh sách sản phẩm': ['Sản phẩm M', 'Sản phẩm N', 'Sản phẩm O'],
         'đối tác kinh doanh': [
           {
-            'tên': 'Công ty ABC',
+            'tên': 'Công ty KI',
             'ngành nghề': 'Đối tác sản xuất',
             'hình ảnh': 'https://example.com/images/company_abc.jpg'
           },
@@ -494,7 +496,8 @@ class ShoppingsView extends BaseView<ShoppingsController> {
       },
     ];
 
-    return Scaffold(
+    return CommonScaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           children: [
@@ -507,7 +510,7 @@ class ShoppingsView extends BaseView<ShoppingsController> {
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios_new),
                     onPressed: () {
-                      Get.off(() => MainTabView());
+                      Get.back();
                     },
                   ),
                   const Expanded(

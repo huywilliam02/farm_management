@@ -15,6 +15,7 @@ class ChartWarehouseView extends BaseView<ChartWarehouseController> {
   @override
   Widget buildView(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -65,8 +66,8 @@ class ChartWarehouseView extends BaseView<ChartWarehouseController> {
                         fontSize: 14,
                         fontWeight: FontWeight.w700),
                   ),
-                  legend:
-                      const Legend(isVisible: true, position: LegendPosition.bottom),
+                  legend: const Legend(
+                      isVisible: true, position: LegendPosition.bottom),
                   tooltipBehavior: controller.tooltipBehaviorw,
                   series: <CircularSeries<StatisticsWareHouseModel, String>>[
                     // Initialize line series
@@ -464,8 +465,8 @@ class ChartWarehouseView extends BaseView<ChartWarehouseController> {
                         fontSize: 14,
                         fontWeight: FontWeight.w700),
                   ),
-                  legend:
-                      const Legend(isVisible: true, position: LegendPosition.bottom),
+                  legend: const Legend(
+                      isVisible: true, position: LegendPosition.bottom),
                   tooltipBehavior: controller.tooltipBehavior,
                   series: <CircularSeries<StatisticsWareHouseModel, String>>[
                     // Initialize line series

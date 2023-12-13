@@ -27,8 +27,9 @@ class CustomtabbarView extends BaseView<ContactController> {
                     labelPadding: const EdgeInsets.symmetric(horizontal: 10.0),
                     indicatorSize: TabBarIndicatorSize.label,
                     indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey,
+                    ),
                     tabs: [
                       Tab(
                         child: Container(
@@ -125,7 +126,7 @@ class CustomtabbarView extends BaseView<ContactController> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Số điện thoại : ${controller.listClient[index].name}",
+                                    "Số điện thoại : ${controller.listClient[index].phoneNumber}",
                                     style: GoogleFonts.roboto(
                                       // textStyle: Theme.of(context).textTheme.displayLarge,
                                       textStyle:
@@ -174,7 +175,7 @@ class CustomtabbarView extends BaseView<ContactController> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Số điện thoại : ${controller.listSupplier[index].name}",
+                                    "Số điện thoại : ${controller.listSupplier[index].phoneNumber}",
                                     style: GoogleFonts.roboto(
                                       // textStyle: Theme.of(context).textTheme.displayLarge,
                                       textStyle:
@@ -223,8 +224,8 @@ class CustomtabbarView extends BaseView<ContactController> {
                                       fontStyle: FontStyle.normal,
                                     ),
                                   ),
-                                  subtitle:
-                                      Text(controller.listClient[index].name),
+                                  subtitle: Text(
+                                      controller.listClient[index].phoneNumber),
                                   trailing: const Icon(Icons.navigate_next),
                                 );
                               },
@@ -265,7 +266,7 @@ class CustomtabbarView extends BaseView<ContactController> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    "Số điện thoại : ${controller.listOtherObject[index].name}",
+                                    "Số điện thoại : ${controller.listOtherObject[index].phoneNumber}",
                                     style: GoogleFonts.roboto(
                                       // textStyle: Theme.of(context).textTheme.displayLarge,
                                       textStyle:

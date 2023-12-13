@@ -26,6 +26,7 @@ class ChartQuanlityView extends BaseView<ChartQuanlityController> {
       ChartData(12, "Tháng 12", 0, 0),
     ];
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

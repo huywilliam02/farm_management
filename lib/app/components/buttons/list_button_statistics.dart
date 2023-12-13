@@ -59,6 +59,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                 children: [
                   Card(
                     elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -86,6 +87,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                   ),
                   Card(
                     elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -113,6 +115,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                   ),
                   Card(
                     elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -141,6 +144,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                   ),
                   Card(
                     elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(
@@ -168,6 +172,7 @@ class _ListIconStatisticsState extends State<ListIconStatistics>
                   ),
                   Card(
                     elevation: 0.3,
+                    color: ColorConstant.background_color,
                     child: Column(
                       children: [
                         const SizedBox(

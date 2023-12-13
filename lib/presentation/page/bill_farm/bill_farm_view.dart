@@ -215,6 +215,7 @@ class BillDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.background_color,
       appBar: CommonAppBar(
         title: "Chi tiết hoá đơn",
         titleType: AppBarTitle.text,

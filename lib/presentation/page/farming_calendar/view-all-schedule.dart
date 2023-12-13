@@ -6,6 +6,7 @@ import 'package:itfsd/app/core/common/divider/common.divider.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
 import 'package:itfsd/base/base_view.dart';
+import 'package:itfsd/data/model/farming_calendar/schedule-detail.dart';
 import 'package:itfsd/presentation/controllers/farming_calendar/farming_calendar_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -60,32 +61,34 @@ class ViewAllSchedule extends BaseView<FarmingCalendarController> {
                 ),
               ),
               const CommonDivider(),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Hiện thị :  2",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Image(
-                            height: 30,
-                            image: AssetImage("assets/icons/filter.png"),
-                          ),
+              Obx(
+                () => Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Hiện thị: ${controller.listSchedule.length}",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Image(
+                              height: 30,
+                              image: AssetImage("assets/icons/filter.png"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Expanded(
@@ -101,11 +104,15 @@ class ViewAllSchedule extends BaseView<FarmingCalendarController> {
                                     controller.farmingCalendarscrollController,
                                 primary: false,
                                 itemBuilder: (context, index) {
+                                  DetailSchedule schedule =
+                                      controller.listSchedule[index];
                                   return InkWell(
                                     onTap: () {
-                                      controller.showData(
-                                        controller.listSchedule.value[index],
-                                      );
+                                      controller
+                                          .showCalendarFarmDetails(schedule);
+                                      // controller.showData(
+                                      //   controller.listSchedule.value[index],
+                                      // );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),

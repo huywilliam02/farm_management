@@ -93,10 +93,10 @@ class _WareHouseTabViewState extends State<WareHouseTabView>
                 },
               ),
               CommonCardButton(
-                title: "Sổ tay",
-                iconButton: "assets/icons/book.png",
+                title: "Hàng hoá",
+                iconButton: "assets/icons/warehouserun.png",
                 onPressed: () {
-                  Get.to(() => const ListIconPhoneNumber());
+                  Get.toNamed(Routes.STOREWAREHOUSE);
                 },
               ),
               CommonCardButton(
@@ -128,7 +128,6 @@ class _WareHouseTabViewState extends State<WareHouseTabView>
             fontStyle: FontStyle.normal,
           ),
         ),
-
       ],
     );
   }

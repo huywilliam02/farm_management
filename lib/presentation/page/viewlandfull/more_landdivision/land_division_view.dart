@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
@@ -166,7 +167,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                                 },
                               );
                             },
-                            child: FormFieldWidget(
+                            child: CommonFormFieldWidget(
                               controllerEditting: controller.areaController,
                               isEnabled: false,
                               setValueFunc: () {},
@@ -182,7 +183,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                           SizedBox(
                             height: UtilsReponsive.height(context, 10),
                           ),
-                          FormFieldWidget(
+                          CommonFormFieldWidget(
                             setValueFunc: controller.setValueName,
                           ),
                           SizedBox(
@@ -222,7 +223,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                           SizedBox(
                             height: UtilsReponsive.height(context, 10),
                           ),
-                          FormFieldWidget(
+                          CommonFormFieldWidget(
                               initValue: controller.acreage.toString(),
                               textInputType: TextInputType.number,
                               setValueFunc: (value) {
@@ -313,7 +314,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                                 },
                               );
                             },
-                            child: FormFieldWidget(
+                            child: CommonFormFieldWidget(
                               controllerEditting:
                                   controller.soilTypeIdController,
                               isEnabled: false,
@@ -349,7 +350,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                        child: FormFieldWidget(
+                                        child: CommonFormFieldWidget(
                                       textInputType: TextInputType.number,
                                       setValueFunc: (value) {
                                         controller
@@ -374,7 +375,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
                                     //   ),
                                     // ),
                                     Expanded(
-                                        child: FormFieldWidget(
+                                        child: CommonFormFieldWidget(
                                       textInputType: TextInputType.number,
                                       setValueFunc: (value) {
                                         controller
@@ -654,7 +655,7 @@ class LandDivisionView extends BaseView<LandDivisionController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.productController,

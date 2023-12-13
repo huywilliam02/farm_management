@@ -52,7 +52,7 @@ class IngredientsController extends BaseController {
   List<String> listStatusDropdown = <String>['Hàng tồn kho', 'Hàng xuất kho'];
   Rx<String> dropdownValue = "".obs;
 
-  Rx<IngredientsDetail> currentIngredient = IngredientsDetail().obs;
+  Rx<IngredientsDetail?> currentIngredient = Rx<IngredientsDetail?>(null);
 
   final count = 0.obs;
   @override
@@ -150,9 +150,11 @@ class IngredientsController extends BaseController {
 
   showDetails(IngredientsDetail model) {
     currentIngredient.value = model;
-    Get.to(() => IngredientsDetailsView(
-          id: model.id!,
-        ));
+    Get.to(
+      () => IngredientsDetailsView(
+        idIngredient: model.id!,
+      ),
+    );
   }
 
   showDataIngredients(IngredientsDetail model) {

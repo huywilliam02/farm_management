@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/resources/theme/app_text_style.dart';
@@ -73,7 +74,7 @@ class Moresupplier extends BaseView<SupplierController> {
                         SizedBox(
                           height: UtilsReponsive.height(context, 10),
                         ),
-                        FormFieldWidget(
+                        CommonFormFieldWidget(
                           controllerEditting: controller.namesupplierController,
                           textInputType: TextInputType.text,
                           setValueFunc: controller.setValueName,
@@ -88,7 +89,7 @@ class Moresupplier extends BaseView<SupplierController> {
                         const SizedBox(
                           height: 10,
                         ),
-                        FormFieldWidget(
+                        CommonFormFieldWidget(
                           textInputType: TextInputType.text,
                           controllerEditting: controller.addresssController,
                           // suffixIcon: const Icon(Icons.arrow_drop_down),
@@ -105,7 +106,7 @@ class Moresupplier extends BaseView<SupplierController> {
                         SizedBox(
                           height: UtilsReponsive.height(context, 10),
                         ),
-                        FormFieldWidget(
+                        CommonFormFieldWidget(
                             textInputType: TextInputType.number,
                             // suffixIcon: const Icon(Icons.arrow_drop_down),
                             initValue: NumberFormatUtils.formatNumber(
@@ -124,7 +125,7 @@ class Moresupplier extends BaseView<SupplierController> {
                         SizedBox(
                           height: UtilsReponsive.height(context, 10),
                         ),
-                        FormFieldWidget(
+                        CommonFormFieldWidget(
                           textInputType: TextInputType.text,
                           // suffixIcon: const Icon(Icons.arrow_drop_down),
                           controllerEditting: controller.phonenumberController,
@@ -140,7 +141,7 @@ class Moresupplier extends BaseView<SupplierController> {
                         SizedBox(
                           height: UtilsReponsive.height(context, 10),
                         ),
-                        FormFieldWidget(
+                        CommonFormFieldWidget(
                           textInputType: TextInputType.text,
                           controllerEditting: controller.descriptionController,
                           setValueFunc: controller.setValueNote,

@@ -1,4 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
+import 'package:itfsd/app/util/icon_utils.dart';
 import 'package:itfsd/base/base_view.dart';
 import 'package:itfsd/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ class ViewMoreLandView extends BaseView<ViewMoreLandController> {
   @override
   Widget buildView(BuildContext context) {
     return Scaffold(
-        body: Obx(() => controller.isLoading.value
+      backgroundColor: ColorConstant.background_color,
+      body: Obx(
+        () => controller.isLoading.value
             ? const Center(
                 child: CircularProgressIndicator(
                   strokeWidth: 5,
@@ -192,6 +195,13 @@ class ViewMoreLandView extends BaseView<ViewMoreLandController> {
                     ),
                   ),
                 ],
-              )));
+              ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorConstant.background_color,
+        child: Icon(IconsUtils.description),
+        onPressed: () {},
+      ),
+    );
   }
 }

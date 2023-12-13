@@ -13,7 +13,7 @@ class ChartUserView extends BaseView<ChartUserController> {
 
   @override
   Widget buildView(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: ColorConstant.background_color,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

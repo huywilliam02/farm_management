@@ -1,3 +1,4 @@
+import 'package:itfsd/app/core/common/input/common_form_field_widget.dart';
 import 'package:itfsd/app/core/common/menu/common_app_bar.dart';
 import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 import 'package:itfsd/app/core/common/page_view/loading_view/common_loading_page_progress_indicator.dart';
@@ -56,7 +57,9 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 15,
+          ),
           Expanded(
             flex: 8,
             child: Obx(
@@ -105,7 +108,7 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                             SizedBox(
                               height: UtilsReponsive.height(context, 10),
                             ),
-                            FormFieldWidget(
+                            CommonFormFieldWidget(
                               controllerEditting: controller.nameController,
                               textInputType: TextInputType.text,
                               setValueFunc: controller.setValueNameProduct,
@@ -120,9 +123,8 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                             SizedBox(
                               height: UtilsReponsive.height(context, 10),
                             ),
-                            FormFieldWidget(
-                              initValue:
-                                  controller.numberOfVarites.toString(),
+                            CommonFormFieldWidget(
+                              initValue: controller.numberOfVarites.toString(),
                               // controllerEditting:
                               //     controller.numberOfVaritesController,
                               textInputType: TextInputType.number,
@@ -148,19 +150,19 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                                         ],
                                       ),
                                       SizedBox(
-                                        height: UtilsReponsive.height(
-                                            context, 10),
+                                        height:
+                                            UtilsReponsive.height(context, 10),
                                       ),
                                       GestureDetector(
                                         onTap: () async {
                                           await controller.chooseDate(true);
                                         },
-                                        child: FormFieldWidget(
+                                        child: CommonFormFieldWidget(
                                             isEnabled: false,
                                             suffixIcon: const Icon(
                                                 Icons.calendar_month),
-                                            controllerEditting: controller
-                                                .dateStartController,
+                                            controllerEditting:
+                                                controller.dateStartController,
                                             setValueFunc: () {}),
                                       )
                                     ],
@@ -188,10 +190,10 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                                       onTap: () async {
                                         await controller.chooseDate(false);
                                       },
-                                      child: FormFieldWidget(
+                                      child: CommonFormFieldWidget(
                                           isEnabled: false,
-                                          suffixIcon: const Icon(
-                                              Icons.calendar_month),
+                                          suffixIcon:
+                                              const Icon(Icons.calendar_month),
                                           controllerEditting:
                                               controller.dateEndController,
                                           setValueFunc: () {}),
@@ -210,12 +212,11 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                             SizedBox(
                               height: UtilsReponsive.height(context, 10),
                             ),
-                            FormFieldWidget(
+                            CommonFormFieldWidget(
                                 controllerEditting:
                                     controller.seedProviderController,
                                 textInputType: TextInputType.text,
-                                setValueFunc:
-                                    controller.setValueseedProvider),
+                                setValueFunc: controller.setValueseedProvider),
                             const SizedBox(
                               height: 10,
                             ),
@@ -235,17 +236,14 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                                           height: UtilsReponsive.height(
                                               context, 10),
                                         ),
-                                        FormFieldWidget(
-                                            initValue: controller
-                                                .expectOutput
+                                        CommonFormFieldWidget(
+                                            initValue: controller.expectOutput
                                                 .toString(),
                                             // controllerEditting: controller
                                             //     .expectOutputController,
-                                            textInputType:
-                                                TextInputType.number,
+                                            textInputType: TextInputType.number,
                                             setValueFunc: (value) {
-                                              controller
-                                                      .expectOutput.value =
+                                              controller.expectOutput.value =
                                                   int.tryParse(value) ?? 0;
                                             }),
                                       ],
@@ -297,8 +295,8 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                               height: UtilsReponsive.height(context, 20),
                             ),
                             ConstrainedBox(
-                              constraints: BoxConstraints.tightFor(
-                                  width: context.width),
+                              constraints:
+                                  BoxConstraints.tightFor(width: context.width),
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   minimumSize: const MaterialStatePropertyAll(
@@ -388,7 +386,7 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
                 },
               );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.landController,
@@ -449,7 +447,7 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.productController,
@@ -510,7 +508,7 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.unitController,
@@ -575,7 +573,7 @@ class FarmingCalendarView extends BaseView<FarmingCalendarController> {
           },
         );
       },
-      child: FormFieldWidget(
+      child: CommonFormFieldWidget(
           isEnabled: false,
           suffixIcon: const Icon(Icons.arrow_drop_down),
           controllerEditting: controller.userController,

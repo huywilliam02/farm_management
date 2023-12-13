@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/land/land_detail.dart';
 import 'package:itfsd/data/network/api/view_landfull/land_division.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -10,8 +11,12 @@ import 'package:latlong2/latlong.dart';
 
 class ViewLandfullController extends BaseController {
   final count = 0.obs;
-  RxList<LandDivision> listLand = <LandDivision>[].obs;
-  RxList<LandDivision> listToView = <LandDivision>[].obs;
+  // RxList<LandDivision> listLand = <LandDivision>[].obs;
+  // RxList<LandDivision> listToView = <LandDivision>[].obs;
+
+  RxList<LandDetail> listLand = <LandDetail>[].obs;
+  RxList<LandDetail> listToView = <LandDetail>[].obs;
+
   RxList<Polygon> listPolygon = <Polygon>[].obs;
   Rx<String> idLandChoose = "".obs;
   MapController mapController = MapController();
@@ -36,7 +41,7 @@ class ViewLandfullController extends BaseController {
     }
   }
 
-  changeStatus(LandDivision index) {
+  changeStatus(LandDetail index) {
     log(index.toString());
     if (listToView.contains(index)) {
       listToView.remove(index);

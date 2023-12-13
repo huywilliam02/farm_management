@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itfsd/app/core/common/menu/common_scaffold.dart';
 
 class CompanyDetailsScreen extends StatelessWidget {
   final Map<String, dynamic> companyData;
@@ -7,7 +8,7 @@ class CompanyDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       appBar: AppBar(
         title: Text('Chi tiết đơn hàng'),
       ),

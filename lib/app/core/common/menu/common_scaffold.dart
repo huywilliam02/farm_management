@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:itfsd/app/core/common/shimmer/shimmer.dart';
+import 'package:itfsd/app/core/constants/color_constants.dart';
 import 'package:itfsd/app/util/view_utils.dart';
 
 class CommonScaffold extends StatelessWidget {
@@ -8,7 +9,7 @@ class CommonScaffold extends StatelessWidget {
     this.appBar,
     this.floatingActionButton,
     this.drawer,
-    this.backgroundColor,
+    this.backgroundColor = ColorConstant.background_color,
     this.hideKeyboardWhenTouchOutside = false,
     super.key,
   });

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:flutter_map/flutter_map.dart';
 import 'package:itfsd/base/base_controller.dart';
+import 'package:itfsd/data/model/land/land_detail.dart';
 import 'package:itfsd/data/network/api/farming_calendar/farmingcalendar_api.dart';
 import 'package:itfsd/data/network/api/view_landfull/land_division.dart';
 import 'package:itfsd/app/core/constants/color_constants.dart';
@@ -15,8 +17,10 @@ import 'package:itfsd/data/model/farming_calendar/form_schedule.dart';
 import 'package:itfsd/data/model/farming_calendar/schedule-detail.dart';
 import 'package:itfsd/data/model/land/land.dart';
 import 'package:itfsd/data/model/users/user.dart';
+import 'package:itfsd/presentation/page/farming_calendar/farm_calendar_detail.dart';
 import 'package:itfsd/presentation/page/farming_calendar/farming_calendar_view.dart';
 import 'package:itfsd/presentation/page/farming_calendar/view-all-schedule.dart';
+import 'package:latlong2/latlong.dart';
 
 class FarmingCalendarController extends BaseController {
   //TODO: Implement FarmingCalendarController
@@ -36,13 +40,14 @@ class FarmingCalendarController extends BaseController {
   TextEditingController expectOutputController =
       TextEditingController(text: '');
 
-  RxList<LandDivision> listLand = <LandDivision>[].obs;
+  RxList<LandDetail> listLand = <LandDetail>[].obs;
   RxList<UnitModel> unitModel = <UnitModel>[].obs;
   RxList<Product> listProduct = <Product>[].obs;
   RxList<Product> listUnit = <Product>[].obs;
   RxList<UserModel> listUser = <UserModel>[].obs;
   RxList<DetailSchedule> listSchedule = <DetailSchedule>[].obs;
   RxList<DetailSchedule> listToView = <DetailSchedule>[].obs;
+  Rx<DetailSchedule?> selectedCalendar = Rx<DetailSchedule?>(null);
   Rx<String> idLandChoose = "".obs;
   Rx<String> idproductnameChoose = "".obs;
   Rx<String> nameproduct = "".obs;
@@ -52,13 +57,13 @@ class FarmingCalendarController extends BaseController {
   Rx<String> startTime = "".obs;
   Rx<String> endtime = "".obs;
   RxList<String> listIdUserChoose = <String>[].obs;
-
+  RxList<Polygon> listPolygon = <Polygon>[].obs;
   Rx<String> unitChoose = "".obs;
   DateFormat dateFormat = DateFormat('dd/MM/yyyy');
   Rx<DateTime> dateStartChoose = DateTime.now().obs;
   Rx<DateTime> dateEndChoose = DateTime.now().add(const Duration(days: 2)).obs;
 
-  Rx<LandDivision> landChoose = LandDivision().obs;
+  Rx<LandDetail> landChoose = LandDetail().obs;
 
   TextEditingController dateStartController = TextEditingController(text: '');
   TextEditingController dateEndController = TextEditingController(text: '');
@@ -160,11 +165,47 @@ class FarmingCalendarController extends BaseController {
   showAll() {
     listToView.clear();
     listToView.addAll(listSchedule);
+    renderLand();
+  }
+  Color parseRGBStringToColor(String rgbString) {
+    // Remove any leading/trailing spaces and the "rgb(" and ")" parts
+    String cleanRGBString =
+    rgbString.trim().replaceAll("rgb(", "").replaceAll(")", "");
+
+    // Split the RGB values into a list of strings
+    List<String> rgbValues = cleanRGBString.split(',');
+
+    // Parse the RGB values to integers
+    int red = int.parse(rgbValues[0].trim());
+    int green = int.parse(rgbValues[1].trim());
+    int blue = int.parse(rgbValues[2].trim());
+
+    // Create and return the Color object
+    return Color.fromARGB(145, red, green, blue);
+  }
+
+  renderLand() {
+    listPolygon.clear();
+
+    for (var landModel in listLand.value) {
+      List<LatLng> listLatLngTmp = [];
+      for (var location in landModel.locations!) {
+        listLatLngTmp.add(LatLng(location.latitude, location.longitude));
+      }
+      listPolygon.add(Polygon(
+          borderColor:
+          parseRGBStringToColor(landModel.productType!.childColumn!.color!),
+          isFilled: true,
+          color:
+          parseRGBStringToColor(landModel.productType!.childColumn!.color!),
+          borderStrokeWidth: 3,
+          points: listLatLngTmp));
+    }
   }
 
   void increment() => count.value++;
 
-  chooseLand(LandDivision model) {
+  chooseLand(LandDetail model) {
     idLandChoose(model.id);
     landController.text = model.name!;
   }
@@ -339,6 +380,13 @@ class FarmingCalendarController extends BaseController {
               ),
             ),
           ),
+        ));
+  }
+
+  void showCalendarFarmDetails(DetailSchedule model) {
+    selectedCalendar.value = model;
+    Get.to(() => FarmCalendarDetailsView(
+          idUser: model.id,
         ));
   }
 
